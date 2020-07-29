@@ -86,7 +86,6 @@ id = "UA-00000000-0"
 
 [params]
 copyright = "The Docsy Authors"
-privacy_policy = "https://policies.google.com/privacy"
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
