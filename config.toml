@@ -10,11 +10,15 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
+# Change contentDir value to "content/end", uncomment and
+# move files from /content to /content/en
+# to enable multi-language support
+
+contentDir = "content"
+# defaultContentLanguage = "en"
+# defaultContentLanguageInSubdir = false
 # Useful when translating.
-enableMissingTranslationPlaceholders = true
+# enableMissingTranslationPlaceholders = true
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
@@ -50,21 +54,23 @@ anchor = "smart"
 id = "UA-00000000-0"
 
 # Language configuration
+# Uncomment and move files from /content to /content/en
+# to enable multi-language support
 
-[languages]
-[languages.en]
-title = "Goldydocs"
-description = "A Docsy example site"
-languageName ="English"
+# [languages]
+# [languages.en]
+# title = "Goldydocs"
+# description = "A Docsy example site"
+# languageName ="English"
 # Weight used for sorting.
-weight = 1
-[languages.no]
-title = "Goldydocs"
-description = "Docsy er operativsystem for skyen"
-languageName ="Norsk"
-contentDir = "content/no"
-time_format_default = "02.01.2006"
-time_format_blog = "02.01.2006"
+# weight = 1
+# [languages.no]
+# title = "Goldydocs"
+# description = "Docsy er operativsystem for skyen"
+# languageName ="Norsk"
+# contentDir = "content/no"
+# time_format_default = "02.01.2006"
+# time_format_blog = "02.01.2006"
 
 [markup]
   [markup.goldmark]
