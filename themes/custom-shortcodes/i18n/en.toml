@@ -1,2 +1,9 @@
 [post_create_issue]
 other = "Create lesson issue"
+
+# Footer text
+[footer_all_rights_reserved]
+other = "Creative Commons Attribution 4.0 International License"
+
+[footer_privacy_policy]
+other = "Privacy Policy"
