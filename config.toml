@@ -85,7 +85,7 @@ id = "UA-113453617-2"
 # Everything below this are Site Params
 
 [params]
-copyright = "The Docsy Authors"
+copyright = "The University of Florida and The Contributors;"
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
