@@ -158,10 +158,11 @@ enable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 
 [[params.links.user]]
-	name = "Stack Overflow"
-	url = "https://example.org/stack"
-	icon = "fab fa-stack-overflow"
-        desc = "Practical questions and curated answers"
+	name = "License"
+	url = "https://creativecommons.org/licenses/by/4.0/"
+	icon = "fab fa-creative-commons-by"
+       desc = "All content licensed under CC-BY 4.0"
+
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name ="Twitter"
