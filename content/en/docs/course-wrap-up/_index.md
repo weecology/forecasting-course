@@ -2,15 +2,14 @@
 title: "Wrap up discussion: Can we (and what should we) forecast in ecology?"
 linkTitle: "Course wrap up"
 weight: 27
-description:
+description: "Synthetic discussion of how to use forecasting in ecology given the strengths, weakness, and approaches we've learned." 
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Synthetic perspective on the strengths and weakness of ecological forecasting
+* Plans for how to use the material from this course in the future
 
 {{% /pageinfo %}}
 
-A brief description of the lesson.
