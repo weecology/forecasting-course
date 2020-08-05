@@ -1,5 +1,5 @@
 ---
-title: "Course Introduction"
+title: "Course Introduction (9/1/2020)"
 linkTitle: "Course Introduction"
 weight: 1
 description:
