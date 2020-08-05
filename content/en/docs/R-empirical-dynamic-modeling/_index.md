@@ -2,15 +2,14 @@
 title: "Empirical Dynamic Modeling in R"
 linkTitle: "R: Empirical Dynamic Modeling"
 weight: 24
-description:
+description: R Tutorial on fitting and making forecasts using empirical dynamic modeling
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Fit empirical dynamic models using R
+* Interpret output of empirical dynamic models in R
+* Make forecasts using empirical dynamic models using R
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
