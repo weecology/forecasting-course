@@ -1,16 +1,15 @@
 ---
-title: "Time series modeling in R"
+title: "Time series modeling in R (10/1/2020)"
 linkTitle: "R: Time series modeling"
 weight: 10
-description:
+description: Learn time-series modeling in R using ecological data
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Apply lessons on autocorrelation, seasonal dynamics, and time-date formatting
+* Describe what an ARIMA model is
+* Fit ARIMA models to ecological data
 
-{{% /pageinfo %}}
 
-A brief description of the lesson.
