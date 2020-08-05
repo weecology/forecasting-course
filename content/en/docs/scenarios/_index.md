@@ -2,15 +2,14 @@
 title: "Scenario based forecasting"
 linkTitle: "Forecasting scenarios"
 weight: 25
-description:
+description: Discussion of scenario based approaches to forecasting, which explore general classes of future outcomes to facilitate decision making.
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Define and describe scenario based forecasting methods and their uses
+* Distinguish between scenario planning, predictions, and forecasting
+* Describe approaches to multi-stakeholder decision making using scenarios  
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
