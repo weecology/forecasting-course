@@ -2,15 +2,15 @@
 title: "Ethics of Ecological Forecasting"
 linkTitle: "Forecasting Ethics"
 weight: 26
-description:
+description: Discussion focused on ethical issues that can arise when we make predictions about the future
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Describe the different types of ethical concerns related to forecasting
+
 
 {{% /pageinfo %}}
 
-A brief description of the lesson.
+
