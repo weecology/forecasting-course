@@ -2,15 +2,14 @@
 title: "State space modeling in R: Part 2"
 linkTitle: "R: State space models 2"
 weight: 18
-description:
+description: Introductory tutorial on state space modeling in R
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Fit simple state space models in R
+* Interpret simple state space models from R
+* Make forecasts using simple state space models in R
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
