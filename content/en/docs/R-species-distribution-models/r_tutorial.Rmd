@@ -1,7 +1,6 @@
 ---
-title: "R Tutorial"
-weight: 3
-description:
+title: "Species Distribution Model Demo"
+output: html_document
 ---
 
 ## Species Distribution Models
@@ -14,7 +13,7 @@ description:
 
 * `dismo` is the major package for SDM in R
 
-```r
+```{r}
 library(ggplot2)
 library(dismo)
 library(dplyr)
@@ -37,7 +36,7 @@ library(dplyr)
     * CMIP5 50 year forecasts (coupled model intercomparison project)
 * Download data from [https://course.naturecast.org/data/sdm_data.zip](https://course.naturecast.org/data/sdm_data.zip)
 
-```r
+```{r}
 hooded_warb_data = read.csv("hooded_warb_locations.csv")
 env_data_stacked_current = stack("env_current.grd")
 env_data_stacked_forecast = stack("env_forecast.grd")
@@ -50,7 +49,7 @@ plot(env_data_stacked_current)
 * Combine the two data types
 * Info on the environment where a species occur and where it doesn't
 
-```r
+```{r}
 hooded_warb_locations = select(hooded_warb_data, lon, lat)
 hooded_warb_env = data.frame(extract(env_data_stacked_current, hooded_warb_locations))
 hooded_warb_data = cbind(hooded_warb_data, hooded_warb_env)
@@ -58,7 +57,7 @@ hooded_warb_data = cbind(hooded_warb_data, hooded_warb_env)
 
 * Can look at this in a 2D case
 
-```r
+```{r}
 ggplot(hooded_warb_data, aes(x = tmin, y = precip, color = present)) +
   geom_point()
 ```
@@ -72,7 +71,7 @@ ggplot(hooded_warb_data, aes(x = tmin, y = precip, color = present)) +
     * Generalized linear modeling
     * Multivariate logistic regression
     
-```r
+```{r}
 logistic_regr_model <- glm(present ~ tmin + precip,
                            family = binomial(link = "logit"),
                            data=hooded_warb_data)
@@ -81,7 +80,7 @@ summary(logistic_regr_model)
 
 ## Evaluate the model performance
 
-```r
+```{r}
 presence_data = filter(hooded_warb_data, present == 1)
 absence_data = filter(hooded_warb_data, present == 0)
 evaluation <- evaluate(presence_data, absence_data, logistic_regr_model)
@@ -98,7 +97,7 @@ plot(evaluation, 'ROC')
     * Model
     * `type = "response"` to get probabilities
 
-```r
+```{r}
 predictions <- predict(env_data_stacked_current, logistic_regr_model, type = "response")
 present <- select(filter(hooded_warb_data, present == 1), lon, lat)
 plot(predictions, ext = extent(-140, -50, 25, 60))
@@ -111,7 +110,7 @@ points(present, pch='+', cex = 0.5)
 * E.g., > 25% probability of occuring
 * Can choose this automatically
 
-```r
+```{r}
 tr <- threshold(evaluation, 'prevalence')
 plot(predictions > tr, ext = extent(-140, -50, 25, 60))
 points(present, pch='+', cex = 0.5)
@@ -121,9 +120,10 @@ points(present, pch='+', cex = 0.5)
 * Use forecast data for future environmental conditions
 * CMIP5
 
-```r
+```{r}
 predictions <- predict(env_data_stacked_forecast, logistic_regr_model, type = "response")
 plot(predictions, ext = extent(-140, -50, 25, 60))
 plot(predictions > 0.5, ext = extent(-140, -50, 25, 60))
 plot(predictions > tr, ext = extent(-140, -50, 25, 60))
 ```
+

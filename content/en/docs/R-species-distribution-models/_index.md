@@ -2,15 +2,14 @@
 title: "Species Distribution Models in R"
 linkTitle: "R: Species Distribution Models"
 weight: 20
-description:
+description: An R tutorial on using fitting simple species models and making forecasts based on these models
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Fit basic species distribution models using R
+* Interpret output of species distribution models in R
+* Make forecasts using species distribution models using R
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
