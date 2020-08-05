@@ -1,15 +1,13 @@
 ---
 title: "Forecasting using state space models"
 weight: 15
-description:
+description: Learn about and discuss the use of state space models for ecological forecasting
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Define state space models
+* Describe the simulation approaches used by Treddenick et al.
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
