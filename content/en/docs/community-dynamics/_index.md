@@ -1,15 +1,15 @@
 ---
-title: "Community Dynamics"
+title: "Community Dynamics (09/22/2020)"
 weight: 7
-description:
+description: Discussion of current dynamics in biodiversity and implications for forecasting
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Describe contemporary biodiversity dynamics
+* Critically assess current biodiversity data limitations
+* Determine what challenges and opportunities both our data and observations of nature imply for ecological forecasting 
 
 {{% /pageinfo %}}
 
-A brief description of the lesson.
