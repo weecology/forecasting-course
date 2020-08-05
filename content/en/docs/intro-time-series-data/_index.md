@@ -1,15 +1,15 @@
 ---
 title: "Introduction to Time Series Data"
 weight: 2
-description:
+description: Discussion about ecological data collection and how it relates to forecasting
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Gain familiarity with the spatial and temporal scales of ecological data collection
+* Explore relationships between forecasting needs and current ecological data collection
 
 {{% /pageinfo %}}
 
-A brief description of the lesson.
+
