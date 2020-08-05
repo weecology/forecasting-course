@@ -1,5 +1,6 @@
 ---
 title: "Community Dynamics (09/22/2020)"
+linkTitle: Community Dynamics
 weight: 7
 description: Discussion of current dynamics in biodiversity and implications for forecasting
 ---
