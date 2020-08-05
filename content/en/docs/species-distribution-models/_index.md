@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Forecasting using species distribution models"
+linkTitle: "Species Distribution Models"
+weight: 19
 description:
 ---
 

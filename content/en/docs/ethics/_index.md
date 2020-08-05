@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Ethics of Ecological Forecasting"
+linkTitle: "Forecasting Ethics"
+weight: 26
 description:
 ---
 

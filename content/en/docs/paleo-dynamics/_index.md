@@ -1,7 +1,6 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Paleoecological Dynamics"
+weight: 3
 description:
 ---
 

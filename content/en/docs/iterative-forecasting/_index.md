@@ -1,7 +1,6 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Near-term iterative ecological forecasting"
+weight: 17
 description:
 ---
 

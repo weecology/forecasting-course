@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Hurricane Forecasts"
+linkTitle: "Hurricane Forecasts"
+weight: 21
 description:
 ---
 

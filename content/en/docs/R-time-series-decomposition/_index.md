@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Time Series Decomposition in R"
+linkTitle: "R: Time series decomposition"
+weight: 6
 description:
 ---
 

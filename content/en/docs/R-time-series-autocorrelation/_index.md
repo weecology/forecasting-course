@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Time Series Autocorrelation in R"
+linkTitle: "R: Time series autocorrelation"
+weight: 8
 description:
 ---
 

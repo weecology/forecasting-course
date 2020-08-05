@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Species Distribution Models in R"
+linkTitle: "R: Species Distribution Models"
+weight: 20
 description:
 ---
 

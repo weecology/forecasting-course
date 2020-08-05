@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Evaluating Forecasts in R"
+linkTitle: "R: Forecast evaluation"
+weight: 14
 description:
 ---
 

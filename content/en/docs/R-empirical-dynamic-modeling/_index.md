@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Empirical Dynamic Modeling in R"
+linkTitle: "R: Empirical Dynamic Modeling"
+weight: 24
 description:
 ---
 

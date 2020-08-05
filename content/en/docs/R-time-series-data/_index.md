@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Working with time series data in R"
+linkTitle: "R: Time series data"
+weight: 4
 description:
 ---
 

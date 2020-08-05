@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "State space modeling in R: Part 2"
+linkTitle: "R: State space models 2"
+weight: 18
 description:
 ---
 

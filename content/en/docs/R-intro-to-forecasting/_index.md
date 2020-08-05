@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Introduction to Forecasting in R"
+linkTitle: "R: Forecasting"
+weight: 12
 description:
 ---
 

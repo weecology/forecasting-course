@@ -1,7 +1,6 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Community Dynamics"
+weight: 7
 description:
 ---
 

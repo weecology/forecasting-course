@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Data-driven models for forecasting"
+linkTitle: "Data-driven models"
+weight: 23
 description:
 ---
 

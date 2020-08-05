@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Election forecasts"
+linkTitle: "Election forecasts"
+weight: 22
 description:
 ---
 

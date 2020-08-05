@@ -1,7 +1,6 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Introduction to Time Series Data"
+weight: 2
 description:
 ---
 

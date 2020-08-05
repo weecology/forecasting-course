@@ -1,7 +1,7 @@
 ---
-title: ""
-linkTitle: ""
-weight: 100
+title: "Scenario based forecasting"
+linkTitle: "Forecasting scenarios"
+weight: 25
 description:
 ---
 
