@@ -10,15 +10,15 @@ theme = ["custom-shortcodes", "docsy"]
 enableGitInfo = true
 
 # Language settings
-# Change contentDir value to "content/end", uncomment and
+# Change contentDir value to "content/en", uncomment and
 # move files from /content to /content/en
 # to enable multi-language support
 
-contentDir = "content"
-# defaultContentLanguage = "en"
-# defaultContentLanguageInSubdir = false
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 # Useful when translating.
-# enableMissingTranslationPlaceholders = true
+enableMissingTranslationPlaceholders = true
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
@@ -57,20 +57,20 @@ id = "UA-113453617-2"
 # Uncomment and move files from /content to /content/en
 # to enable multi-language support
 
-# [languages]
-# [languages.en]
-# title = "Goldydocs"
-# description = "A Docsy example site"
-# languageName ="English"
+[languages]
+[languages.en]
+title = "Ecological Forecasting"
+description = "A course on ecological dynamics and forecasting"
+languageName ="English"
 # Weight used for sorting.
-# weight = 1
-# [languages.no]
-# title = "Goldydocs"
-# description = "Docsy er operativsystem for skyen"
-# languageName ="Norsk"
-# contentDir = "content/no"
-# time_format_default = "02.01.2006"
-# time_format_blog = "02.01.2006"
+weight = 1
+#[languages.no]
+#title = "Goldydocs"
+#description = "Docsy er operativsystem for skyen"
+#languageName ="Norsk"
+#contentDir = "content/no"
+#time_format_default = "02.01.2006"
+#time_format_blog = "02.01.2006"
 
 [markup]
   [markup.goldmark]
