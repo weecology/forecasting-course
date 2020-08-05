@@ -1,15 +1,15 @@
 ---
-title: "Regime Shifts"
+title: "Regime Shifts (09/29/2020)"
+linkTitle: "Regime shifts"
 weight: 9
-description:
+description: Face our assumptions (and the associated challenges) related to how quickly nature changes
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Define different ways nature can change over time 
+* Assess how rapid versus slow change impact our ability to forecast ecology
 
 {{% /pageinfo %}}
 
-A brief description of the lesson.
