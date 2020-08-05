@@ -9,8 +9,8 @@ description: Formatting times and dates in R to make working with time series da
 
 **Learning Objectives:**
 * Discover unique challenges with working with time-date information on computers
-* Learn how to properly format times and dates in R
-* Be able to apply time-date formatting to ecological data
+* Be able to properly format time-date data 
+* Apply time-date knowledge to ecological data
 
 {{% /pageinfo %}}
 
