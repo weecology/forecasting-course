@@ -2,15 +2,13 @@
 title: "Evaluating Forecasts in R"
 linkTitle: "R: Forecast evaluation"
 weight: 14
-description:
+description: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package
 ---
 
 {{% pageinfo %}}
 
 **Learning Objectives:**
-* First lesson objective
-* Second lesson objective
+* Evaluate point forecast accuracy in R
+* Evaluate forecast uncertainty in R
 
 {{% /pageinfo %}}
-
-A brief description of the lesson.
