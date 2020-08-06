@@ -1,13 +1,11 @@
 ---
-title: "R Tutorial"
-weight: 3
-description: R tutorial on making forecasts from time-series models using the forecast package
+title: "Introduction to Forecasting in R"
+output: html_document
 ---
-
 
 ## Setup
 
-```r
+```{r}
 library(forecast)
 library(ggplot2)
 
@@ -31,7 +29,7 @@ NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 * Process we went through over the last few weeks
 * Look at the data structure
 
-```r
+```{r}
 plot(NDVI_ts)
 acf(NDVI_ts)
 ```
@@ -44,7 +42,7 @@ acf(NDVI_ts)
 
 * Fit this model using `Arima()`
 
-```r
+```{r}
 avg_model = Arima(NDVI_ts, c(0, 0, 0))
 str(avg_model)
 ```
@@ -55,7 +53,7 @@ str(avg_model)
 * To make forecasts from a model we ask what the model would predict at the time-step
 * For the average model we just need to know what c is, which is just the mean(NDVI_ts)
 
-```r
+```{r}
 avg_forecast = forecast(avg_model)
 str(avg_forecast)
 ```
@@ -68,19 +66,19 @@ str(avg_forecast)
 
 * The expected value, or point forecast, is in `$mean`
 
-```r
+```{r}
 avg_forecast$mean
 ```
 
 * Change the number of time-steps in the forecast using h
 
-```r
+```{r}
 avg_forecast = forecast(avg_model, h = 50)
 ```
 
 ### Visualize
 
-```r
+```{r}
 plot(NDVI_ts)
 lines(avg_forecast$mean, col = 'pink')
 ```
@@ -88,7 +86,7 @@ lines(avg_forecast$mean, col = 'pink')
 
 * Better to use built-in plotting functions
 
-```r
+```{r}
 plot(avg_forecast)
 autoplot(avg_forecast)
 ```
@@ -102,7 +100,7 @@ autoplot(avg_forecast)
 * By default 80% and 95%
 * Can change using `level`
 
-```r
+```{r}
 avg_forecast
 avg_forecast <- forecast(avg_model, level = c(50, 95))
 avg_forecast
@@ -125,7 +123,7 @@ plot(avg_forecast)
 
 ### How this forcast works
 
-```r
+```{r}
 arima_model = auto.arima(NDVI_ts, seasonal = FALSE)
 arima_model
 arima_forecast = forecast(arima_model)
@@ -144,7 +142,7 @@ plot(arima_forecast)
 * Best model we found last time
 * Not much better than non-seasonal when looking at fit to data
 
-```r
+```{r}
 seasonal_arima_model = auto.arima(NDVI_ts)
 seasonal_arima_forecast = forecast(seasonal_arima_model, h = 36, level = c(80, 99))
 plot(seasonal_arima_forecast)
@@ -158,7 +156,7 @@ plot(seasonal_arima_forecast)
 * Predict NDVI based on rain data
 * Southern Arizona's vegetation relies on summer monsoons, so focus on that precip
 
-```r
+```{r}
 library(dplyr)
 library(lubridate)
 
@@ -172,7 +170,7 @@ monsoon_data <- data %>%
 
 * Visualize the relationship
 
-```r
+```{r}
 ggplot(monsoon_data, aes(x = monsoon_rain, y = monsoon_ndvi)) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -180,14 +178,14 @@ ggplot(monsoon_data, aes(x = monsoon_rain, y = monsoon_ndvi)) +
 
 * Fit a linear model
 
-```r
+```{r}
 rain_model = lm('monsoon_ndvi ~ monsoon_rain', data = monsoon_data)
 ```
 
 * Make a forecast using that model
 * Requires forecast values for precipition
 
-```r
+```{r}
 rain_forecast = forecast(rain_model, newdata = data.frame(monsoon_rain = c(120, 226, 176, 244)))
 plot(rain_forecast)
 ```
