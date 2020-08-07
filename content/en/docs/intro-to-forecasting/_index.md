@@ -8,9 +8,8 @@ description: A brief introduction to the concepts and approaches of ecological f
 
 **Learning Objectives:**
 * Read and communicate using forecasting terminology
+* Describe general approaches to making forecasts
 * Describe and discuss current perspectives on ecological forecasting
 * Describe uncertainty and the implications of uncertainty for ecological forecasting
 
 {{% /pageinfo %}}
-
-Introductory video, reading, and discussion of ecological forecasting.

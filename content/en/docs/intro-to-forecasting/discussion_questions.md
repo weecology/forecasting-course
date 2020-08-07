@@ -3,29 +3,42 @@ title: "Discussion Questions"
 weight: 2
 ---
 
-### Why ecological forecasting?
+## Why ecological forecasting?
 
 * Why do we need ecological forecasting?
-* What are two some of things we need to be able to make forecasts?
+* What are some of things we need to be able to make forecasts?
 
-### Terminology
+## Forecastability?
 
-* What is the distinction between forecasting, prediction, projection &
-  prognosis?
-* Of these types what is common in ecological forecasting and why?
+* What influences our ability to forecast and how?
 
-### State of ecological forecasting
+## Forecasting, planning, and goals
 
-* Does ecological research tend ot focus more on forecasting/prediction or on
-  understanding ecological processes?
-* When ecologists do forecast is it research or application focused?
-* What are the two general types of models that can be used for forecasting?
-* What are the different ways in which time and can incorporated into these models?
-* What are the different ways in which model parameters are determined?
-* What are the two main types of forecasts being developed and what properties to they have?
+* What kinds of time-scales of forecasts do we want/need in ecology?
+* How might these different "forecasting horizons" influence our approaches to forecasting?
 
-### Uncertainty
+## Determining what to forecast
+
+* How should we think about what to forecast in ecology?
+
+## Terminology
+
+* What is the distinction between forecasting, prediction, projection & prognosis?
+* Are these terms consistently used the two readings? In your experience more broadly?
+
+## Uncertainty
 
 * What is the distinction between point estimates and uncertainty?
 * Do most ecological forecasts include uncertainty estimates?
 * Why does estimating uncertainty matter?
+
+## Forecasting data and methods
+
+* What are the general types of models that can be used for forecasting and how to they differ?
+* What are the different ways in which model parameters are determined?
+* When might these different approaches be most appropriate in ecology?
+* What are the different ways in which time and can incorporated into models?
+
+## Basic steps
+
+* How do the "basic steps" of forecasting relate to ecological forecasting?
