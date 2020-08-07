@@ -1,5 +1,6 @@
 ---
-title: "Introduction to Ecological Forecasting"
+title: "Introduction to Ecological Forecasting (10/06/2020)"
+linkTitle: "Intro to Ecological Forecasting"
 weight: 11
 description: A brief introduction to the concepts and approaches of ecological forecasting
 ---

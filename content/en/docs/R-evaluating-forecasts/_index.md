@@ -1,5 +1,5 @@
 ---
-title: "Evaluating Forecasts in R"
+title: "Evaluating Forecasts in R (10/15/2020)"
 linkTitle: "R: Forecast evaluation"
 weight: 14
 description: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package

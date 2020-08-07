@@ -1,5 +1,5 @@
 ---
-title: "Scenario based forecasting"
+title: "Scenario based forecasting (12/01/2020)"
 linkTitle: "Forecasting scenarios"
 weight: 25
 description: Discussion of scenario based approaches to forecasting, which explore general classes of future outcomes to facilitate decision making.

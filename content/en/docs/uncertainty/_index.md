@@ -1,5 +1,6 @@
 ---
-title: "Uncertainty in Forecasting"
+title: "Uncertainty in Forecasting (10/13/202)"
+linkTitle: "Uncertainty"
 weight: 13
 description: Discussion of the sources and importance of uncertainty in ecological forecasting
 ---

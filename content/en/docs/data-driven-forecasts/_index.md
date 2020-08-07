@@ -1,5 +1,5 @@
 ---
-title: "Data-driven models for forecasting"
+title: "Data-driven models for forecasting (11/17/2020)"
 linkTitle: "Data-driven models"
 weight: 23
 description: A discussion of data-driven models, how they compare to process models, and how they can be used for forecasting, with a focu on Empirical Dynamic Modeling
