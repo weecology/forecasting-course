@@ -12,10 +12,8 @@ type: docs
 
 | Instructor      | Dr. Morgan Ernest (she/her) | Dr. Ethan White (he/him) |
 |-----------------|-----------------------------|--------------------------|
-| Office Location | Building 150, Room 2        | Building 150, Room 1     |
-| Phone           | 352-294-2082                | 352-294-2081             |         
+| Office Location | on-line                     | online                   |    
 | Email           | <skmorgane@ufl.edu>         | <ethanwhite@ufl.edu>     |
-
 
 #### **Times and Locations**
 
@@ -29,50 +27,53 @@ The goal of this class is to provide students a basic understanding of
 how populations and communities change through time and to provide fundamental 
 concepts of how to forecast those changes. By the end of the semester, students will:
 
-1)  Have an appreciation of the dynamics of species and communities.
+1)  Have an appreciation of the dynamics and time scales of change that populations and communities exhibit.
 
 2)  Understand the basic concepts of forecasting that apply across fields 
     and the challenges within ecology
 
-3) Have a basic understanding of working with time series data
+3)  Apply time series concepts to working with ecological time series data
 
-4) Be able to fit models to data and use those models to make forecasts
+4)  Be able to fit models to data and use those models to make forecasts
 
 #### **General Course Structure and Expectations**
 
-This course is a mixture class discussion of primary literature and hands-on
+This course is a mixture of class discussion of the primary literature and hands-on
 experience involving data and computing. Completing assigned readings,
 intellectual engagement with topics, discussion participation, and completion of
 assignments are the main ways students will learn in this class. Tuesdays are
 typically concept discussion days. Thursdays will be a mix of tools or concept
-discussion. You are expected to come prepared to discuss the assigned papers.
+discussion. 
 
-#### **Paper Discussion Participation**
+#### **Course Participation**
 
-There are two general approaches to participating in paper discussion.
+The course is designed so that students may participate synchronously or asynchronously in the course. 
+Students may shift between synchronous and aynschronous participation as needed. 
 
-The first is to attend class and partipate in the group discussion about the paper. This
-discussion is generally centered around the discussion questions that are provided
-in advance but may also expand beyond them. Our goal is to produce a classroom environment
-where everyone is comfortable participating in class discussions. We will try to manage
-discussions so that everyone has a chance to contribute and make sure that folks who are
-less comfortable interjecting get a chance to participate. We welcome your help in making
-sure that everyone in the class gets a chance to contribute.
+##### Paper discussions:
+Synchronous participation: During the assigned course time, synchronous discussions of assigned papers 
+will occur over zoom. In-class group discussion about the assigned papers paper. 
+This discussion is generally centered around the discussion questions that are provided 
+in advance but may also expand beyond them. Our goal is to produce a classroom environment where
+everyone is comfortable participating in class discussions. We will try to manage discussions so 
+that everyone has a chance to contribute and make sure that folks who are less comfortable 
+interjecting get a chance to participate. We welcome your help in making sure that everyone 
+in the class gets a chance to contribute. 
 
-If you can't or don't want to participate in conversations about papers in class you can
-write up short answers to the provided discussion questions and send them to us each week.
-You can choose to either have use read them ourselves and count them as participation or
-let us know that you would like us to share those ideas for you by reading some of them in
-class as we talk about relevant material.
+Asynchronous participation: Students may opt to participate asynchronously by providing written responses to the assigned class discussion questions and submitting those responses to the instructors. Instructor notes will be provided via the course website so that students participating asynchronously have access to information being discussed in class. The Canvas discussion board can also be used to ask questions and generate discussion with the class related to the topic material.
+
+##### R-tutorials
+
+Most weeks we have an R-tutorial session on Thursdays. R-tutorials consist of a video that all students (synchronous and asynchronous) students are required to watch before the thursday class time. Synchronous class time on R-tutorial thursdays is dedicated for students to ask questions, get clarification, or help with their r code. Asynchronous students are encouraged to post their questions to the course discussion board on canvas.
 
 #### **Course Grading**
 
-* 50% of grade will be based on participation including discussing papers and participating in in-class tutorials
+* 50% of grade will be based on participation including discussing papers and doing r-tutorials
 * 50% will be based on completion of assignments
 
 #### **Attendance Policy**
 
-Two days can be missed without impacts on your grade without the need
+Two class days can be missed without impacts on your grade without the need
 to submit make-up work, though we recommend that students attempt any 
 missed class activities on their own time because additional class 
 activities or discussions may rely on that knowledge. 
@@ -87,9 +88,9 @@ feel free to write more or less as appropriate.
 
 #### **Course Materials**
 
-1) All reading materials are made available through the [course website](https://weecology.github.io/forecasting-dynamics-course/). If you are off campus you may need to use the VPN to access some of them.
+1) All reading materials are made available through the [course website](https://course.naturecast.org/). If you are off campus you may need to use the UF VPN to access some of them.
 
-2)  Laptops: On class activity days, laptops will be required for class.
+2) Computers: Computers with R and Rstudio installed are required for the R-tutorial part of the course
 
 
 ### **UF Policies**
