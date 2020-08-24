@@ -1,7 +1,7 @@
 ---
-title: "Forecasting using species distribution models (11/03/2020)"
+title: "Forecasting using species distribution models (10/29/2020)"
 linkTitle: "Species Distribution Models"
-weight: 19
+weight: 17
 description: How forecasts are made from species distribution modelings and the challenges associated with these forecasts
 ---
 
