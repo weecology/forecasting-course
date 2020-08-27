@@ -1,6 +1,6 @@
 ---
-title: "Regime Shifts (09/29/2020)"
-linkTitle: "Regime shifts"
+title: ""
+linkTitle: ""
 weight: 9
 description: Face our assumptions (and the associated challenges) related to how quickly nature changes
 ---
