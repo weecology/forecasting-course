@@ -1,7 +1,7 @@
 ---
 title: ""
 linkTitle: ""
-weight: 9
+weight:
 description: Face our assumptions (and the associated challenges) related to how quickly nature changes
 ---
 
