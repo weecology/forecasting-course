@@ -34,11 +34,38 @@ description:
 * Grades
   * 50% participation
 	  * Participating in paper discussions in class
-	  * If you're worried that you aren't able to participate sufficiently let us know
+	  * Alternatively you can submit written answers to the discussion questions
   * 50% R tutorials
     * Follow along with R tutorials
     * Will include some sections for you to complete on your own
     * Turn in tutorial to Canvas
+
+## Introduction to the website
+
+* Intro to the website
+
+## Introduction to Canvas
+
+* Intro to Canvas
+
+## Special notes for 2020
+
+* This is going to be a hard semester for both learning & teaching
+* We're all figuring out how to do this effectively online
+* Most of us have more responsibilities & stress than usual
+* We don't expect any of you to be operating at your full capacity
+
+* We're trying to ensure that the course is manageable in this context
+* Minimizing time committments - most weeks involve reading one paper and folowing along w/a 1 hour R Tutorial
+* Not doing additional assignments beyond completing R tutorials
+* Supporting asynchronous participation. The course is synchronous, but we're very sympathetic to the challenges that can pose since we currently have a kid going to school from home.
+* If you can't participate asynchronously some weeks, or at all, you can read the papers and turn in written responses to the discussion questions instead of attendin class discussions.
+* This group discussion is a valuable part of class, so it won't be as good of an experience, but that's OK.
+
+## Questions about the course
+
+* Any questions about how the course is going to work?
+
 
 ## Opening discussion
 
