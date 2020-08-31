@@ -34,9 +34,10 @@ description:
   * 50% participation
 	  * Participating in paper discussions in class
 	  * If you're worried that you aren't able to participate sufficiently let us know
-	  * Participating in R tutorials
-  * 50% assignments
-    * 4 assignments using R to work with data and make forecasts
+  * 50% R tutorials
+    * Follow along with R tutorials
+    * Will include some sections for you to complete on your own
+    * Turn in tutorial to Canvas
 
 ## Opening discussion
 

@@ -68,8 +68,8 @@ Most weeks we have an R-tutorial session on Thursdays. R-tutorials consist of a 
 
 #### **Course Grading**
 
-* 50% of grade will be based on participation including discussing papers and doing r-tutorials
-* 50% will be based on completion of assignments
+* 50% of grade will be based on paper paper discussion
+* 50% of the grade will be based on completing R tutorials
 
 #### **Attendance Policy**
 
