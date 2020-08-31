@@ -24,6 +24,7 @@ description:
 * Discussion
     * Read paper in advance
     * Questions to think about provided to help guide thinking while reading
+    * Big group, so raise hands in Zoom
 * R tutorials
     * Introductions to methods for working with dynamic data and forecasting
 	* I do, we do, you do
