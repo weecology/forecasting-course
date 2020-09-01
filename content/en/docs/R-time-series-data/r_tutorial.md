@@ -4,6 +4,7 @@ weight: 3
 description:
 ---
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Zr81Xn-sic4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 If you are working with data, what are the different ways you could write today's date?
 
