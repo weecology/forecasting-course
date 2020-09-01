@@ -9,3 +9,5 @@ description:
 * Download the following files:
     * [NEON_HarvardForest_date.csv](/data/NEON_Harvardforest_date_2001_2006.csv)
     * [NEON_HarvardForest_datetime.csv](/data/NEON_Harvardforest_datetime.csv)
+    
+* [R_tutorial videos and written notes](https://course.naturecast.org/docs/r-time-series-data/r_tutorial/)
