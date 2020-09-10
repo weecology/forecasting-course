@@ -3,7 +3,57 @@ title: "R Tutorial"
 weight: 3
 description:
 ---
+## Time Series Decomposition in R
+### Video Tutorial
 
+1. Watch Introduction to time series decomposition
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D45ddUVcEfY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+2. Watch Loading data for time series decomposition in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qVDAxVx6D_Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+3. Convert date column into a date format, using as.Date()
+
+4. Watch Importing data into a time series object in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OXrn7hI08TI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+5. Convert the rodent column into a time series object using ts()
+
+6. Watch Identifying the Long-term Signal in a Time Series
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2wcUuTqrj60" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+7. Watch Conducting a moving average in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/16ClJ5piZW4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+8. Do a moving average with the rodent time series object using ma()
+
+9. Watch time series decomposition: removing the long-term signal
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oxMZ_cVUTP0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+10. Watch multiplicative vs. additive time series decomposition in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iG9pOaQmvJs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+11. Pull the trend out of the rodent time series object, using either the additive or multiplicative approach
+
+12. Watch Using decompose() to do a time series decomposition in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nYAQMnAguQ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+13. Apply decompose() to the rodent time series object
+
+
+14. Watch Using Season Trend Decomposition using Loess (stl) in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Y8OHQjcYEjU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+15. Use stl() on the rodent time series object
+
+16. Watch Time Series Decomposition Wrap up
+<iframe width="560" height="315" src="https://www.youtube.com/embed/v3dkh4YnX5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+17. Submit your r code (either as a file or cut and paste text) through the assignment for this module in the course canvas site
+---
+
+### Written version of the lesson. It will vary from the videos, but the core info is the same.
+### You may find it helpful to watch the videos without "in R" in their title as these are more informative videos with visuals that are not  present in the written document.
 ---
 title: "Decomposition"
 author: "Morgan Ernest"
