@@ -4,8 +4,15 @@ weight: 3
 description: R tutorial on making forecasts from time-series models using the forecast package
 ---
 
+## Video Tutorials
 
-## Setup
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kyPg3jV4pJ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/govzki35PIQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Text Tutorial
+
+### Setup
 
 ```r
 library(forecast)
@@ -17,7 +24,7 @@ head(data)
 NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 ```
 
-## Steps in forecasting
+### Steps in forecasting
 
 1. Problem definition
 2. Gather information
@@ -26,7 +33,7 @@ NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 5. Make forecasts
 6. Evaluate forecasts
 
-## Exploratory analysis
+### Exploratory analysis
 
 * Process we went through over the last few weeks
 * Look at the data structure
@@ -36,7 +43,7 @@ plot(NDVI_ts)
 acf(NDVI_ts)
 ```
 
-## Choose and fit models
+### Choose and fit models
 
 * Simples model was white noise or the "naive" model:
 
@@ -50,7 +57,7 @@ str(avg_model)
 ```
 
 
-## Make forecasts
+### Make forecasts
 
 * To make forecasts from a model we ask what the model would predict at the time-step
 * For the average model we just need to know what c is, which is just the mean(NDVI_ts)
@@ -78,7 +85,7 @@ avg_forecast$mean
 avg_forecast = forecast(avg_model, h = 50)
 ```
 
-### Visualize
+#### Visualize
 
 ```r
 plot(NDVI_ts)
@@ -94,7 +101,7 @@ autoplot(avg_forecast)
 ```
 
 
-### Uncertainty
+#### Uncertainty
 
 * Important to know how confident our forecast is
 * Shaded areas provide this information
@@ -113,7 +120,7 @@ plot(avg_forecast)
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
-## Forecasting with more complex models
+### Forecasting with more complex models
 
 * Non-seasonal ARIMA
 * `y_t = c + b1 * y_t-1 + b2 * y_t-2 + e_t`
@@ -123,7 +130,7 @@ plot(avg_forecast)
 > Have students build a non-seasonal ARIMA model: 36 month horizon, 80 and 99% prediction intervals
 > Then discuss.
 
-### How this forcast works
+#### How this forcast works
 
 ```r
 arima_model = auto.arima(NDVI_ts, seasonal = FALSE)
@@ -139,7 +146,7 @@ plot(arima_forecast)
 * Second step is pulled below negative AR2 parameter
 * Gradually reverts to the mean
 
-### Seasonal ARIMA
+#### Seasonal ARIMA
 
 * Best model we found last time
 * Not much better than non-seasonal when looking at fit to data
@@ -152,7 +159,7 @@ plot(seasonal_arima_forecast)
 * Do you think it might be a better model for forecasting?
 * We'll find out how to tell next week.
 
-# Forecasts from cross-sectional approach
+### Forecasts from cross-sectional approach
 
 * Just predictor variables, not time-series component
 * Predict NDVI based on rain data
