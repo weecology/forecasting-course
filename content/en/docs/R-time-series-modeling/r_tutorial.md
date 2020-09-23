@@ -4,6 +4,54 @@ weight: 3
 description:
 ---
 
+## Time Series Modeling in R [in progress!!!]
+### Video Tutorial
+
+1. Watch Time series modeling: starting with white noise
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OO-KjD1sOBQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+2. Import portal_timeseries.csv in R using read.csv. 
+Convert the NDVI data column into a time series object using ts(). Name that time series object: NDVI.ts
+Convert the rain column into a time series object using ts(). Name that time series object: rain.ts
+
+3. Watch Fitting a white noise model to data
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iS5VKoEhJl4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+4. Use meanf() to fit the whitenoise model to rain.ts
+Plot rain.ts
+Add the fitted model for rain to that plot using lines()
+
+5. Watch Explaining the ARIMA model
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hD13nv8SK6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+6. Watch Fitting an Arima model in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6gmCNGRrRBs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+7. Generate the acf and pacf plots for rain.ts
+Examine those plots and decide what a good initial ARIMA model structure would be (AR vs MA?, How many orders?)
+Fit that model using the Arima() function. 
+Examine the residuals of the model using checkresiduals()
+
+8. Watch Modeling seasonal signals in ARIMA models
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m6fplOpo4qs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+******
+9. Watch Using pacf() to diagnose time lags for autoregressive models
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4W9uI4pjc8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+10. Using tsdisplay() examine the acf and pacf for NDVI.ts
+Using tsdisplay() examine the acf and pacf for rain.ts
+
+11. Watch Exploring lagged correlations between different time series
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dKDgihvtZGk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+12. Plot the lag plot comparing NDVI.ts and rats.ts
+Generate the ccf plot comparing NDVI.ts and rats.ts
+
+13. Submit your r code (either as a file or cut and paste text) through the assignment for this module in the course canvas site.
+
+
+
  Over the past few weeks, we've explored how to turn time series into time series objects, how to disentangle the seasonal and long-term signals in a time series, and learned about the influence of the past on current observations. Today we're going to start taking all that information and turn them into models. 
 
 ## White noise model - Simplest Time series
