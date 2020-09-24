@@ -55,21 +55,6 @@ Generate the ccf plot comparing NDVI.ts and rats.ts
  Over the past few weeks, we've explored how to turn time series into time series objects, how to disentangle the seasonal and long-term signals in a time series, and learned about the influence of the past on current observations. Today we're going to start taking all that information and turn them into models. 
 
 ## White noise model - Simplest Time series
-Last week I introduced you to White noise, where we defined a distribution with a mean and variance and pulled random values from it to produce a time series. 
-
-```{r}
-set.seed(20)
-whitenoise <- ts(rnorm(273, mean=0.18))           
-plot(whitenoise, main="White noise")
-abline(h=0.18)
-```
-From this, we can fit the most basic version of a time series model:
-  *  Normally distributed data w/fixed mean and variance
-*  No change time-series is just random samples
-If we were to fit an equation to this, what would it look like?
-** y = c + e_t, where e_t ~ N(0, sigma) **
-  
-  Let's fit this simple time series model to our data.
 
 ## Data setup
 
@@ -80,49 +65,72 @@ We're going to be using the rpackage forecast today. Forecast is the package dev
 ```{r}
 library(forecast)
 ```
-We're going to be modelling the data we've been working with over the past few weeks - the Portal data time series. And today we're going to work with the NDVI data together and then you'll work on applying what we've done to the rain data.
+We're going to be modeling the data we've been working with over the past few weeks - the Portal data time series. And today we're going to work with the NDVI data together and then you'll work on applying what we've done to the rain data. 
 
-Just like we've been doing, we'll turn the data into a time series object which will work with the functions in forecast.
-
+You do:
+Why don't you load up the datafile portal_timeseries.csv and turn both NDVI and rain into time series objects. Call the NDVI time series NDVI.ts and the rain time series rain.ts
 ```{r}
-data = read.csv("portal_timeseries.csv", stringsAsFactors = FALSE)
-NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
-rain_ts = ts(data$rain, start = c(1992, 3), end = c(2014, 11), frequency = 12)
+Insert your code here!
 ```
 
-## Plot the data
-Let's just remind ourselves what the data look like:
+Let's also make our white noise time series again. As a reminder white noise is when we have a time series where the data points lack any correlation structure. They are random, independent draws from a distribution. The equation for white noise looks like this:
 
+y_t = constant + Error_t, where the error at time t is assumed to be from a normal distribution with some mean and variance.
+
+We can generate one of these time series in R using the code we played with last week:
 ```{r}
-plot(NDVI_ts)
+set.seed(20)
+whitenoise = ts(rnorm(273,0.18))
 ```
+Reminder: set.seed is fixing that random draw so we all have the same numbers. rnorm() pulls random draws from a normal distribution. And we've asked it to pull 273 observations from a normal distribution with mean 0.18
 
-Now let's fit this white noise model to our data. We'll use the meanf function from
-the forecast package. It fits a model where you have a mean and assume data are 
-independent and identifcally distributed  (so no time series structure)
+## Fit the white noise model
+Now let's fit this white noise model (the equation above) to our data. We'll use the meanf function from the forecast package. It fits a model where you have a mean and assumes data are independent and identifcally distributed  (so no time series structure)
+
 ```{r}
-avg_model = meanf(NDVI_ts)
-plot(NDVI_ts)
-lines(fitted(avg_model), col = 'red')
-summary(avg_model)
+avg_model_w = forecast::meanf(whitenoise)
+plot(whitenoise)
+lines(fitted(avg_model_w), col='blue')
+```
+As you can see, it's not a very exciting model. All it does is fit the mean of the data and then all the variance around that mean is modeled as random error.
+
+For 'fun' let's apply it to our NDVI data.
+
+```{r}
+avg_model = forecast::meanf(NDVI.ts)
+plot(NDVI.ts)
+lines(fitted(avg_model), col='blue')
+```
+In some ways it looks even worse because we have these obvious systematic excursios from the mean that are maintained for more than one time step. This is because the NDVI is not just random draws from some distribution. It has autocorrelation between the data points. 
+
+You do:
+Run the meanf() model on the rain.ts time series object. Plot your data with the model fit on top.
+```{r}
+Insert your code here
 ```
 
 ## Auto-regressive model
 
-* But we know this isn't right. As we learned last week, there is structure in our data. It's not just a random pull from a distribution. We have autocorrelation between our data points.
+Let's remind ourselves of what that autocorrelation structure looks like for NDVI.
 
 ```{r}
-acf(NDVI_ts)
-pacf(NDVI_ts)
+acf(NDVI.ts)
+pacf(NDVI.ts)
 ```
+(You can also do this using tsdisplay()
 
-So, let's build a model that takes this autocorrelation into account.
-* "Autoregressive model""
-* Predict value based on previous states in time-series
+Let's build a model that takes this autocorrelation into account. We'll do this by adding autocorrelation into that base white noise equation.
+White noise model:
+y_t = constant + Error_t
 
-> y_t = c + b1 * y_t-1 + b2 * y_t-2 ... + e_t
-* Does this remind you of a biological model?
-* This model is bascially a Gompertz population model if y is log(N)
+Autoregressive model:
+y_t = constant + b1 * y_t-1 + error_t
+where b1 is a coefficient that we fit to the data (like a slope in a regression). y_t-1 is the observation at a 1 time step lag - or the observation one time step before y_t.
+
+Moving average model:
+y_t = constant + theta1 * error_t-1 + error_t
+where theta1 is a coffiecient fit to the data and error_t-1 is the error value for the observation at the prior time step.
+
 
 This general structure is an approach to time series modelling called an ARIMA model.
 * ARIMA: autoregressive, integrated, moving average
