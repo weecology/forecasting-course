@@ -111,67 +111,74 @@ Insert your code here
 
 ## Auto-regressive model
 
-Let's remind ourselves of what that autocorrelation structure looks like for NDVI.
-
-```{r}
-acf(NDVI.ts)
-pacf(NDVI.ts)
-```
-(You can also do this using tsdisplay()
-
 Let's build a model that takes this autocorrelation into account. We'll do this by adding autocorrelation into that base white noise equation.
 White noise model:
 y_t = constant + Error_t
 
-Autoregressive model:
+Autoregressive model (AR):
 y_t = constant + b1 * y_t-1 + error_t
 where b1 is a coefficient that we fit to the data (like a slope in a regression). y_t-1 is the observation at a 1 time step lag - or the observation one time step before y_t.
 
-Moving average model:
+Moving average model (MA):
 y_t = constant + theta1 * error_t-1 + error_t
 where theta1 is a coffiecient fit to the data and error_t-1 is the error value for the observation at the prior time step.
 
+Data doesn't necessarily reflect just an autoregressive or just a moving average process. We can combine the Autoregressive and Moving average processes in the same model, often called an ARMA model. For example:
 
-This general structure is an approach to time series modelling called an ARIMA model.
-* ARIMA: autoregressive, integrated, moving average
-These terms define different approaches to modeling the time series. We talked about one of these last week - autocorrelation, which is the AR part of an ARIMA model
+y_t = constant + theta1 * error_t-1 +  b1 * y_t-1 + error_t
+This would be considered an ARMA model with an AR1 process (first order autoregressive or autoregressive with lag of 1) and a MA1 process (a first order moving average or moving average with a lag of 1)
+
+Finally, we can add something to the arma that allows us to deal with any long-term trends in our data (i.e. long-term shifts in the mean value of a time series).That type of model is called an ARIMA.
 AR: Autoregression. Uses the mean relationship between one time step and another.
 I: Integrated. Is used when there is a trend in the data that needs to be accounted for.
 MA: Moving Average (not the same as moving average we discussed for decomposition). This
 uses information in the errors, not the means.
 
-For each of these components, we have to tell the model how many time steps in the past do we think influence our observed time point. 
-We are just going to focus on AR models today - ignoring I and MA.
-So let's start by thinking about how many time steps in the past we may want to 
-* Fit using `Arima()` function
-* Can use the Pacf as a starting point for determining the order of the model.
-* Our pacf has 2 significant lags.
+The I component changes what data is being fit by the model. Instead of the observation y_t it's the difference between y_t and the value at some point in the past (for example y_t-1). 
+
+For each of these components, we have to tell the model how many time steps in the past do we think influence our observed time point. In this context, we often talk about the 'order' of the process. A first order AR process, A second order MA process, which is just another ways of saying how many lags we want to fit. A lag of 1 is a 1st order process. When we specify an ARIMA model with the orders we want it to fit, we can specify 0 for those aspects of the model we don't want 
+
+So let's start by thinking about how many time steps in the past we may want to fit foro ur NDVI data. 
+From our adventures in autocorrelation last week, we know that the acf and pacf plots can give us some insights there:
+
+So, let's remind ourselves of what that autocorrelation structure looks like for NDVI.
 
 ```{r}
-arima_model = Arima(NDVI_ts, c(2, 0, 0))
-plot(NDVI_ts)
-lines(fitted(arima_model), col = 'red')
-summary(arima_model)
+acf(NDVI.ts)
+pacf(NDVI.ts)
 ```
+(You can also do this using tsdisplay())
 
-SO, just with the information about the mean relationship between the observed value and the
-value from th eprevious two timesteps, we are able to generate a plot that doesn't look
-ridiculuous different from the observed.
-* Check fit
+We learned last week that this signal, which was very different from the rodents, is probably telling us there's a moving average process working here. And since a lag of 1 and a lag of 2 are both significant, let's start off by fitting a MA-2 model (a second order, or lag-2 moving average process)
 
 ```{r}
-plot(resid(arima_model))
-acf(resid(arima_model))
+MA2 = forecast::Arima(NDVI.ts, c(0,0,2))
 ```
-If our model was a good fit to the time series, we would no longer have autocorrelation
-in the residuals, but we do.
-* Autocorrelation at 1 and 2 years
-Why? What kind of signal would generate that? (we talked about this when we
-were thinking about autocorrelation last week)
-* Seasonal signal
-* Seasonal component is modeled in the same way, but in 1 full annual cycle steps
+
+Let's see how this model performs relative to the white noise model we plotted before:
+
+```{r}
+plot(NDVI.ts)
+lines(fitted(MA2), col='blue')
+```
+SO, just with the information about correlated errors at short time intervals, we are able to generate a plot that doesn't look ridiculuously different from the observed data.
+
+The next step whenever we fit any model is to check how its fitting our data. Are there signals in our residuals that indicate something is amiss. With a time series model, we're often looking to see if we left any autocorrelation unaccounted for. 
+
+
+```{r}
+forecast::checkresiduals(MA2)
+```
+If our model was a good fit to the time series, we would no longer have autocorrelation in the residuals, but we do.
+We have autocorrelation at 1 and 2 years (12 months and 24 months). This is that seasonal signal, that repeated pattern of green and not green that happens every year as part of the seasonal nature of the system.
+
+We can add terms to the ARIMA model that allow us to fit this seasonal signal.
 
 > y_t = constant + b1 * y_t-1 + b2 * yt_2 + b3 * y_t-12 + b4 * y_t-24 + e_t
+
+in this case, y_t-12 and y_t-24 are tell the model to also incorporate those longer term correlations, which emerge from the seasonal signal generating cross-year correlations.
+
+When we put this into Arima(), however, 
 ```{r}
 seasonal_arima_model = Arima(NDVI_ts, c(2, 0, 0), seasonal = c(2, 0, 0))
 plot(NDVI_ts)
