@@ -35,13 +35,13 @@ Examine the residuals of the model using checkresiduals()
 8. Watch Modeling seasonal signals in ARIMA models
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m6fplOpo4qs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-******
-9. Watch Using pacf() to diagnose time lags for autoregressive models
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4W9uI4pjc8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+9. Watch Fitting a seasonal ARIMA in R
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Uk9VxIlbj8I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-10. Using tsdisplay() examine the acf and pacf for NDVI.ts
-Using tsdisplay() examine the acf and pacf for rain.ts
+10. Examine the acf graph for your rain Arima model that you produced in step 7 above.
+Use Arima() to fit a seasonal model to rain.ts based on the information in your acf plot
 
+11. Watch Using auto.arima() in R
 11. Watch Exploring lagged correlations between different time series
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dKDgihvtZGk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
