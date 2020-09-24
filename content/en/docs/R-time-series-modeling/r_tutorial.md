@@ -165,7 +165,6 @@ SO, just with the information about correlated errors at short time intervals, w
 
 The next step whenever we fit any model is to check how its fitting our data. Are there signals in our residuals that indicate something is amiss. With a time series model, we're often looking to see if we left any autocorrelation unaccounted for. 
 
-
 ```{r}
 forecast::checkresiduals(MA2)
 ```
@@ -178,12 +177,27 @@ We can add terms to the ARIMA model that allow us to fit this seasonal signal.
 
 in this case, y_t-12 and y_t-24 are tell the model to also incorporate those longer term correlations, which emerge from the seasonal signal generating cross-year correlations.
 
-When we put this into Arima(), however, 
+When we put this information into Arima(), however, we tell it the number of annual cycle (units of 12 months) we want to model. 
+
 ```{r}
-seasonal_arima_model = Arima(NDVI_ts, c(2, 0, 0), seasonal = c(2, 0, 0))
-plot(NDVI_ts)
-lines(fitted(seasonal_arima_model), col = 'red')
+season_MA2 = forecast::Arima(NDVI.ts, c(0,0,2), seasonal=c(0,0,2))
+```
+Let's plot this model on our data and see how it looks:
+
+```{r}
+plot(NDVI.ts)
+lines(fitted(season_MA2), col='green')
+```
+There are differences between this fit and the non-seasonal ARIMA we fit above, but they're subtle (you can flip back and forth between this graph and the plot for MA2 if you'd like).
+
+```{r}
+summary(season_MA2)
+```
+It should us the model structure at the top, and the cofficient values that it fit to the data for that model structure.
+Let's see what the model output for this model looks like:
+```
 summary(seasonal_arima_model)
+```
 acf(resid(seasonal_arima_model))
 plot(resid(seasonal_arima_model))
 ```
