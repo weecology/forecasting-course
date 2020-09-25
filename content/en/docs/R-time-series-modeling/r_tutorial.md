@@ -42,15 +42,19 @@ Examine the residuals of the model using checkresiduals()
 Use Arima() to fit a seasonal model to rain.ts based on the information in your acf plot
 
 11. Watch Using auto.arima() in R
-11. Watch Exploring lagged correlations between different time series
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dKDgihvtZGk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JUIoMc0isdI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-12. Plot the lag plot comparing NDVI.ts and rats.ts
-Generate the ccf plot comparing NDVI.ts and rats.ts
+11. Use auto.arima() to fit the rain.ts data using the default settings (i.e. just give it the data, do not change any max values)
+Examine the model fit using checkresiduals()
+Modify the max orders, if needed, and rerun the model.
+
+12. Watch Fitting external predictors using auto.arima()
+<iframe width="560" height="315" src="https://www.youtube.com/embed/A72HE1XxX5Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 13. Submit your r code (either as a file or cut and paste text) through the assignment for this module in the course canvas site.
 
 
+# Written version of the videos
 
  Over the past few weeks, we've explored how to turn time series into time series objects, how to disentangle the seasonal and long-term signals in a time series, and learned about the influence of the past on current observations. Today we're going to start taking all that information and turn them into models. 
 
@@ -105,6 +109,7 @@ In some ways it looks even worse because we have these obvious systematic excurs
 
 You do:
 Run the meanf() model on the rain.ts time series object. Plot your data with the model fit on top.
+
 ```{r}
 Insert your code here
 ```
@@ -253,44 +258,23 @@ summary(autoarima_3)
 ```
 And now we have a higher sAR term: sAR3, which means that our best fitting model includes a seasonal correlation structure that spans back for 3 annual cycles.
 
-And our residuals now show that 
+```{r}
+forecast::checkresiduals(autoarima_3)
+```
+
+And our residuals now show that the 36 month correlation structure in our data is gone. Yes, we still have that 28 month correlation peak, but I have no idea why that exists and remember that we expect some significant correlations just by chance (even for a time series deliberately constructed to not have autocorrelation!). So, I say let's call it good. As an additional check, look in your console window. You should see results for something called the Ljung-Box test. This test is a test for whether your residuals are significantly different from white noise expectations. It says our residuals are not distinguishable from white noise, so I think we're good!
+
+You do: Run auto.arima on the rain time series using the default values first. Check the residuals and determine whether you need to modify the defaults to explore models with higher order processes.
+
+```{r}
+Insert your code here
+```
+
 ## Incorporating external co-variates
-This is fun - making your timeseries predict itself, but often we know there are
-important predictors of a time series. We can add those to an ARIMA model just like
-in a normal regression
-* Add values of x and associated coefficient to model
-
-> y_t = c + b1 * y_t-1 + b2 * x_t ... + e_t
-```{r}
-rain_arima_model = auto.arima(NDVI_ts, xreg = rain_ts)
-plot(NDVI_ts)
-lines(fitted(rain_arima_model), col = 'blue')
-lines(fitted(arima_model), col = 'red')
-summary(rain_arima_model)
-```
-It does not automatically explore all the lags of the predictor. Anyone remember
-whenwe did the crosscorrelation between rain and NDVI last week what the strongest correlation was?
-```{r}
-ccf(rain_ts, NDVI_ts)
-```
-Lag of 1.
-
-To generate lagged predictors you need to generate a new dataframe containing
-the different lags you want to examine
+This is fun - making your timeseries predict itself, but often we know there are important predictors of a time series. We can add those to our ARIMA model just like in a normal regression. Technically, the way this works is that the predictor is fit to the data (like with regression) and the arima components are fit to the errors from that regression.
 
 ```{r}
-Rain1 = stats::lag(rain_ts,-1)
-Rain0 = rain_ts
-rain_lags <- cbind(
-    Rain0 = rain_ts,
-    Rain1 = stats::lag(rain_ts,1))
-head(rain_lags)
+rain_arima = forecast::auto.arima(NDVI.ts, max.P=3, xreg=data$rain)
+summary(rain_arima)
 ```
-
-```{r}
-NDVI_rain_0 = auto.arima(NDVI_ts, xreg = Rain1)
-plot(NDVI_ts)
-lines(fitted(NDVI_rain_0), col = 'blue')
-summary(NDVI_rain_0)
-
-```
+The xreg term is the coefficient for the impact of rain on NDVI in this model. Unlike with the autocorrelation structure, auto,arima() does not automatically explore all the lags of the predictor. The model we ran is examining the impact of rain in the current month on NDVI in the current month. You may remember from last week that this was not our strongest correlation. The strongest correlation between rain and NDVI was occurring at a lag of 1 (the rain from the previous month was correlated with the NDVI in the current month). You can run lagged predictors in auto.arima but you have to generate the lagged data yourself so that the rain from the prvious month is associated with the NDVI for the next month. So, I'm going to end our magical tour of ARIMA models here. 
