@@ -125,9 +125,9 @@ accuracy(arima_forecast, NDVI_test)
 * RMSE is a common method for evaluating forecast performance as is the Brier score
   (RMSE^2)
 
-> Now it's your turn.
-> Pause the video (or stop reading)
-> Write code to visualize and quantify the accuracy of the seasonal ARIMA model
+> * **Now it's your turn.**
+> * Pause the video (or stop reading)
+> * Write code to visualize and quantify the accuracy of the seasonal ARIMA model
 
 * Here's what I would have done
 
