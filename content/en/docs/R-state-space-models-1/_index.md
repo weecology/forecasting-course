@@ -1,5 +1,5 @@
 ---
-title: "State space models in R (10/22 & 10/24 2020)"
+title: "State space models in R (10/22 & 10/27 2020)"
 linkTitle: "R: State space models"
 weight: 16
 description: Introductory tutorial on state space modeling in R
