@@ -4,7 +4,25 @@ weight: 3
 description: R tutorial on evaluating forecasts using the forecast package
 ---
 
-# Evaluating forecasts
+# Video Tutorials
+
+## Hindcasting & Visual Evaluation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ODmOr76QnWc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Quantitative Evaluation of Point Estimates
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h0Igk8uOXKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Evaluating Uncertainty Using Coverage
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hGlnIVYFUgg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Evaluating How Forecast Accuracy Changes With Forecast Horizon
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/DHOfUYLnshA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Written Tutorial
 
 ## Steps in forecasting
 
@@ -110,6 +128,9 @@ abline(0, 1)
 * Not much relationship between observed and predicted values
 * Because no variation in predicted values
 
+> * **Now it's you're turn.**
+> * Forecast and visualize a seasonal ARIMA model
+
 ## Quantitative Evaluation
 
 * `accuracy` function shows a number of common measures of forecast accuracy
@@ -126,8 +147,7 @@ accuracy(arima_forecast, NDVI_test)
   (RMSE^2)
 
 > * **Now it's your turn.**
-> * Pause the video (or stop reading)
-> * Write code to visualize and quantify the accuracy of the seasonal ARIMA model
+> * Write code to quantify the accuracy of the seasonal ARIMA model
 
 * Here's what I would have done
 
@@ -178,7 +198,11 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
 
 * We want this value to be as close to the value of the interval as possible, so we want it to be close to 0.8
-* Let's ompare this result to the uncertainty of the seasonal model
+
+> * **Now it's your turn.**
+> * Write code to evaluate the coverage of the seasonal ARIMA model
+
+* Let's compare this result to the uncertainty of the seasonal model
 
 ```r
 in_interval_season <- NDVI_test > seasonal_arima_forecast$lower[,1] & NDVI_test < seasonal_arima_forecast$upper[,1]
