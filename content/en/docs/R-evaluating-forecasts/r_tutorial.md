@@ -4,27 +4,27 @@ weight: 3
 description: R tutorial on evaluating forecasts using the forecast package
 ---
 
-# Video Tutorials
+## Video Tutorials
 
-## Hindcasting & Visual Evaluation
+### Hindcasting & Visual Evaluation
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ODmOr76QnWc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Quantitative Evaluation of Point Estimates
+### Quantitative Evaluation of Point Estimates
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h0Igk8uOXKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Evaluating Uncertainty Using Coverage
+### Evaluating Uncertainty Using Coverage
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hGlnIVYFUgg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Evaluating How Forecast Accuracy Changes With Forecast Horizon
+### Evaluating How Forecast Accuracy Changes With Forecast Horizon
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/DHOfUYLnshA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-# Written Tutorial
+## Written Tutorial
 
-## Steps in forecasting
+### Steps in forecasting
 
 1. Problem definition
 2. Gather information
@@ -33,7 +33,7 @@ description: R tutorial on evaluating forecasts using the forecast package
 5. Make forecasts
 6. **Evaluate forecasts**
 
-## Setup
+### Setup
 
 ```r
 library(forecast)
@@ -44,7 +44,7 @@ NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 tsdisplay(NDVI_ts)
 ```
 
-## Hindcasting
+### Hindcasting
 
 * There are two approaches to evaluating forecasts
 * One is to make a forecast for the future, collect new data, and then see how well the forecast performed
@@ -55,7 +55,7 @@ tsdisplay(NDVI_ts)
 * Test on data from the end of the observed time-series
 * For those of you familiar with cross-validation, this is a special form of cross-validation that accounts for autocorrelation and the fact that time is directional
 
-### Test and training data
+#### Test and training data
 
 * To split the time-series into training data and testing data we use the `window` function
 * First argument is the time-series
@@ -66,7 +66,7 @@ NDVI_train <- window(NDVI_ts, end = c(2011, 11))
 NDVI_test <- window(NDVI_ts, start = c(2011, 12))
 ```
 
-### Build model on training data
+#### Build model on training data
 
 * We then fit our model to the training data
 * Let's start with a non-seasonal ARIMA
@@ -75,7 +75,7 @@ NDVI_test <- window(NDVI_ts, start = c(2011, 12))
 arima_model = auto.arima(NDVI_train, seasonal = FALSE)
 ```
 
-### Make forecast for the test data
+#### Make forecast for the test data
 
 * We then use that model to make forecasts for the test data
 * We reserved 3 years of test data so we want to forecasts 36 months into the future
@@ -84,7 +84,7 @@ arima_model = auto.arima(NDVI_train, seasonal = FALSE)
 arima_forecast = forecast(arima_model, h = 36)
 ```
 
-## Visual Evaluation
+### Visual Evaluation
 
 * Start by evaluating the performance of the forecast visually
 * Remember that we can plot the data the model is fit to and the forecast using `autoplot`
@@ -131,7 +131,7 @@ abline(0, 1)
 > * **Now it's you're turn.**
 > * Forecast and visualize a seasonal ARIMA model
 
-## Quantitative Evaluation
+### Quantitative Evaluation
 
 * `accuracy` function shows a number of common measures of forecast accuracy
   * 1st argument: forecast object from model on training data
@@ -170,7 +170,7 @@ accuracy(arima_forecast, NDVI_test)
 
 * So the season model appears to perform better on point estimates
 
-### Coverage
+#### Coverage
 
 * How do we test the uncertainty
 * We have these blue prediction intervals, but how do we evalute them
@@ -211,7 +211,7 @@ length(in_interval_seasonal[in_interval_seasonal == TRUE]) / length(in_interval_
 
 * Seasonal is better because it is closer to the coverage interval of 0.8
 
-## Forecast horizon
+### Forecast horizon
 
 * Forecasts generally get worse through time
 * Can look at this by comparing the fit at different forecast horizons
