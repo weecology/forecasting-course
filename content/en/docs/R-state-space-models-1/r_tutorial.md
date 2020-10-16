@@ -178,20 +178,30 @@ xs <- out[,3:ncol(out)]
 ```
 predictions <- colMeans(xs)
 plot(time, predictions, type = "l")
-points(time, y)
 ```
+
+* And this looks very similar to the observed dynamics of y
 
 * Add prediction intervals as range containing 95% of MCMC samples
 
 ```
 ci <- apply(xs, 2, quantile, c(0.025, 0.975))
-lines(time, ci[1,], lty = "dashed")
-lines(time, ci[2,], lty = "dashed")
+lines(time, ci[1,], lty = "dashed", col = "blue")
+lines(time, ci[2,], lty = "dashed", col = "blue")
 ```
+
+* These are very narrow prediction intervals, so the model appears to be very confident
+* But it's important to keep in mind that when fitting the value of `x` at time `t`, the model has access to the value of `y` at time `t`
+* And the `y` is present it isn't being estimated, it's just the observed value
+* So, will this model forecast well?
 
 ## Forecasting
 
-* Add NAs for values to be forecast
+* To make forecasts using a JAGS model we include data for `y` that is `NA`
+* This tells the model that we don't know the values and therefore the model estimates them as part of the fitting process
+* To make a true forecast we would add one `NA` to the end of `y` for each time step we wanted to forecast
+* To hindcast or backcast like we replace the values for `y` that are part of the test set with `NA`
+* We'll hindcast, so to do this we'll replace the last year of `y` values with `NA` and then compare the final year of data to our predictions
 
 > Make these changes at top of script and rerun
 
