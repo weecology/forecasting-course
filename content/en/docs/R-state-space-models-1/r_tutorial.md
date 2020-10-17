@@ -1,5 +1,5 @@
 ---
-title: "R Tutorial"
+title: "R Tutorial Part 1"
 weight: 3
 description: "State space modeling tutorial: Part 1"
 ---
@@ -14,7 +14,13 @@ excellent
 > JAGS needs to be installed: https://sourceforge.net/projects/mcmc-jags/files/
 > rjags R package needs to be installed
 
-## State space models
+## Video Tutorial
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T3ZGhXAO6VY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Text Tutorial
+
+### State space models
 
 * Time-series model
 * Only first order autoregressive component
@@ -23,7 +29,7 @@ excellent
   * the observation model - observation error or indirect observations
 * Estimates the true value of the underlying **latent** state variables
 
-## Data
+### Data
 
 * Google Flu Trends data for Florida
 * [https://www.google.org/flutrends/about/data/flu/us/data.txt](https://www.google.org/flutrends/about/data/flu/us/data.txt)
@@ -35,6 +41,8 @@ y = gflu$Florida
 plot(time,y,type='l',ylab="Flu Index",lwd=2,log='y')
 ```
 
+### Model
+
 > Draw on board while walking through models
 
 ```
@@ -43,8 +51,7 @@ y_t-1    y_t    y_t+1
 x_t-1 -> x_t -> x_t+1   Process model
 ```
 
-
-### Process model
+#### Process model
 
 * What is actually happening in the system
 * First order autoregressive component
@@ -56,7 +63,7 @@ x_t+1 = f(x_t) + e_t
 x_t+1 = b0 + b1 * x_t + e_t
 
 
-### Observation model
+#### Observation model
 
 * Google searches aren't perfect measures of the number of flu cases (which are
   what should be changing in the process model and what we care about)
@@ -67,7 +74,7 @@ y_t = x_t + e_t
 * Can be much more complicated
 
 
-## Model Framework
+### rjags
 
 * Models like this are not trivial to fit
 * Use [JAGS (Just Another Gibbs Sampler)](http://mcmc-jags.sourceforge.net)
@@ -79,7 +86,7 @@ y_t = x_t + e_t
 library(rjags)
 ```
 
-## Model
+### JAGS Model
 
 * JAGS code to describe the model
 * Store as string in R
@@ -195,7 +202,7 @@ lines(time, ci[2,], lty = "dashed", col = "blue")
 * And the `y` is present it isn't being estimated, it's just the observed value
 * So, will this model forecast well?
 
-## Forecasting
+### Forecasting
 
 * To make forecasts using a JAGS model we include data for `y` that is `NA`
 * This tells the model that we don't know the values and therefore the model estimates them as part of the fitting process
@@ -207,9 +214,25 @@ lines(time, ci[2,], lty = "dashed", col = "blue")
 
 ```
 data$y[(length(y)-51):length(y)] = NA
+jags.out   <- coda.samples (model = j.model,
+                            variable.names = c("y","tau_proc","tau_obs"),
+                            n.iter = 10000)
 ```
 
-## Uncertainty
+* We can see from plotting the predictions that the forecast doesn't look promising
+* Without the observed data to influence the estimates of `x[t]` the model predicts little change over the forecast year
+* We can directly compare this to the empirical data by adding it to the plot
+
+```
+lines(time, y)
+```
+
+* So the point estimates don't perform well
+* This raises the question of whether the model accurately predicts that it is uncertain when making forecasts
+* Plotting the prediction intervals suggests that it does
+* They very quickly expand towards zero and the upper limits of the data
+
+### Uncertainty
 
 * The uncertainty is partitioned between process and observation models
 * Look at `tau_proc` and `tau_obs` (as standard deviations)
@@ -218,66 +241,4 @@ data$y[(length(y)-51):length(y)] = NA
 hist(1/sqrt(out[,1])
 hist(1/sqrt(out[,2])
 plot(out[,1],out[,2])
-```
-
-## Dynamic linear modeling
-
-* Random walk worked well for one-step ahead
-* But not for longer range forecasts
-* Add covariates
-* "Dynamic linear model"
-
-* Download some weather data
-
-```{r}
-# install.packages('daymetr')
-library(daymetr)
-weather = download_daymet(site = "Orlando",
-                               lat = 28.54,
-                               lon = -81.34,
-                               start = 2003,
-                               end = 2016,
-                               internal = TRUE)
-weather_data = weather$data
-head(weather_data)
-```
-
-* For date information this data has `year` and `yday`
-* `yday` is the Julian day (starts at 1 on Jan 1 and goes to 365)
-* Make this into a date column so we can combine with the weekly date data in Google Flu
-
-```{r}
-weather_data$date = as.Date(paste(weather_data$year,weather_data$yday,sep = "-"),"%Y-%j")
-```
-
-* Add this weather data to our `data` object used by our model
-
-```{r}
-#data$Tmin = weather_data$tmin..deg.c.[match(time, weather_data$date)]
-data$Tmin = weather_data$tmin..deg.c.[weather_data$date %in% time]
-```
-
-* Could expand on our random walk model in JAGS
-* But a bit complicated once there are predictors
-
-```{r}
-# devtools::install_packages('EcoForecast/ecoforecastR')
-library(ecoforecastR)
-
-data$logy = log(data$y)
-dlm = ecoforecastR::fit_dlm(model = list(obs="logy", fixed="~ 1 + X + Tmin"), data)
-params = dlm$params
-params <- window(dlm$params,start=1000) ## remove burn-in
-plot(params)
-```
-
-* Make forecasts in the same was as before
-
-```
-out <- as.matrix(dlm$predict)
-ci <- apply(exp(out),2,quantile,c(0.025,0.5,0.975))
-plot(time, y)
-lines(time, ci[2,])
-lines(time, ci[1,], lty = "dashed")
-lines(time, ci[3,], lty = "dashed")
 ```
