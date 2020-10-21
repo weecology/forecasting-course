@@ -12,15 +12,15 @@ description: R tutorial on evaluating forecasts using the forecast package
 
 ### Quantitative Evaluation of Point Estimates
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h0Igk8uOXKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/h0Igk8uOXKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Evaluating Uncertainty Using Coverage
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hGlnIVYFUgg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hGlnIVYFUgg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Evaluating How Forecast Accuracy Changes With Forecast Horizon
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/DHOfUYLnshA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DHOfUYLnshA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Written Tutorial
 

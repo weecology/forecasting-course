@@ -7,7 +7,7 @@ description: Introductory video, reading on ecological forecasting, and reading 
 
 ## Video
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Lgi_e7N-C8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Lgi_e7N-C8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Readings
 

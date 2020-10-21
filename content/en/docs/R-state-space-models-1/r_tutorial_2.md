@@ -20,6 +20,13 @@ excellent
 
 ## Text Tutorial
 
+### Missing data
+
+* Works naturally with missing data
+* Just have `NA`'s in the portions of the time series that are missing
+* Show how uncertainty expands around those areas
+* Explain how this is capturing the models uncertainty in the training data when no observed values are available
+
 ### Dynamic linear modeling
 
 * Random walk worked well for one-step ahead
@@ -61,7 +68,7 @@ data$Tmin = weather_data$tmin..deg.c.[weather_data$date %in% time]
 * But a bit complicated once there are predictors
 
 ```{r}
-# devtools::install_packages('EcoForecast/ecoforecastR')
+# devtools::install_github('EcoForecast/ecoforecastR')
 library(ecoforecastR)
 
 data$logy = log(data$y)

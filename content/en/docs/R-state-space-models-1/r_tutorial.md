@@ -231,14 +231,3 @@ lines(time, y)
 * This raises the question of whether the model accurately predicts that it is uncertain when making forecasts
 * Plotting the prediction intervals suggests that it does
 * They very quickly expand towards zero and the upper limits of the data
-
-### Uncertainty
-
-* The uncertainty is partitioned between process and observation models
-* Look at `tau_proc` and `tau_obs` (as standard deviations)
-
-```{r}
-hist(1/sqrt(out[,1])
-hist(1/sqrt(out[,2])
-plot(out[,1],out[,2])
-```
