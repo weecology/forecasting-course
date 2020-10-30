@@ -51,9 +51,10 @@ head(hooded_warb_data)
 * Load those using the `stack()`, which is part of the `raster` package which gets loaded when we load `dismo`
 
 ```r
-env_data_stacked_current = stack("env_current.grd")
-env_data_stacked_forecast = stack("env_forecast.grd")
-plot(env_data_stacked_current)
+env_data_current = stack("env_current.grd")
+env_data_forecast = stack("env_forecast.grd")
+plot(env_data_current$tmin)
+plot(env_data_current$precip)
 ```
 
 ## Determine environment where species is (and isn't)
@@ -67,7 +68,7 @@ plot(env_data_stacked_current)
 
 ```r
 hooded_warb_locations = select(hooded_warb_data, lon, lat)
-hooded_warb_env = extract(env_data_stacked_current, hooded_warb_locations)
+hooded_warb_env = extract(env_data_current, hooded_warb_locations)
 ```
 
 * Then we need to attached these extracted environmental values back to our presence absence data
@@ -151,7 +152,7 @@ plot(evaluation, 'ROC')
     * `type = "response"` to get probabilities
 
 ```r
-predictions <- predict(env_data_stacked_current, logistic_regr_model, type = "response")
+predictions <- predict(env_data_current, logistic_regr_model, type = "response")
 present <- select(filter(hooded_warb_data, present == 1), lon, lat)
 plot(predictions, ext = extent(-140, -50, 25, 60))
 points(present, pch='+', cex = 0.5)
@@ -189,7 +190,7 @@ points(present, pch='+', cex = 0.5)
 * We'll use the CMIP5 predictions for 50 years from now that we loaded at the beginning of the lesson
 
 ```r
-forecasts <- predict(env_data_stacked_forecast, logistic_regr_model, type = "response")
+forecasts <- predict(env_data_forecast, logistic_regr_model, type = "response")
 plot(forecasts, ext = extent(-140, -50, 25, 60))
 plot(forecasts > tr, ext = extent(-140, -50, 25, 60))
 ```
