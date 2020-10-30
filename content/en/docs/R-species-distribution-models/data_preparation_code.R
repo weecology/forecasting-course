@@ -1,4 +1,4 @@
-library("rdataretriever")
+library("rdataretriever") # To install this package follow instuctions at https://github.com/ropensci/rdataretriever/
 library("raster")
 library("rgdal")
 library("DBI")
@@ -8,23 +8,10 @@ library("maptools")
 
 # Hooded Warbler Presence-Absence Data
 
-# bbs_data = fetch("breed-bird-survey")
-# counts = bbs_data$breed_bird_survey_counts
-# routes = bbs_data$breed_bird_survey_routes
-# species = bbs_data$breed_bird_survey_species
-
-if (!file.exists('bbs.sqlite')){
-  rdataretriever::get_updates()
-  rdataretriever::install('breed-bird-survey', 'sqlite', 'bbs.sqlite')
-}
-
-bbs_db = dbConnect(RSQLite::SQLite(), 'bbs.sqlite')
-counts = tbl(bbs_db, "breed_bird_survey_counts") %>%
-  data.frame()
-routes = tbl(bbs_db, "breed_bird_survey_routes") %>%
-  data.frame()
-species = tbl(bbs_db, "breed_bird_survey_species") %>% 
-  data.frame()
+bbs_data = fetch("breed-bird-survey")
+counts = bbs_data$breed_bird_survey_counts
+routes = bbs_data$breed_bird_survey_routes
+species = bbs_data$breed_bird_survey_species
 
 hooded_warb_data = filter(counts, aou == 6840) %>% 
   full_join(routes) %>% 
