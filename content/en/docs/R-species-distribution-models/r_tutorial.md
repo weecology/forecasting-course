@@ -4,7 +4,11 @@ weight: 3
 description:
 ---
 
-## Species Distribution Models
+## Video Tutorial
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0VObf2rMrI8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Text Tutorial
 
 * Species Distribution Models attempt to model where species are expect to occur
 * Can be based on lots of things, but often just environmental variables
