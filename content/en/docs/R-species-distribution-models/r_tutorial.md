@@ -71,11 +71,9 @@ hooded_warb_locations = select(hooded_warb_data, lon, lat)
 hooded_warb_env = extract(env_data_current, hooded_warb_locations)
 ```
 
-* Then we need to attached these extracted environmental values back to our presence absence data
-* Convert it from a matrix to a data frame and then attached it using `cbind()`
+* Then we need to attached these extracted environmental values back to our presence absence data using `cbind()`
 
 ```r
-hooded_warb_env = data.frame(hooded_warb_env)
 hooded_warb_data = cbind(hooded_warb_data, hooded_warb_env)
 ```
 
