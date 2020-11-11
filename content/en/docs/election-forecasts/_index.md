@@ -1,5 +1,5 @@
 ---
-title: "Election forecasts (11/12/2020)"
+title: "Election forecasts (11/17/2020)"
 linkTitle: "Election forecasts"
 weight: 22
 description: Discussion of modelling approaches and data challenges in election forecasting

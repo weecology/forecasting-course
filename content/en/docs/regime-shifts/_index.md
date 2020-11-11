@@ -2,7 +2,7 @@
 title: ""
 linkTitle: ""
 weight:
-description: Face our assumptions (and the associated challenges) related to how quickly nature changes
+# description: Face our assumptions (and the associated challenges) related to how quickly nature changes
 ---
 
 {{% pageinfo %}}
