@@ -1,8 +1,8 @@
 ---
-#title: "Empirical Dynamic Modeling in R (11/19/2020)"
-#linkTitle: "R: Empirical Dynamic Modeling"
-#weight: 24
-#description: R Tutorial on fitting and making forecasts using empirical dynamic modeling
+title: "Empirical Dynamic Modeling in R"
+linkTitle: "R: Empirical Dynamic Modeling"
+weight: 24
+description: R Tutorial on fitting and making forecasts using empirical dynamic modeling
 ---
 
 {{% pageinfo %}}
