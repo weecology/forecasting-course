@@ -4,6 +4,10 @@ weight: 3
 description:
 ---
 
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 ## Data
 
 We'll model and forecast abundance data for *Dipodomys ordii*.
