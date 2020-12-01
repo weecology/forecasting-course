@@ -4,9 +4,10 @@ weight: 2
 description:
 ---
 
-* How will you define an "ecological surprise"? Give some examples.
-* What is the difference between scenario planning, and predictions and forecasting? Give some examples.
-* Which are the benefits of scenario planning? 
-* How will you define "ecological feedback"? Give some examples.
-* Which are the reasons that scenario planning should include ecology as part of their the process?
-* How will incorporating global scenarios should benefit ecologist and ecosystem managers?
+* What is an ecological surprise and how would it effect forecasting?
+* What is scenario planning and how does it differ from predictions and forecasting?
+* Which are the benefits of scenario planning?
+* What are some challenges you can envision for scenario planning?
+* Are scenarios qualititive, quantitative, both?
+* What are the reasons that environmental scenario planning needs ecology?
+* How will incorporating global scenarios benefit ecologists and managers?
