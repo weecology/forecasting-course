@@ -48,7 +48,7 @@ description:
     * Should forecasts only be made to end users after scientific peer-review?
     * Does the risk of making bad forecasts cause issues for the eld of forecasting in general, especially if these forecasts have not been properly communicating their research-level nature or the uncertainty involved?
     * Interesting tensions between the speed of feedback from end users and the slowness of the scientific evaluation process.
-  * How ot best communicate forecasts to end users depends on end user needs (e.g., web vs. text messages)
+  * How to best communicate forecasts to end users depends on end user needs (e.g., web vs. text messages)
 * Education
   * Need to work with end users to improve their capacity to interpret information
   * Different users in different places on the simplicity-details tradeoff
