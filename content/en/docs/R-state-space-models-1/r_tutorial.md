@@ -32,10 +32,10 @@ excellent
 ### Data
 
 * Google Flu Trends data for Florida
-* [https://www.google.org/flutrends/about/data/flu/us/data.txt](https://www.google.org/flutrends/about/data/flu/us/data.txt)
+* [https://raw.githubusercontent.com/EcoForecast/EF_Activities/master/data/gflu_data.txt](https://raw.githubusercontent.com/EcoForecast/EF_Activities/master/data/gflu_data.txt)
 
 ```{r}
-gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+gflu = read.csv("https://raw.githubusercontent.com/EcoForecast/EF_Activities/master/data/gflu_data.txt", skip=11)
 time = as.Date(gflu$Date)
 y = gflu$Florida
 plot(time,y,type='l',ylab="Flu Index",lwd=2,log='y')
