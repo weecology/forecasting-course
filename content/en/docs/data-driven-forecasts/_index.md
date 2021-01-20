@@ -8,6 +8,7 @@ description: A discussion of data-driven models, how they compare to process mod
 {{% pageinfo %}}
 
 **Learning Objectives:**
+
 * Define and distinguish between process-based and data-driven models
 * Describe the strengths and weaknesses of data-driven models
 * Describe how Empirical Dynamic Modeling works
