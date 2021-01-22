@@ -8,16 +8,18 @@ description:
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-## Data
+## Objectives
 
 We'll model and forecast abundance data for *Dipodomys ordii*.
 
 ```{r, message = FALSE}
+# package dependencies
 library(ggplot2)
-library(dplyr)
 library(portalr)
 library(rEDM)
 ```
+
+## Data
 
 * Download the data
 
@@ -56,7 +58,7 @@ with parameters $r_1, r_2, \alpha_{1,2}, \alpha_{2,1}$.
 * Can capture the complexity of a multiple species/state system in a single
   species/state time-series
 * Does this based on Taken's Theorem
-    * Resconstruct a shadow of the real system from single time-series
+    * Reconstruct a shadow of the real system from single time-series
 
 In other words, instead of relying on:
 $$x_i(t+1) = F_i\left(x_1(t), x_2(t), \dots, x_d(t)\right)$$
@@ -91,8 +93,6 @@ $$x_i(t+1) = G_i\left(x_i(t), x_i(t-1), \dots, x_i(t-(E-1))\right)$$
 * Split the data to reserve some for forecasting
 
 ```{r}
-library(rEDM)                    # load the package
-
 n <- nrow(do_data)
 lib <- c(1, floor(2/3 * n))      # indices for the first 2/3 of the time series
 pred <- c(floor(2/3 * n) + 1, n) # indices for the final 1/3 of the time series
@@ -108,11 +108,11 @@ simplex(do_data,                     # input data (for data.frames, uses 2nd col
 
 * Output shows how well the model "predicted" on the given data
 * Focus on measures of fit/error:
-    * rho (correlation between observed and predicted values)
-    * mae (mean absolute error)
-    * rmse (root mean squared error)
-* `E` of 5 or 6 is optimal
-* Use 5 for simpler model
+    * rho (correlation between observed and predicted values, higher is better)
+    * mae (mean absolute error, lower is better)
+    * rmse (root mean squared error, lower is better)
+* `E` of 4 or 5 is optimal
+* Use 4 for simpler model
 * Use to forecast the remaining 1/3 of the data.
 
 ## Forecasts
@@ -121,16 +121,16 @@ simplex(do_data,                     # input data (for data.frames, uses 2nd col
 * To store predicted values add `stats_only` argument
 
 ```{r}
-  output <- simplex(do_data,
-          lib = lib, pred = pred,  # predict on last 1/3
-          E = 5, 
-          stats_only = FALSE)      # return predictions, too
+output <- simplex(do_data,
+                  lib = lib, pred = pred,  # predict on last 1/3
+                  E = 4, 
+                  stats_only = FALSE)      # return predictions, too
 ```
 
 * Output is a data.frame with a list column for the predictions
 
 ```{r}
-predictions <- output[[1]]$model_output
+predictions <- output$model_output[[1]]
 str(predictions)
 ```
 
@@ -139,22 +139,22 @@ str(predictions)
 ```{r}
 ggplot(do_data, aes(x = period, y = abundance)) +
   geom_line() +
-  geom_line(data = predictions, mapping = aes(x = time, y = pred), color = 'blue')
+  geom_line(data = predictions, mapping = aes(x = period, y = Predictions), color = 'blue')
 ```
 
-* Also have estimate of the prediction uncertainty in `pred_var`
+* Also have estimate of the prediction uncertainty in `Pred_Variance`
 * Variance of the prediction
 * Plot a 95% prediction interval use $\pm 2 * SD$
 
 ```{r}
 ggplot(do_data, aes(x = period, y = abundance)) +
   geom_line() +
-  geom_line(data = predictions, mapping = aes(x = time, y = pred), color = 'blue') +
+  geom_line(data = predictions, mapping = aes(x = period, y = Predictions), color = 'blue') +
   geom_ribbon(data = predictions,
-              mapping = aes(x = time,
-                            y = pred,
-                            ymax = pred + 2 * sqrt(pred_var),
-                            ymin = pred - 2 * sqrt(pred_var)),
+              mapping = aes(x = period,
+                            y = Predictions,
+                            ymax = Predictions + 2 * sqrt(Pred_Variance),
+                            ymin = Predictions - 2 * sqrt(Pred_Variance)),
               fill = 'blue',
               alpha = 0.2)
 ```
@@ -164,22 +164,23 @@ ggplot(do_data, aes(x = period, y = abundance)) +
 * For multi-step forecasts we can take these one step ahead forecasts along with their
   uncertainties and increment forward for multi-step forecasts as you'll see later in the
   week in a different context.
-* Or we can train the model to make forecasts the number of steaps head that we want
+* Or we can train the model to make forecasts the number of steps ahead that we want
 * We do this using `tp`
 
 ```{r}
 output <- simplex(do_data,
           lib = lib, pred = pred,  # predict on last 1/3
-          E = 6,
+          E = 10,                  # predicting 6 steps ahead is different model;
+                                   # selecting a different E is recommended, and
+                                   # a higher E for a more complex model is sensible
           tp = 6,
           stats_only = FALSE)      # return predictions, too
 
-predictions <- output[[1]]$model_output
+predictions <- output$model_output[[1]]
 
 ggplot(do_data, aes(x = period, y = abundance)) +
   geom_line() +
-  geom_line(data = predictions, mapping = aes(x = time, y = pred), color = 'blue')
+  geom_line(data = predictions, mapping = aes(x = period, y = Predictions), color = 'blue')
 ```
 
-* The model performs less well the longer the "forecast horizon" or distance into the future we ask it
-  to prediction, which is a common feature of real world forecasts.
+* The model performs less well the longer the "forecast horizon" or distance into the future we ask it to predict, which is a common feature of real world forecasts.
