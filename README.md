@@ -11,4 +11,4 @@ Anyone is welcome to use the material in their own courses and contributions are
 * Adding a new lesson involves making a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/master/content/en/docs/LessonTemplate) and modifying the pages in the resulting folder using [markdown](https://www.markdownguide.org/)
 * [Open an issue](https://github.com/weecology/forecasting-course/issues/new) to say Hi or if there’s anything we can do to help!
 * Contributions of new lessons are welcome as Pull Requests or we can work with you to add new data to the site
-* If you want to create a modified copy of the course including the website you should fork or copy the repository and [connect it to Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to automatically build the site.
+* If you want to create a modified copy of the course including the website you should fork or copy the repository and [connect it to Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to automatically build the site
