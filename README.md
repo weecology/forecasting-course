@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/283032599.svg)](https://zenodo.org/badge/latestdoi/283032599)
+
 # Ecological Dynamics & Forecasting Course
 
 This is a course on how ecological systems change through time and how to forecast how they will change in the future.
