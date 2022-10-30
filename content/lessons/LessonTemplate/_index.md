@@ -3,7 +3,7 @@ title: "Lesson Template"
 linkTitle: ""
 type: book
 weight: 100
-summary: " "
+summary: "Template for creating new lessons"
 ---
 
 {{% callout note %}}
