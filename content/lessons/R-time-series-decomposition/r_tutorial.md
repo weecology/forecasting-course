@@ -2,6 +2,7 @@
 title: "R Tutorial"
 weight: 3
 summary: " "
+show_date: false
 ---
 ## Time Series Decomposition in R
 ### Video Tutorial

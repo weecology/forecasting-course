@@ -4,6 +4,7 @@ linkTitle: ""
 type: book
 weight: 10
 summary: "Discussion of shifts in species ranges in response to climate change"
+show_date: false
 ---
 
 {{% callout note %}}

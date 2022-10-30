@@ -2,8 +2,7 @@
 title: "Discussion Questions"
 weight: 2
 summary: " "
-
-
+show_date: false
 ---
 
 ### Questions for Introduction of Ecological Change, Range Fluctuations, and Population Dynamics

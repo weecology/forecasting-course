@@ -2,6 +2,7 @@
 title: "Material"
 weight: 1
 summary: " "
+show_date: false
 ---
 Before doing the lesson: 
 * Install the R package: forecast

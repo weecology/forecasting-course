@@ -4,6 +4,7 @@ linkTitle: ""
 type: book
 weight: 90
 summary: Benefits and approaches to conducting automated iterative forecasts
+show_date: false
 ---
 
 {{% callout note %}}

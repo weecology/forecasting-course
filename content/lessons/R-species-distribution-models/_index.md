@@ -4,6 +4,7 @@ linkTitle: "R: Species Distribution Models"
 type: book
 weight: 20
 summary: An R tutorial on using fitting simple species models and making forecasts based on these models
+show_date: false
 ---
 
 {{% callout note %}}

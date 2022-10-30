@@ -2,6 +2,7 @@
 title: "R Tutorial"
 weight: 3
 summary: " "
+show_date: false
 ---
 ## Handling Dates and Times in R
 ### Video Tutorial

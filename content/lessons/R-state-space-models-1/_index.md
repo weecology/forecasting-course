@@ -4,6 +4,7 @@ linkTitle: "R: State space models"
 type: book
 weight: 16
 summary: Introductory tutorial on state space modeling in R
+show_date: false
 ---
 
 {{% callout note %}}

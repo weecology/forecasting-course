@@ -2,6 +2,7 @@
 title: "R Tutorial Part 1"
 weight: 3
 summary: "State space modeling tutorial: Part 1"
+show_date: false
 ---
 
 *Adapted from

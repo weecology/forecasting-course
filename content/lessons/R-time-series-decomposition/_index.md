@@ -4,6 +4,7 @@ linkTitle: "R: Time series decomposition"
 type: book
 weight: 6
 summary: Use R to examine dynamics occuring at different time-scales in ecological data
+show_date: false
 ---
 
 {{% callout note %}}

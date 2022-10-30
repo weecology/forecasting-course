@@ -4,6 +4,7 @@ linkTitle: "R: Forecast evaluation"
 type: book
 weight: 14
 summary: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package
+show_date: false
 ---
 
 {{% callout note %}}

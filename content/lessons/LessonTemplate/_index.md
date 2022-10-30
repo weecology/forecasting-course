@@ -4,6 +4,7 @@ linkTitle: ""
 type: book
 weight: 100
 summary: "Template for creating new lessons"
+show_date: false
 ---
 
 {{% callout note %}}

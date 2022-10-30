@@ -2,8 +2,7 @@
 title: "Discussion Questions"
 weight: 2
 summary: " "
-
-
+show_date: false
 ---
 
 * What is temporal alpha diversity and temporal beta diversity as defined in this paper?

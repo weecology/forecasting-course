@@ -2,6 +2,7 @@
 title: "Supplemental Code"
 weight: 5
 summary: "Data preparation code for specie distribution modeling exercise"
+show_date: false
 ---
 
 ```r

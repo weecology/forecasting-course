@@ -2,14 +2,14 @@
 title: "Instructor Notes"
 weight: 4
 summary: " "
+show_date: false
 ---
 
 ---
 title: "Discussion Questions"
 weight: 2
 summary: " "
-
-
+show_date: false
 ---
 
 ## Concepts

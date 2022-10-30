@@ -4,6 +4,7 @@ linkTitle: "Phenology"
 type: book
 weight: 5
 summary: Discussing seasonal dynamics and how they change over time
+show_date: false
 ---
 
 {{% callout note %}}

@@ -2,6 +2,7 @@
 title: "Material"
 weight: 1
 summary: Software installation requirements
+show_date: false
 ---
 
 ## Software Installation

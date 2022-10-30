@@ -4,6 +4,7 @@ linkTitle: "Uncertainty"
 type: book
 weight: 13
 summary: Discussion of the sources and importance of uncertainty in ecological forecasting
+show_date: false
 ---
 
 {{% callout note %}}

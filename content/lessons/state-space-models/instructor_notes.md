@@ -2,6 +2,7 @@
 title: "Instructor Notes"
 weight: 4
 summary: " "
+show_date: false
 ---
 
 * Why is it important to forecasting at large scales using dynamic models?

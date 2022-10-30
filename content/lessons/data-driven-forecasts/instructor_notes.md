@@ -2,6 +2,7 @@
 title: "Instructor Notes"
 weight: 4
 summary: " "
+show_date: false
 ---
 
 <script type="text/javascript"

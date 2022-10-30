@@ -2,6 +2,7 @@
 title: "Instructor Notes"
 weight: 4
 summary: " "
+show_date: false
 ---
 
 ### Class Announcements: remind students regarding any issues with upcoming tutorials, files, packages, etc.

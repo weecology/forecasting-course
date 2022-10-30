@@ -2,8 +2,7 @@
 title: "Discussion Questions"
 weight: 2
 summary: " "
-
-
+show_date: false
 ---
 
 * What kinds of forecasts are you familiar with?

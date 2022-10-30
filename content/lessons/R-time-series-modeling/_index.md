@@ -4,6 +4,7 @@ linkTitle: "R: Time series modeling"
 type: book
 weight: 10
 summary: Learn time-series modeling in R using ecological data
+show_date: false
 ---
 
 {{% callout note %}}

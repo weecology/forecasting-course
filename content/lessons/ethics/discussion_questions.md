@@ -2,8 +2,7 @@
 title: "Discussion Questions"
 weight: 2
 summary: " "
-
-
+show_date: false
 ---
 
 * The article breaks down the process of generating forecasts for management into 4 phases. Briefly define each phase.

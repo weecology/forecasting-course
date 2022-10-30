@@ -4,6 +4,7 @@ linkTitle: "Forecasting Ethics"
 type: book
 weight: 26
 summary: Discussion focused on ethical issues that can arise when we make predictions about the future
+show_date: false
 ---
 
 {{% callout note %}}

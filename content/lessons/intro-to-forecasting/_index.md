@@ -4,6 +4,7 @@ linkTitle: "Intro to Ecological Forecasting"
 type: book
 weight: 11
 summary: A brief introduction to the concepts and approaches of ecological forecasting
+show_date: false
 ---
 
 {{% callout note %}}
