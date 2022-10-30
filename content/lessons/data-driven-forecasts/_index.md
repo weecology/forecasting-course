@@ -1,5 +1,5 @@
 ---
-title: "Data-driven models for forecasting (11/19/2020)"
+title: "Data-driven models for forecasting"
 linkTitle: "Data-driven models"
 type: book
 weight: 23

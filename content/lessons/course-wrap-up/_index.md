@@ -1,5 +1,5 @@
 ---
-title: "Wrap up: Can we (and what should we) forecast in ecology? (12/8/2020)"
+title: "Wrap up: Can we (and what should we) forecast in ecology?"
 linkTitle: "Course wrap up"
 type: book
 weight: 27

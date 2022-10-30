@@ -1,5 +1,5 @@
 ---
-title: "Working with times and dates in R (9/10/2020)"
+title: "Working with times and dates in R"
 linkTitle: "R: Time and date data"
 type: book
 weight: 4

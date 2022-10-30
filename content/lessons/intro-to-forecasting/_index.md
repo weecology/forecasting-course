@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Ecological Forecasting (10/06/2020)"
+title: "Introduction to Ecological Forecasting"
 linkTitle: "Intro to Ecological Forecasting"
 type: book
 weight: 11

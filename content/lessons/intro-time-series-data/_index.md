@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Time Series Data (9/3/2020)"
+title: "Introduction to Time Series Data"
 linkTitle: "Intro to Time Series Data"
 type: book
 weight: 2

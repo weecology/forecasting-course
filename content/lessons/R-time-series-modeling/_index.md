@@ -1,5 +1,5 @@
 ---
-title: "Time series modeling in R (10/1/2020)"
+title: "Time series modeling in R"
 linkTitle: "R: Time series modeling"
 type: book
 weight: 10

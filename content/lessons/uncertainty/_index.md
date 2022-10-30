@@ -1,5 +1,5 @@
 ---
-title: "Uncertainty in Forecasting (10/13/202)"
+title: "Uncertainty in Forecasting"
 linkTitle: "Uncertainty"
 type: book
 weight: 13

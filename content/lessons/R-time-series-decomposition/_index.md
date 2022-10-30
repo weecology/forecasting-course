@@ -1,5 +1,5 @@
 ---
-title: "Time Series Decomposition in R (9/17/2020)"
+title: "Time Series Decomposition in R"
 linkTitle: "R: Time series decomposition"
 type: book
 weight: 6

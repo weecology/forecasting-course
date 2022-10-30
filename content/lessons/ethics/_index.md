@@ -1,5 +1,5 @@
 ---
-title: "Ethics of Ecological Forecasting (12/3/2020)"
+title: "Ethics of Ecological Forecasting"
 linkTitle: "Forecasting Ethics"
 type: book
 weight: 26

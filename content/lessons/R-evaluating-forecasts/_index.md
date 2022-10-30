@@ -1,5 +1,5 @@
 ---
-title: "Evaluating Forecasts in R (10/15/2020)"
+title: "Evaluating Forecasts in R"
 linkTitle: "R: Forecast evaluation"
 type: book
 weight: 14

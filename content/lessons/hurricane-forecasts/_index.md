@@ -1,5 +1,5 @@
 ---
-title: "Hurricane Forecasts (11/10/2020)"
+title: "Hurricane Forecasts"
 linkTitle: "Hurricane Forecasts"
 type: book
 weight: 21

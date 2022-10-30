@@ -1,5 +1,5 @@
 ---
-title: "Species Distribution Models in R (11/05/2020)"
+title: "Species Distribution Models in R"
 linkTitle: "R: Species Distribution Models"
 type: book
 weight: 20

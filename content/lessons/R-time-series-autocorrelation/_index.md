@@ -1,5 +1,5 @@
 ---
-title: "Time Series Autocorrelation in R (09/24/2020)"
+title: "Time Series Autocorrelation in R"
 linkTitle: "R: Time series autocorrelation"
 type: book
 weight: 8

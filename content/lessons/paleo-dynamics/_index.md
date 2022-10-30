@@ -1,5 +1,5 @@
 ---
-title: "Paleoecological Dynamics (9/8/2020)"
+title: "Paleoecological Dynamics"
 linkTitle: "Paleoecological Dynamics"
 type: book
 weight: 3

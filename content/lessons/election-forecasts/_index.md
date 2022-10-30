@@ -1,5 +1,5 @@
 ---
-title: "Election forecasts (11/17/2020)"
+title: "Election forecasts"
 linkTitle: "Election forecasts"
 type: book
 weight: 22

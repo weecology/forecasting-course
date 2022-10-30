@@ -1,5 +1,5 @@
 ---
-title: "Forecasting using species distribution models (10/29/2020)"
+title: "Forecasting using species distribution models"
 linkTitle: "Species Distribution Models"
 type: book
 weight: 17

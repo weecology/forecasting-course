@@ -1,5 +1,5 @@
 ---
-title: "Scenario based forecasting (12/01/2020)"
+title: "Scenario based forecasting"
 linkTitle: "Forecasting scenarios"
 type: book
 weight: 25

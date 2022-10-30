@@ -1,5 +1,5 @@
 ---
-title: "Community Dynamics (09/22/2020)"
+title: "Community Dynamics"
 linkTitle: Community Dynamics
 type: book
 weight: 7

@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Forecasting in R (10/08/2020)"
+title: "Introduction to Forecasting in R"
 linkTitle: "R: Forecasting"
 type: book
 weight: 12

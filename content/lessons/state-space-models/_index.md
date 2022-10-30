@@ -1,5 +1,5 @@
 ---
-title: "Forecasting using state space models (10/20/2020)"
+title: "Forecasting using state space models"
 linkTitle: "State space models"
 type: book
 weight: 15

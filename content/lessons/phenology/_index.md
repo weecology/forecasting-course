@@ -1,5 +1,5 @@
 ---
-title: "Changes in Phenology (9/15/2020)"
+title: "Changes in Phenology"
 linkTitle: "Phenology"
 type: book
 weight: 5
