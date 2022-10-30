@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Lesson Template"
 linkTitle: ""
 type: book
 weight: 100
