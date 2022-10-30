@@ -1,8 +1,8 @@
 ---
-title: ""
+title: "Regime Shifts"
 linkTitle: ""
 type: book
-weight:
+weight: 10
 # summary: Face our assumptions (and the associated challenges) related to how quickly nature changes
 ---
 
