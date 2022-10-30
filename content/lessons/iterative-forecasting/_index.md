@@ -3,7 +3,7 @@ title: "Iterative Forecasting"
 linkTitle: ""
 type: book
 weight: 90
-summary: " "
+summary: Benefits and approaches to conducting automated iterative forecasts
 ---
 
 {{% callout note %}}
