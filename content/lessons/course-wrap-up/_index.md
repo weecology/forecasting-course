@@ -5,6 +5,7 @@ type: book
 weight: 27
 summary: "Synthetic discussion of how to use forecasting in ecology given the strengths, weakness, and approaches we've learned." 
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

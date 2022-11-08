@@ -5,6 +5,7 @@ type: book
 weight: 11
 summary: A brief introduction to the concepts and approaches of ecological forecasting
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

@@ -5,6 +5,7 @@ type: book
 weight: 3
 summary: Learn about past responses to global change at the end of the last Ice Age
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

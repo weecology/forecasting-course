@@ -5,6 +5,7 @@ type: book
 weight: 7
 summary: Discussion of current dynamics in biodiversity and implications for forecasting
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

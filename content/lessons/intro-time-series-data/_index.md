@@ -5,6 +5,7 @@ type: book
 weight: 2
 summary: Discussion about ecological data collection and how it relates to forecasting
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

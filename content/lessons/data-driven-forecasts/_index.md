@@ -5,6 +5,7 @@ type: book
 weight: 23
 summary: A discussion of data-driven models, how they compare to process models, and how they can be used for forecasting, with a focu on Empirical Dynamic Modeling
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

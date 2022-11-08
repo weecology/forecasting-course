@@ -3,6 +3,7 @@ title: "Material"
 weight: 1
 summary: " "
 show_date: false
+editable: true
 ---
 * Reading: Just the Introduction of [Ecological Change, Range Fluctuations and Population Dynamics during the Pleistocene](https://doi.org/10.1016/j.cub.2009.06.030) (i.e. stop when you reach the section titled "The Glacial Refugium Theory")
 

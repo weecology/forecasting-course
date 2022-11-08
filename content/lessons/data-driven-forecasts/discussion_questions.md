@@ -3,6 +3,7 @@ title: "Discussion Questions"
 weight: 2
 summary: " "
 show_date: false
+editable: true
 ---
 
 * What is parametric modeling and what are its limitations for modeling and forecasting?

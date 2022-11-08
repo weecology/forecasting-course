@@ -5,6 +5,7 @@ type: book
 weight: 20
 summary: An R tutorial on using fitting simple species models and making forecasts based on these models
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

@@ -5,6 +5,7 @@ type: book
 weight: 24
 summary: R Tutorial on fitting and making forecasts using empirical dynamic modeling
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

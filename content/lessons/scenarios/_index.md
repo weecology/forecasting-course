@@ -5,6 +5,7 @@ type: book
 weight: 25
 summary: Discussion of scenario based approaches to forecasting, which explore general classes of future outcomes to facilitate decision making.
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

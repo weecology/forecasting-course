@@ -5,6 +5,7 @@ type: book
 weight: 1
 summary: " "
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

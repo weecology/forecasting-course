@@ -5,6 +5,7 @@ type: book
 weight: 14
 summary: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

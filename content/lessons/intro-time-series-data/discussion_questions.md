@@ -3,6 +3,7 @@ title: "Discussion Questions"
 weight: 2
 summary: " "
 show_date: false
+editable: true
 ---
 * If you want to forecast future conditions in ecology, what type of data might you want?
     * Can you think of specific examples to share in class? 

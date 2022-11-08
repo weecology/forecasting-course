@@ -3,6 +3,7 @@ title: "Material"
 weight: 1
 summary: " "
 show_date: false
+editable: true
 ---
 ## Readings
 A good general overview of hurricane forecasting has proven elusive, so instead we have a series of web pages and blog posts that will provide the framework for our discussion. The first reading is to set the stage and the subsequent readings will fill in the details of the types of models hurricane forecasting relies on and the challenges involved.

@@ -5,6 +5,7 @@ type: book
 weight: 16
 summary: Introductory tutorial on state space modeling in R
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

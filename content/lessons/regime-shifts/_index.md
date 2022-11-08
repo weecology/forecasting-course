@@ -5,6 +5,7 @@ type: book
 weight: 10
 # summary: Face our assumptions (and the associated challenges) related to how quickly nature changes
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

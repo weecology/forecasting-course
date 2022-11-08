@@ -3,6 +3,7 @@ title: "Discussion Questions"
 weight: 2
 summary: " "
 show_date: false
+editable: true
 ---
 
 * What is the data that 538 uses for its election forecasts? What sources of uncertainty does this data have?

@@ -5,6 +5,7 @@ type: book
 weight: 4
 summary: Formatting times and dates in R to make working with time series data easier
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

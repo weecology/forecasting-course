@@ -3,6 +3,7 @@ title: "R Tutorial"
 weight: 3
 summary: " "
 show_date: false
+editable: true
 ---
 
 ## Time Series Modeling in R [in progress!!!]

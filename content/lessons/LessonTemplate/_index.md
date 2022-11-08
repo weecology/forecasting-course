@@ -5,6 +5,7 @@ type: book
 weight: 100
 summary: "Template for creating new lessons"
 show_date: false
+editable: true
 ---
 
 {{% callout note %}}

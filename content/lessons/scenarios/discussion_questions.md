@@ -3,6 +3,7 @@ title: "Discussion Questions"
 weight: 2
 summary: " "
 show_date: false
+editable: true
 ---
 
 * What is an ecological surprise and how would it effect forecasting?

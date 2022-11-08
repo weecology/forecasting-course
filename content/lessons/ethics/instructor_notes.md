@@ -3,6 +3,7 @@ title: "Instructor Notes"
 weight: 4
 summary: " "
 show_date: false
+editable: true
 ---
 
 > The article breaks down the process of generating forecasts for management into 4 phases. Briefly define each phase.

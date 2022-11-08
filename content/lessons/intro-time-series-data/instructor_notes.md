@@ -3,6 +3,7 @@ title: "Instructor Notes"
 weight: 4
 summary: " "
 show_date: false
+editable: true
 ---
 
 ### Types and properties of data for forecasting
