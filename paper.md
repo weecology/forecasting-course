@@ -8,15 +8,15 @@ tags:
   - models
   - uncertainty
 authors:
-  - name: Ethan P. White
-    orcid: 0000-0001-6728-7745
-    affiliation: "1, 2, 3"
-  - name: Hao Ye
-    orcid:
-    affiliation: "1,4"
   - name: S. K. Morgan Ernest
     orcid: 0000-0002-6026-8530
     affiliation: "1, 2"
+  - name: Hao Ye
+    orcid:
+    affiliation: "1,4"
+  - name: Ethan P. White
+    orcid: 0000-0001-6728-7745
+    affiliation: "1, 2, 3"
 affiliations:
  - name: Department of Wildlife Ecology and Conservation, University of Florida
    index: 1
