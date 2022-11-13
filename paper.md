@@ -61,29 +61,9 @@ R tutorials follow explicit instruction principles, which combine active-learnin
 
 All of the course materials are available online at <https://course.naturecast.org>. This includes links to papers, discussion questions, instructor notes for guiding discussions, and both written and video versions of R tutorials and associated student exercises. The R tutorials are also available as a [YouTube playlist](https://www.youtube.com/watch?v=Zr81Xn-sic4&list=PLD8eCxFKntVETvfPd-diUORGYLAL6idBv). To mirror the explicit instruction approach used during in-person R tutorials video-based lessons are typically split into a series of short videos with breaks for students to conduct exercises. To support self-guided students the video lessons discuss the expected output for each exercise after it has been conducted.
 
-In order to allow self-guided students to check to make sure they understand the exercises, the expected output for each exercise is included on the website. This allows the learner to self-evaluate and troubleshoot their solution to the exercise, while still keeping the code solutions private for use in grading in traditional classroom settings. This is also beneficial to students using this material in traditional courses because it helps remove any uncertainty about exactly what each exercise expects the learner to do.
+## Reuse and remixing
 
-## Basis for other college and university courses
-
-The course is designed to be modified and remixed to meet the needs of the particular instructor and students and allow using the material broadly across college and university classrooms. This allows faculty who have enough expertise to teach an introductory R course, but who lack either the time or expertise to develop the course, to be able to teach this course at their institutions. To facilitate this, the course site has a modular design that allows modifying and remixing exercises, assignments, readings, and coding lessons, along with detailed documentation for doing so (https://datacarpentry.org/semester-biology/docs/).
-
-Access to a separate private repository that includes the code solutions for all of the exercises is available to instructors at colleges and universities by opening an issue in the main course repository (https://github.com/datacarpentry/semester-biology/). This allows the code solutions to the exercises to be shared among instructors while still enabling the use of the exercises for summative evaluation purposes.
-
-The course material and infrastructure is and has been used for a number of college and university courses including:
-
-* [Data Science for Biologists](https://catherinehulshof.github.io/Fall2020-biology/) at Virginia Commonwealth University
-* [Data Science for Agriculture](https://palderman.github.io/DataSciAg/) at Oklahoma State University
-* [Data Visualization for Plant Pathologists](https://ufvegpathology.github.io/phyto-data-viz/) at the University of Florida
-* [Data Science for SAFS](https://sr320.github.io/course-fish497-2018/) at the University of Washington
-* [Data Carpentry for Pharmacists](https://ory-data-science.github.io/semester-pharmacy/) at the University of Health Sciences and Pharmacy in St. Louis 
-* [R Programming for Biologists](https://www.stonehill.edu/summer-courses-2021/undergraduate-courses/bio316a/) at Stonehill College
-* [Data Carpentry for Ecologists](https://mvevans89.github.io/ECOL-8030/) at the University of Georgia
-* [Introduction to Data Analysis for Aquatic Sciences](https://sr320.github.io/course-fish274-2019/) at the University of Washington
-* [Data Science in Omics Introduction](https://hoytpr.github.io/bioinformatics-semester/) at Oklahoma State University
-* [Ecoinformatics](https://globalecologybiogeography.github.io/Ecoinformatics/) at Kenyon College
-* [Data Management for Biologists](https://ericlind.github.io/data-mgmt-4-biologists/syllabus/) at the University of Minnesota
-* [Introducing Agroecology: The Basics of Agroecology for Practitioners](https://trec-agroecology.github.io/introducing-agroecology/) at the University of Florida
-* [Data Science with R](https://datasciencer.tychen.us/)
+Both individual components of the course (e.g., individual R tutorials) and the course as a whole are designed to be reused in other classroom environments. To allow instructors to customize which material they use to suit their classroom, the course site has a modular design to allow choosing which materials to include and when. This is accomplished using changes to YAML on a single schedule page allowing other instructors to easily setup a version of the course that works for their needs and those of their students.
 
 ## Course Infrastructure
 
