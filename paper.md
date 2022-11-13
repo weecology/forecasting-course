@@ -1,4 +1,5 @@
-title: "Ecological Dynamics and Forecasting: A semester long course introducing fundamentals of time series and forecasting in ecology"
+---
+title: "Ecological Dynamics and Forecasting: A graduate course on the fundamentals of time series and forecasting in ecology"
 tags:
   - biology
   - forecasting
@@ -12,8 +13,8 @@ authors:
     orcid: 0000-0002-6026-8530
     affiliation: "1, 2"
   - name: Hao Ye
-    orcid:
-    affiliation: "1,4"
+    orcid: 0000-0002-8630-1458
+    affiliation: "1, 4"
   - name: Ethan P. White
     orcid: 0000-0001-6728-7745
     affiliation: "1, 2, 3"
@@ -24,10 +25,9 @@ affiliations:
    index: 2
  - name: Informatics Institute, University of Florida
    index: 3
- - name: 
+ - name: Health Science Center Libraries, University of Florida
    index: 4
 
-date: 7 November 2022
 bibliography: paper.bib
 ---
 
