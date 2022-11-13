@@ -71,7 +71,7 @@ The course website is built using the [Hugo static site generator](https://gohug
 
 # Course Development Background
 
-The course has been developed Morgan Ernest and Ethan White at the University of Florida to meet the need for more training in ecological forecasting. The primary development has been supported by the National Science Foundation and the Gordon and Betty Moore Foundation. Hao Ye contributed lesson material on the use of Empirical Dynamic Modeling for making ecological forecasts. The authors of this material have extensive background in long-term data [@yenni2019, @ernest2020], time-series analysis [@christensen2018, @diaz2022], ecological forecasting [@harris2018, @white2019, @simonis2021], and teaching computational tools to scientists [@hampton2017, @white2022].
+The course has been developed Morgan Ernest and Ethan White at the University of Florida to meet the need for more training in ecological forecasting. The primary development has been supported by the National Science Foundation and the Gordon and Betty Moore Foundation. Hao Ye contributed lesson material on the use of Empirical Dynamic Modeling for making ecological forecasts. The authors of this material have extensive background in long-term data [@yenni2019; @ernest2020], time-series analysis [@christensen2018; @diaz2022], ecological forecasting [@harris2018; @white2019; @simonis2021], and teaching computational tools to scientists [@hampton2017; @white2022].
 
 # Acknowledgements
 
