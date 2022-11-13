@@ -65,15 +65,9 @@ All of the course materials are available online at <https://course.naturecast.o
 
 Both individual components of the course (e.g., individual R tutorials) and the course as a whole are designed to be reused in other classroom environments. To allow instructors to customize which material they use to suit their classroom, the course site has a modular design to allow choosing which materials to include and when. This is accomplished using changes to YAML on a single schedule page allowing other instructors to easily setup a version of the course that works for their needs and those of their students.
 
-## Course Infrastructure
+## Course infrastructure
 
-The course website is built using the [Jekyll static site generator](https://jekyllrb.com/) with a customized version of the [Lanyon theme](https://github.com/poole/lanyon). Development is conducted in the [course's GitHub repository](https://github.com/datacarpentry/semester-biology/) and the site is automatically deployed from this repository using [GitHub Pages](https://pages.github.com/).
-
-The modular design of the course is supported by "assignments" that automatically combine "readings" and "lecture notes" on a topic with "exercises" and associated point values provided by YAML lists that indicate the exercises to include and the point values to be assigned to them. The course schedule is automatically generated based on selected assignments, also provided in a YAML list. This allows both exercises and assignments to be reused and remixed by changing the selections in YAML lists.
-
-The online materials for the course are designed to be accessible to all learners. The site has been reviewed using the [WAVE web accessibility evaluation tool](https://wave.webaim.org/) and [pa11y](https://pa11y.org/), and all videos have been manually captioned by the instructor presenting the material. In order to ensure that accessibility is maintained as the site is continuously updated, we use [pa11y-ci](https://github.com/pa11y/pa11y-ci) and continuous integration ([GitHub Actions](https://github.com/features/actions)) to automatically scan all pull requests for accessibility.
-
-This general infrastructure for modular, collaborative, and accessible course development is useful regardless of the content of the course. For example, one of the authors (Zachary Brym) uses the same infrastructure for  [extension programs on agroecology at the University of Florida](https://trec-agroecology.github.io/introducing-agroecology/). We hope that open courses on other topics can be built on this infrastructure to support the broader adoption of collaborative course development for college and university classrooms.
+The course website is built using the [Hugo static site generator](https://gohugo.io/) with a customized version of the [Wowchemy Documentation theme](https://github.com/wowchemy/hugo-documentation-theme). The website and course materials are developed in the open on the [course's GitHub repository](https://github.com/weecology/forecasting-course). The site is automatically following every change to the main branch using [Netlify](https://www.netlify.com/).
 
 # Course Development Background
 
