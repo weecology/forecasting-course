@@ -1,6 +1,7 @@
 ---
 title: "Material"
 weight: 1
+summary: " "
 type: book
 ---
 * Make sure R is installed on your computer

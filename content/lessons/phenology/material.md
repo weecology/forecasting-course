@@ -1,7 +1,7 @@
 ---
 title: "Material"
 weight: 1
-summary: Paper for phenology discussion
+summary: " "
 show_date: false
 editable: true
 ---
