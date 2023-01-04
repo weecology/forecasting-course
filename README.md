@@ -55,6 +55,6 @@ Contributions are always welcome!
 
 * [Open an issue](https://github.com/weecology/forecasting-course/issues/new) to say Hi or if there’s anything we can do to help!
 * Contributions of new lessons are welcome as Pull Requests or we can work with you to add new material and data to the site
-* If you want to create a modified copy of the course including the website you should fork or copy the repository and [connect it to Netlify](https://wowchemy.com/docs/hugo-tutorials/deployment/) to automatically build the site
+* If you want to create a modified copy of the course including the website either following the instructions for installing on Netlify above or fork/copy the repository and [connect it to Netlify](https://wowchemy.com/docs/hugo-tutorials/deployment/) to automatically build the site.
 
 For more information see our [CONTRIBUTING page](https://github.com/weecology/forecasting-course/tree/main/CONTRIBUTING.md)
