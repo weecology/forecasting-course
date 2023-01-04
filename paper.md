@@ -27,7 +27,7 @@ affiliations:
    index: 3
  - name: Health Science Center Libraries, University of Florida
    index: 4
-
+date: 4 January 2023
 bibliography: paper.bib
 ---
 
