@@ -112,7 +112,7 @@ editable: true
 
 ## Start with dynamics
 
-* The title of this course is Ecological Dynamics and Forecasting
+* The title of this course is Ecological Forecasting and Dynamics
 * That's because if we want to be able to forecast the future we need to understand how ecological systems change through time
 * We will start by spending several weeks learning about
     * Key aspects of ecological dynamics

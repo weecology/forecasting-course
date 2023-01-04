@@ -2,7 +2,7 @@
 widget: hero
 headless: true
 weight: 10
-title: Ecological Dynamics & Forecasting Course
+title: Ecological Forecasting & Dynamics Course
 hero_media: book.svg
 design:
   background:

@@ -3,7 +3,7 @@ title: "Syllabus"
 weight: 20
 ---
 
-## WIS 6934 Ecological Dynamics and Forecasting
+## WIS 6934 Ecological Forecasting and Dynamics
 
 
 | Instructor      | Dr. Morgan Ernest (she/her) | Dr. Ethan White (he/him) |

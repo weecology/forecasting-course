@@ -60,7 +60,7 @@ id = "UA-113453617-2"
 [languages]
 [languages.en]
 title = "Ecological Forecasting"
-description = "A course on ecological dynamics and forecasting"
+description = "A course on ecological forecasting & dynamics"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
