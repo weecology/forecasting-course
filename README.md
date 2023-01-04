@@ -11,6 +11,18 @@ The full course including lecture notes and R tutorials is openly available so t
 
 The course website is written in Hugo using the [Wowchemy Documentation theme](https://github.com/wowchemy/hugo-documentation-theme) and broader [Wowchemy system](https://wowchemy.com/)
 
+### Netlify
+
+The easiest way to create your own version of the course is the create a deployed course on Netlify via this template. You need a GitHub account to do this.
+
+Follow the Wowchemy instructions for [Creating a site with Hugo and GitHub](https://wowchemy.com/docs/getting-started/hugo-github-quickstart/),
+but instead of using the "Choose a template" button [click this template link](https://app.netlify.com/start/deploy?repository=https://github.com/weecology/forecasting-course).
+
+This will create a GitHub repository in your GitHub account and live version of the site.
+You can then edit files in the GitHub repository and they will automatically deploy to the website.
+
+### Locally
+
 Building a Hugo site locally requires that Go, git, NodeJS, and Hugo all be installed.
 Detailed instructions for all operating systems are available on the [Wowchemy - Edit on your PC with Hugo Extended page](https://wowchemy.com/docs/getting-started/install-hugo-extended/).
 
