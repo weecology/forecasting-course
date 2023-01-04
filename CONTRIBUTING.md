@@ -1,28 +1,19 @@
-# How to Contribute
+## How to Contribute
 
-We'd love to accept your patches and contributions to this project. There are
-just a few small guidelines you need to follow.
+* The course website is written in Hugo using the [Wowchemy Documentation theme](https://github.com/wowchemy/hugo-documentation-theme) and broader [Wowchemy system](https://wowchemy.com/)
+* Most content is stored in one folder per lesson in the [`content/lessons` folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons)
+* To add a new lesson make a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons/LessonTemplate) and modifying the pages in the resulting folder using [markdown](https://www.markdownguide.org/)
+* Contributions of new lessons are welcome as Pull Requests or we can work with you to add new material and data to the site
+* If you want to create a modified copy of the course including the website you should fork or copy the repository and [connect it to Netlify](https://wowchemy.com/docs/hugo-tutorials/deployment/) to automatically build the site
 
-## Contributor License Agreement
+## Reporting Issues or Problems
 
-Contributions to this project must be accompanied by a Contributor License
-Agreement. You (or your employer) retain the copyright to your contribution;
-this simply gives us permission to use and redistribute your contributions as
-part of the project. Head over to <https://cla.developers.google.com/> to see
-your current agreements on file or to sign a new one.
+* To report issues or problems with either the material or the operation of the site please [open an issue](https://github.com/weecology/forecasting-course/issues/new) and we'll be happy to address it.
 
-You generally only need to submit a CLA once, so if you've already submitted one
-(even if it was for a different project), you probably don't need to do it
-again.
+## Support
 
-## Code reviews
-
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
+* [Open an issue](https://github.com/weecology/forecasting-course/issues/new) if there’s anything we can do to help!
 
 ## Community Guidelines
 
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
+See our [Code of Conduct](https://github.com/weecology/forecasting-course/tree/main/CODE_OF_CONDUCT.md) for our community guidelines.
