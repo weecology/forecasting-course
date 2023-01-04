@@ -21,6 +21,10 @@ but instead of using the "Choose a template" button [click this template link](h
 This will create a GitHub repository in your GitHub account and live version of the site.
 You can then edit files in the GitHub repository and they will automatically deploy to the website.
 
+Edit `config/_default/params.yaml` to match your version of course.
+In particular update the repository url to match the new repository you created.
+This will ensure that the `Edit this page` links on each page direct you to your version of the material.
+
 ### Locally
 
 Building a Hugo site locally requires that Go, git, NodeJS, and Hugo all be installed.
