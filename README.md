@@ -42,12 +42,17 @@ You can build the site locally in the terminal from the root directory of this r
 hugo server
 ```
 
+## Modifying the Site
+
+* Most content is stored in one folder per lesson in the [`content/lessons` folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons)
+* To add a new lesson make a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons/LessonTemplate) and modifying the pages in the resulting folder using [markdown](https://www.markdownguide.org/)
+* To modify a lesson edit the markdown files in that lesson folder with the appropriate name. If you followed the instructions on installing on Netlify above, the easiest way to do this is to go to the page you want to edit on the deployed site and click the `Edit this page` link at the bottom.
+* To modify the schedule edit `content/schedule/schedule.md`. In the `lessons` section list the titles of the lessons you want to teach in the order you want to teach them. If you want to include specific dates for each lesson then edit the `dates` section to include those dates in the same order.
+
 ## Contributing
 
 Contributions are always welcome!
 
-* Most content is stored in one folder per lesson in the [`content/lessons` folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons)
-* To add a new lesson make a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons/LessonTemplate) and modifying the pages in the resulting folder using [markdown](https://www.markdownguide.org/)
 * [Open an issue](https://github.com/weecology/forecasting-course/issues/new) to say Hi or if there’s anything we can do to help!
 * Contributions of new lessons are welcome as Pull Requests or we can work with you to add new material and data to the site
 * If you want to create a modified copy of the course including the website you should fork or copy the repository and [connect it to Netlify](https://wowchemy.com/docs/hugo-tutorials/deployment/) to automatically build the site
