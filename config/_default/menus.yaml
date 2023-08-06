@@ -16,6 +16,9 @@ main:
   - name: Syllabus
     url: syllabus/
     weight: 40
+  - name: Getting Started
+    url: getting-started/
+    weight: 50
   - name: About
     url: about/
-    weight: 50
+    weight: 60

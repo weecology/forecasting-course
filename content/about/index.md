@@ -1,10 +1,13 @@
 ---
 title: About the course
 linkTitle: About
+type: page
 ---
 
 This is a course on how ecological systems change through time and how to forecast how they will change in the future.
 It combines reading and discussing primary scientific literature with R tutorials on how to work with time-series data and make forecasts in R.
+It is intended for graduate students and advanced undergraduates who have started reading the primary scientific literature and have a basic background in R. More details about the intended audience are available on the [Audience page](audience)
+
 It is taught each Fall at the University of Florida by Drs. Morgan Ernest and Ethan White.
 The full course including lecture notes and R tutorials is openly available on this site so that anyone can learn these important approaches and skills for themselves.
 Course materials are openly licensed and <a href="https://github.com/weecology/forecasting-course">developed on GitHub</a>.
