@@ -1,6 +1,7 @@
 ---
 title: "R Tutorial"
 weight: 3
+type: book
 summary: R tutorial on evaluating forecasts using the forecast package
 show_date: false
 editable: true
