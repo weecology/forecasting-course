@@ -7,10 +7,6 @@ show_date: false
 editable: true
 ---
 
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 ## Objectives
 
 We'll model and forecast abundance data for *Dipodomys ordii*.
@@ -42,15 +38,20 @@ ggplot(do_data, aes(x = period, y = abundance)) +
 * If deterministic those 10 values at time *t+1* are fully determined by the values at *t*
 * Can write this as:
 
+{{< math >}}
 $$\bar{x}(t+1) = F \left(\bar{x}(t)\right)$$
+{{< /math >}}
 
 * Could assume some parametric shape (e.g., logistic growth):
 
+{{< math >}}
 $$\begin{align*}
 x_1(t+1) &= r_1 x_1(t) \left[1 - x_1(t) - \alpha_{1,2} x_2(t)\right]\\
 x_2(t+1) &= r_2 x_2(t) \left[1 - x_2(t) - \alpha_{2,1} x_1(t)\right]
 \end{align*}$$
-with parameters $r_1, r_2, \alpha_{1,2}, \alpha_{2,1}$.
+{{< /math >}}
+
+with parameters {{< math >}}$r_1, r_2, \alpha_{1,2}, \alpha_{2,1}${{< /math >}}.
 
 * But we might get the form wrong
 * And there are typically way more than 2 species even if we're only studying 2
@@ -64,16 +65,20 @@ with parameters $r_1, r_2, \alpha_{1,2}, \alpha_{2,1}$.
     * Reconstruct a shadow of the real system from single time-series
 
 In other words, instead of relying on:
+{{< math >}}
 $$x_i(t+1) = F_i\left(x_1(t), x_2(t), \dots, x_d(t)\right)$$
+{{< /math >}}
 
 the system dynamics can be represented as a function of a single variable and its lags:
+{{< math >}}
 $$x_i(t+1) = G_i\left(x_i(t), x_i(t-1), \dots, x_i(t-(E-1))\right)$$
+{{< /math >}}
 
-* $E$ is the embedding dimension which defines how far back in time we go
+* {{< math >}}$E${{< /math >}} is the embedding dimension which defines how far back in time we go
 
 ## Usage
 
-* Need to estimate $G_i$ from the data
+* Need to estimate {{< math >}}$G_i${{< /math >}} from the data
 * Typically think of this as fitting an equation, but $G$ is arbitrarily complex
 * And since we're focusing on prediction we don't need the equation, we just need to know what is going to happen next
 * And we can get this prediction by looking through the existing time-series and finding periods that look like the current period (*draw example*)
@@ -82,17 +87,22 @@ $$x_i(t+1) = G_i\left(x_i(t), x_i(t-1), \dots, x_i(t-(E-1))\right)$$
 * Use the simplest, simplex projection
 * Weighted nearest-neighbors approximation:
 
-1. Have value of $x$ and its lags at time $t$. Then we want a prediction of $x(t+1) = G\left(x(t), x(t-1), \dots, x(t - (E-1))\right)$.
-2. We look for $j = 1..k$ nearest neighbors in the observed time series such that $\langle x(t), x(t-1), \dots, x(t - (E-1))\rangle \approx \langle x(n_j), x(n_j-1), \dots, x(n_j - (E-1))\rangle$.
-3. We then suppose that $x(t+1) \approx x(n_j+1)$.
+1. Have value of {{< math >}}$x${{< /math >}} and its lags at time {{< math >}}$t${{< /math >}}. Then we want a prediction of {{< math >}}$x(t+1) = G\left(x(t), x(t-1), \dots, x(t - (E-1))\right)${{< /math >}}.
+2. We look for {{< math >}}$j = 1..k$ {{< /math >}}nearest neighbors in the observed time series such that
+{{< math >}}
+$$\begin{multline}
+\langle x(t), x(t-1), \dots, x(t - (E-1))\rangle \\ \approx \langle x(n_j), x(n_j-1), \dots, x(n_j - (E-1))\rangle
+\end{multline}$$
+{{< /math >}}
+3. We then suppose that {{< math >}}$x(t+1) \approx x(n_j+1)${{< /math >}}.
 
-* Use a distance function to judge how similar $\langle x(t), x(t-1), \dots, x(t - (E-1))\rangle$ is to $\langle x(n_j), x(n_j-1), \dots, x(n_j - (E-1))\rangle$
-* Estimating $x(t+1)$ as a weighted average of the $x(n_j+1)$ values with weighting determined by the distances.
+* Use a distance function to judge how similar {{< math >}}$\langle x(t), x(t-1), \dots, x(t - (E-1))\rangle${{< /math >}} is to {{< math >}}$\langle x(n_j), x(n_j-1), \dots, x(n_j - (E-1))\rangle${{< /math >}}
+* Estimating {{< math >}}$x(t+1)${{< /math >}} as a weighted average of the {{< math >}}$x(n_j+1)${{< /math >}} values with weighting determined by the distances.
 
 
 ## Determining Embedding Dimension
 
-* Need to know `E`, how many lags to use for determining if time-series is similar
+* Need to know {{< math >}}$E${{< /math >}}, how many lags to use for determining if time-series is similar
 * Split the data to reserve some for forecasting
 
 ```{r}
@@ -114,7 +124,7 @@ simplex(do_data,                     # input data (for data.frames, uses 2nd col
     * rho (correlation between observed and predicted values, higher is better)
     * mae (mean absolute error, lower is better)
     * rmse (root mean squared error, lower is better)
-* `E` of 4 or 5 is optimal
+* {{< math >}}$E${{< /math >}} of 4 or 5 is optimal
 * Use 4 for simpler model
 * Use to forecast the remaining 1/3 of the data.
 
@@ -147,7 +157,7 @@ ggplot(do_data, aes(x = period, y = abundance)) +
 
 * Also have estimate of the prediction uncertainty in `Pred_Variance`
 * Variance of the prediction
-* Plot a 95% prediction interval use $\pm 2 * SD$
+* Plot a 95% prediction interval use {{< math >}}$\pm 2 * SD${{< /math >}}
 
 ```{r}
 ggplot(do_data, aes(x = period, y = abundance)) +
