@@ -1,6 +1,7 @@
 ---
 title: "R Tutorial Part 2"
 weight: 3
+type: book
 summary: "State space modeling tutorial: Part 2"
 show_date: false
 editable: true

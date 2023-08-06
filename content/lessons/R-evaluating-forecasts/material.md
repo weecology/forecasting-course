@@ -1,6 +1,7 @@
 ---
 title: "Material"
 weight: 1
+type: book
 summary: Software installation requirements
 show_date: false
 editable: true

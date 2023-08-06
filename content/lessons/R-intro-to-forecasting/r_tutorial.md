@@ -1,6 +1,7 @@
 ---
 title: "R Tutorial"
 weight: 3
+type: book
 summary: R tutorial on making forecasts from time-series models using the forecast package
 show_date: false
 editable: true
