@@ -39,6 +39,20 @@ Ecological Forecasting and Dynamics' is a semester-long course to introduce stud
 
 Ecological forecasting is an emerging field that aims to project the current state of nature into uncertain futures. This goal of understanding and modeling nature benefits from traditional ecological approaches that assess  processes by modeling known outcomes from short-term experiments or historical data, but also involves unique tools, methods, and ways of thinking [@houlahan2017; @dietze2018; @white2019]. Many ecologists have limited exposure to all of the core concepts necessary to engage in forecasting [@brewer2003; @dietze2018] including: 1) understanding of ecological dynamics [@wolkovich2014]; the iterative cycle of model fitting, evaluation, and improvement [@dietze2018]; and 3) assessing and communicating uncertainty in forecasts [@brewer2003]. Building a community of practice around ecological forecasting requires courses that provide students with foundational conceptual knowledge relevant to ecology in conjunction with active training in methodologies and approaches [@dietze2018]. However, ecological forecasting is still a small field with few practitioners, creating a potential educational bottleneck. The ‘Ecological Forecasting and Dynamics’ course provides training in the fundamentals of ecological forecasting that will allow students to engage critically with the field and provide tools for students to deploy as they develop as forecasters. These materials can be used by instructors as modifiable core materials for their own courses or by individual students as an independent self-guided course.
 
+# Audience
+
+The material is designed to be accessible to graduate students and advanced undergraduates. It assumes a basic ability to read and engage with the primary scientific literature, but provides guidance for engaging with each paper to help students who are learning how to do this. It assumes a basic understanding of R, including loading tabular data, working with variables, loading packages, and running functions. Some experience with `dplyr` and `ggplot2` is also helpful.
+
+The discussion material is primarily designed to be used in a classroom environment centered on group discussion, but guidance is also provided for self-guided learners on how to engage with the material. The R tutorials are designed to work both as a live coding lecture in a classroom and as follow-along exercises for self-guided learners.
+
+Examples of folks who we are trying to help:
+
+Maya: An advanced undergraduate in natural resources who wants to understand what ecological forecasting is and how it might be applied in conservation and management. She has used basic R in some of her other courses and has just started reading the primary scientific literature in a classroom context.
+
+Juniper: A graduate student with a thesis related to how populations change through time, but who doesn't yet know how to model time-series. They want to learn how to build and analyze time-series models for their thesis projects and find the idea of forecasting interesting.
+
+Jaylen: A professor who understands that ecological forecasting is becoming important for students to learn and wants to develop either a full course or a seminar on the topic. He understands the main concepts, but doesn't know the best papers for teaching and doesn't have the time to develop a suite of R tutorials.
+
 # Features
 
 ## General instructional design
