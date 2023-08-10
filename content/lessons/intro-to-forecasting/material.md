@@ -1,5 +1,5 @@
 ---
-title: "Material"
+title: "Reading & Video"
 weight: 1
 type: book
 summary: Introductory video, reading on ecological forecasting, and reading on general forecasting.

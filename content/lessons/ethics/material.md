@@ -1,5 +1,5 @@
 ---
-title: "Material"
+title: "Reading"
 weight: 1
 type: book
 summary: " "
