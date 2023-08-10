@@ -1,5 +1,5 @@
 ---
-title: "Material"
+title: "Data & Software"
 weight: 1
 type: book
 summary: Software installation requirements
@@ -7,7 +7,7 @@ show_date: false
 editable: true
 ---
 
-## Software Installation
+## Data & Software
 
 * [Install JAGS](https://sourceforge.net/projects/mcmc-jags/files/)
 * Install the `rjags` R package: `install.packages('rjags')`
