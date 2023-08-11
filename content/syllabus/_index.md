@@ -8,7 +8,7 @@ weight: 20
 
 | Instructor      | Dr. Morgan Ernest (she/her) | Dr. Ethan White (he/him) |
 |-----------------|-----------------------------|--------------------------|
-| Office Location | on-line                     | online                   |    
+| Office Location | online                      | online                   |    
 | Email           | <skmorgane@ufl.edu>         | <ethanwhite@ufl.edu>     |
 
 #### **Times and Locations**
@@ -44,11 +44,11 @@ discussion.
 #### **Course Participation**
 
 The course is designed so that students may participate synchronously or asynchronously in the course. 
-Students may shift between synchronous and aynschronous participation as needed. 
+Students may shift between synchronous and asynchronous participation as needed. 
 
 ##### Paper discussions:
 Synchronous participation: During the assigned course time, synchronous discussions of assigned papers 
-will occur over zoom. In-class group discussion about the assigned papers paper. 
+will occur over zoom. 
 This discussion is generally centered around the discussion questions that are provided 
 in advance but may also expand beyond them. Our goal is to produce a classroom environment where
 everyone is comfortable participating in class discussions. We will try to manage discussions so 
@@ -60,16 +60,16 @@ Asynchronous participation: Students may opt to participate asynchronously by pr
 
 ##### R-tutorials
 
-Most weeks we have an R-tutorial session on Thursdays. R-tutorials consist of a video that all students (synchronous and asynchronous) students are required to watch before the thursday class time. Synchronous class time on R-tutorial thursdays is dedicated for students to ask questions, get clarification, or help with their r code. Asynchronous students are encouraged to post their questions to the course discussion board on canvas.
+Most weeks we have an R-tutorial session on Thursdays. R-tutorials consist of a video that all students (synchronous and asynchronous) students are required to watch before the Thursday class time. Synchronous class time on R-tutorial Thursdays is dedicated for students to ask questions, get clarification, or help with their R code. Asynchronous students are encouraged to post their questions to the course discussion board on canvas.
 
 #### **Course Grading**
 
-* 50% of grade will be based on paper paper discussion
-* 50% of the grade will be based on completing R tutorials
+* 50% of grade will be based on paper discussions
+* 50% of the grade will be based on completing R-tutorials
 
 #### **Attendance Policy**
 
-Two class days can be missed without impacts on your grade without the need
+Two class days can be missed without impacts on your grade -- there is no need
 to submit make-up work, though we recommend that students attempt any 
 missed class activities on their own time because additional class 
 activities or discussions may rely on that knowledge. 
