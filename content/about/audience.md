@@ -1,7 +1,7 @@
 ---
 title: "Audience"
 type: page
-summary: "Description of people this material is intended for"
+summary: "Description of intended audience for this material"
 ---
 
 The long-term goal of this site is to help two large groups of people: 1) Students in a classroom at a college or university; and 2) Self-guided learners, or folks who aren’t taking a formal class and are interested in learning online on their own time.
