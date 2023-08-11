@@ -4,7 +4,7 @@ type: page
 summary: "Description of people this material is intended for"
 ---
 
-The long-term goal of this site is to help two large groups of people: 1) Students in a classroom at a college or university; and 2) Free-range learners, or folks who aren’t taking a formal class and are interested in learning online on their own time.
+The long-term goal of this site is to help two large groups of people: 1) Students in a classroom at a college or university; and 2) Self-guided learners, or folks who aren’t taking a formal class and are interested in learning online on their own time.
 We are starting with the classroom students and then attempting to build on the material generated to make it maximally useful to the broader audience of folks who want to learn about ecological forecasting and dynamics.
 
 * The material is designed to be accessible to graduate students and advanced undergraduates
