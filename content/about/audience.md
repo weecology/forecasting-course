@@ -15,6 +15,6 @@ Examples of folks who we are trying to help:
 
 Maya: An advanced undergraduate in natural resources who wants to understand what ecological forecasting is and how it might be applied in conservation and management. Maya has used basic R in some of their other courses and has just started reading the primary scientific literature in a classroom context.
 
-Juniper: A graduate student with a thesis related to how populations change through time, but who doesn't know anything about how to model time-series. They want to learn how to build and analyze time-series models for their thesis projects and find the idea of forecasting interesting.
+Juniper: A graduate student with a thesis related to how populations change through time, but who doesn't yet know how to model time-series. Juniper wants to learn how to build and analyze time-series models for their thesis projects and finds the idea of forecasting interesting.
 
-Jaylen: A professor who understands that ecological forecasting is becoming important for students to learn and wants to develop either a full course or a seminar on the topic. They understand the main concepts, but don't know what the best papers would be best for teaching and don't have the time to develop a bunch of R tutorials.
+Jaylen: A professor who understands that ecological forecasting is becoming important for students to learn and wants to develop either a full course or a seminar on the topic. Jaylen understands the main concepts, but doesn't know what the best papers would be best for teaching and doesn't have the time to develop a bunch of R tutorials.
