@@ -51,7 +51,7 @@ Maya: An advanced undergraduate in natural resources who wants to understand wha
 
 Juniper: A graduate student with a thesis related to how populations change through time, but who doesn't yet know how to model time-series. Juniper wants to learn how to build and analyze time-series models for their thesis projects and finds the idea of forecasting interesting.
 
-Jaylen: A professor who understands that ecological forecasting is becoming important for students to learn and wants to develop either a full course or a seminar on the topic. Jaylen understands the main concepts, but doesn't know what the best papers would be best for teaching and doesn't have the time to develop a bunch of R tutorials.
+Jaylen: A professor who understands that ecological forecasting is becoming important for students to learn and wants to develop either a full course or a seminar on the topic. Jaylen understands the main concepts, but doesn't know what papers would be best for teaching and doesn't have the time to develop a bunch of R tutorials.
 
 # Features
 
