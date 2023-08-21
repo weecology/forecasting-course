@@ -1,5 +1,5 @@
 ---
-title: "State space models in R (10/22 & 10/27 2020)"
+title: "State space models in R"
 linkTitle: "R: State space models"
 type: book
 weight: 16

@@ -2,7 +2,7 @@
 title: "Time Series Autocorrelation in R"
 linkTitle: "R: Time series autocorrelation"
 type: book
-weight: 8
+weight: 7.5
 summary: Learn about autocorrelation in time series data and using R to examine it
 show_date: false
 editable: true

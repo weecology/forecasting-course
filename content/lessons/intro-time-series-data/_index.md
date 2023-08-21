@@ -2,7 +2,7 @@
 title: "Introduction to Time Series Data"
 linkTitle: "Intro to Time Series Data"
 type: book
-weight: 2
+weight: 8
 summary: Discussion about ecological data collection and how it relates to forecasting
 show_date: false
 editable: true

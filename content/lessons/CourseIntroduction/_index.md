@@ -3,7 +3,7 @@ title: "Course Introduction"
 linkTitle: "Course Introduction"
 type: book
 weight: 1
-summary: " "
+summary: "Introduction to the class"
 show_date: false
 editable: true
 ---
