@@ -2,7 +2,7 @@
 title: "Election forecasts"
 linkTitle: "Election forecasts"
 type: book
-weight: 22
+weight: 24
 summary: Discussion of modelling approaches and data challenges in election forecasting
 show_date: false
 editable: true

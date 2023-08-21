@@ -57,12 +57,7 @@ editable: true
 
 ### Written version of the lesson. It will vary from the videos, but the core info is the same.
 ### You may find it helpful to watch the videos without "in R" in their title as these are more informative videos with visuals that are not  present in the written document.
----
-title: "Decomposition"
-author: "Morgan Ernest"
-date: "September 20, 2018"
-output: html_document
----
+
 ## Inherent scales within a time series
 
 

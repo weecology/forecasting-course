@@ -63,12 +63,12 @@ Modify the max orders, if needed, and rerun the model.
 
 ## White noise model - Simplest Time series
 
-## Data setup
+### Data setup
 
 Let's start by getting our environment ready to go by loading our rpackage and data.
 
 We're going to be using the rpackage forecast today. Forecast is the package developed by Rob Hyndeman as an aid to learning basic forecasting techniques in R. It makes some of the modeling approaches more user friendly.
----
+
 ```{r}
 library(forecast)
 ```
@@ -91,7 +91,7 @@ whitenoise = ts(rnorm(273,0.18))
 ```
 Reminder: set.seed is fixing that random draw so we all have the same numbers. rnorm() pulls random draws from a normal distribution. And we've asked it to pull 273 observations from a normal distribution with mean 0.18
 
-## Fit the white noise model
+### Fit the white noise model
 Now let's fit this white noise model (the equation above) to our data. We'll use the meanf function from the forecast package. It fits a model where you have a mean and assumes data are independent and identifcally distributed  (so no time series structure)
 
 ```{r}
@@ -175,7 +175,7 @@ Let's see how this model performs relative to the white noise model we plotted b
 plot(NDVI.ts)
 lines(fitted(MA2), col='blue')
 ```
-SO, just with the information about correlated errors at short time intervals, we are able to generate a plot that doesn't look ridiculuously different from the observed data.
+SO, just with the information about correlated errors at short time intervals, we are able to generate a plot that doesn't look ridiculously different from the observed data.
 
 The next step whenever we fit any model is to check how its fitting our data. Are there signals in our residuals that indicate something is amiss. With a time series model, we're often looking to see if we left any autocorrelation unaccounted for. 
 
@@ -213,7 +213,7 @@ There are differences between this fit and the non-seasonal ARIMA we fit above, 
 ```{r}
 summary(season_MA2)
 ```
-JUst like before, we see the model structure at the top, and the cofficient values that it fit to the data for that model structure. sMA refers to that seasonal MA component that we added to this model.
+JUst like before, we see the model structure at the top, and the coefficient values that it fit to the data for that model structure. sMA refers to that seasonal MA component that we added to this model.
 
 And, let's check the residuals:
 ```{r}

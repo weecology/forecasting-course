@@ -49,5 +49,3 @@ Finding a good and - most improtantly - accessible reading to introduce ecology 
     
 > Do you think numerical weather prediction is a good model for ecological forecasting? What issues would we have in applying this approach? Can we overcome them?
   * Instructor note: push the students to think about applying something like this to their systems. What types of 'fundamental equations' would they need? What type of data? How intensively collected? How close are we to being able to do this in ecology?
-  
-•
