@@ -2,7 +2,7 @@
 title: "Ethics of Ecological Forecasting"
 linkTitle: "Forecasting Ethics"
 type: book
-weight: 26
+weight: 28
 summary: Discussion focused on ethical issues that can arise when we make predictions about the future
 show_date: false
 editable: true

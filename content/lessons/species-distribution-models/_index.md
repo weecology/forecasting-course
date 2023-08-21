@@ -2,7 +2,7 @@
 title: "Forecasting using species distribution models"
 linkTitle: "Species Distribution Models"
 type: book
-weight: 17
+weight: 21
 summary: How forecasts are made from species distribution modelings and the challenges associated with these forecasts
 show_date: false
 editable: true

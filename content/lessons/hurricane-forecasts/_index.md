@@ -2,7 +2,7 @@
 title: "Hurricane Forecasts"
 linkTitle: "Hurricane Forecasts"
 type: book
-weight: 21
+weight: 23
 summary: Learn how the field of hurricane forecasting approaches data and model challenges
 show_date: false
 editable: true
