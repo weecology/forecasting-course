@@ -44,8 +44,8 @@ content:
       - 'Wrap up: Can we (and what should we) forecast in ecology?'
     dates:
       - 'August 24th'
-      - 'August 28th'
-      - 'August 30th'
+      - 'August 29th'
+      - 'August 31st'
       - 'September 5th'
       - 'September 7th'
       - 'September 12th'
