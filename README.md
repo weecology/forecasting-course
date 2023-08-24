@@ -1,3 +1,4 @@
+[![DOI](https://jose.theoj.org/papers/10.21105/jose.00198/status.svg)](https://doi.org/10.21105/jose.00198)
 [![DOI](https://zenodo.org/badge/283032599.svg)](https://zenodo.org/badge/latestdoi/283032599)
 
 # Ecological Forecasting & Dynamics Course
