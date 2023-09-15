@@ -1,6 +1,6 @@
 ---
-title: "Time series modeling in R 1"
-linkTitle: "R: Time series modeling 1"
+title: "Time series modeling in R 2"
+linkTitle: "R: Time series modeling 2"
 type: book
 weight: 10
 summary: Learn time-series modeling in R using ecological data
