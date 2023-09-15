@@ -53,32 +53,28 @@ Modify the max orders, if needed, and rerun the model.
 12. Watch Fitting external predictors using auto.arima()
 <iframe width="560" height="315" src="https://www.youtube.com/embed/A72HE1XxX5Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-13. Submit your r code (either as a file or cut and paste text) through the assignment for this module in the course canvas site.
-
-
 ## Text Tutorial
 
 * So far we've learned about time series objects, seasonal and long-term signals, and the influence of the past on current observations
-* Now we're going to start taking all that information and turning it into models
+* Take all that information and turn it into models
 * Let's first load the packages we'll need for today
 
 ```r
 library(readr) # easily read in time-series data
 library(tsibble) # convert time-series data in a tsibble
 library(fable) # main package for modeling and forecasting with time-series data
-library(dplyr) # data manipulation
-library(ggplot2) # data visualization
 library(feasts) # time-series data visualization
+library(dplyr) # data manipulation
 ```
 
 * Then load our data
 
 ```r
-raw_data = read_csv("content/data/portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
+raw_data = read_csv("portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
 portal_data <- raw_data |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
-head(portal_data)
+portal_data
 ```
 
 ### White noise model
@@ -87,11 +83,11 @@ head(portal_data)
 * The data is normally distributed with a fixed mean and variance
 * It takes the form
 
-  > y_t = c + e_t, where e_t ~ N(0, sigma)
+  > `y_t = c + e_t, where e_t ~ N(0, sigma)`
 
-* So each time step in our model is a random draw from a normal distribution with a mean of `c``
-* We fit time-series models using 
-* This model is provided in `fable` by the `MEAN()` function
+* So each time step in our model is a random draw from a normal distribution with a mean of `c`
+* We fit time-series models using the `fable` package
+* This model structure is provided by the `MEAN()` function
 
 ```r
 MEAN()
@@ -111,8 +107,7 @@ avg_model = portal_data |>
 report(avg_model)
 ```
 
-* This shows us that the model is a white noise structure (indicated by `MEAN`), a mean value of 0.1791, and a variance of 0.0031
-
+* This shows us that the model has a white noise structure (indicated by `MEAN`), a mean value of 0.1791, and a variance of 0.0031
 * To visualize the model with the data we have to first make the fitted values available using `augment()`
 
 ```r
@@ -121,8 +116,7 @@ avg_model_aug
 ```
 
 * We can see that this produces a `tsibble` that includes month, NDVI, the fitted values from the model, & the model residuals
-
-* Then we can use `autoplot()` to look at the data and model together
+* Use `autoplot()` to look at the data and model together
 * The predicted values from the model are stored in a special columns `.fitted`
 
 ```r
@@ -133,8 +127,6 @@ autoplot(avg_model_aug, NDVI) + autolayer(avg_model_aug, .fitted, color = "red")
 * There is clearly autocorrelation and seasonality in the time-series
 * We can look at this directly by plotting the residuals and looking at their autocorrelation
 * Our model assumes that the residuals are normally distributed and independent
-* The residuals are stored in `.resid` in our augmented model object
-* We can check their independence by looking at their ACF or PACF plots
 
 ```r
 gg_tsresiduals(avg_model)
@@ -154,18 +146,25 @@ gg_tsresiduals(avg_model)
 * Remember that we have lag 1 and lag 2 autocorrelation plus a season signal
 
 ```r
-autoplot(ACF(portal_data, NDVI))
+gg_tsdisplay(portal_data, NDVI)
 ```
 
 * Let's start with just the lag 1 and lag 2 autocorrelation
-* We model this using and autoregressive or AR model where the current value depends on past values
+* Use an "autoregressive" or AR model
+* Current value depends on past values
 * The simplest version of this type of model is an AR1 model
 
-> `y_t = c + b1 * y_t-1 + e_t, where e_t ~ N(0, sigma)` (**leave room to add y_t-2**)
+> **leave room to add y_t-2**
+> `y_t = c + b_1 * y_t-1 + e_t, where e_t ~ N(0, sigma)`
 
 * c is a constant, like the intercept in regression
-* b1 is a coefficient determining how y_t is related to y at a 1 time-step lag, i.e., the previous time step
+* b_1 is a coefficient determining how y_t is related to y at a 1 time-step lag, i.e., the previous time step
 * e_t is normally distributed error
+
+* Does this model remind you of a biological model?
+* This model is basically a Gompertz population model if y is log(N)
+* The idea is that the current value influences the future values
+* Makes a lot of sense for things like population dynamics
 
 * Since we have also have lag 2 autocorrelation we add a term for two time steps back
 
@@ -190,9 +189,9 @@ ar_model = portal_data |>
 report(ar_model)
 ```
 
-* There is a large, positive, ar1 value (b1)
+* There is a large, positive, ar1 value (b_1)
 * So if NDVI was high at the previous time step it's expected to be high at the current time step
-* There is a smaller, negative, ar2 value (b2)
+* There is a smaller, negative, ar2 value (b_2)
 * So if NDVI was high two time steps back, it's expected to be lower at the current time step
 
 ```r
@@ -201,10 +200,10 @@ ar_model_aug
 ```
 
 * Note there aren't predictions for the first two time-steps
-* Not possible because there are no y values before March 1992 to give the model for prediction
+* Not possible because there are no y values before March 1992 for the model to use for prediction
 
 ```r
-autoplot(ar_model_aug, NDVI) + autolayer(ar_model_aug, .fitted, color = "blue")
+autoplot(ar_model_aug, NDVI) + autolayer(ar_model_aug, .fitted, color = "orange")
 ```
 
 * This looks a lot better
