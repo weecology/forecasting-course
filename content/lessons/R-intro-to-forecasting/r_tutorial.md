@@ -18,13 +18,18 @@ editable: true
 ### Setup
 
 ```r
-library(forecast)
+library(readr)
+library(fable)
+library(tsibble) #yearmonth
+library(feasts) #ACF
+library(dplyr)
 library(ggplot2)
 
-data = read.csv("portal_timeseries.csv", stringsAsFactors = FALSE)
-data$date = as.Date(data$date, format = "%m/%d/%Y")
-head(data)
-NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
+raw_data = read_csv("content/data/portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
+portal_data <- raw_data |>
+  mutate(month = yearmonth(date)) |>
+  as_tsibble(index = month)
+head(portal_data)
 ```
 
 ### Steps in forecasting
@@ -39,11 +44,18 @@ NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 ### Exploratory analysis
 
 * Process we went through over the last few weeks
-* Look at the data structure
+* Look at the time series
 
-```r
-plot(NDVI_ts)
-acf(NDVI_ts)
+```{r}
+autoplot(portal_data, NDVI)
+```
+
+* Look at the autocorrelation structure
+
+```{r}
+portal_data |>
+  ACF(NDVI) |>
+  autoplot()
 ```
 
 ### Choose and fit models
@@ -52,11 +64,12 @@ acf(NDVI_ts)
 
   > y_t = c + e_t, where e_t ~ N(0, sigma)
 
-* Fit this model using `Arima()`
+* Fit this model using `MEAN()`
 
 ```r
-avg_model = Arima(NDVI_ts, c(0, 0, 0))
-str(avg_model)
+avg_model = portal_data |>
+  model(MEAN(NDVI)) |>
+  report()
 ```
 
 
@@ -66,8 +79,8 @@ str(avg_model)
 * For the average model we just need to know what c is, which is just the mean(NDVI_ts)
 
 ```r
-avg_forecast = forecast(avg_model)
-str(avg_forecast)
+avg_forecast = avg_model |>
+  forecast(h = 12)
 ```
 
 * Model object has information on
@@ -76,10 +89,10 @@ str(avg_forecast)
   * Information about the model
   * Mean values for the forecast
 
-* The expected value, or point forecast, is in `$mean`
+* The expected value, or point forecast, is in `$.mean`
 
 ```r
-avg_forecast$mean
+avg_forecast$.mean
 ```
 
 * Change the number of time-steps in the forecast using h
@@ -90,36 +103,39 @@ avg_forecast = forecast(avg_model, h = 50)
 
 #### Visualize
 
-```r
-plot(NDVI_ts)
-lines(avg_forecast$mean, col = 'pink')
-```
-
-
-* Better to use built-in plotting functions
+* Use the built-in `autoplot` function
 
 ```r
-plot(avg_forecast)
 autoplot(avg_forecast)
 ```
 
+* This just shows the forecast
+* Let's also add the time series we trained the model on
+
+```r
+autoplot(avg_forecast, portal_data)
+```
 
 #### Uncertainty
 
 * Important to know how confident our forecast is
 * Shaded areas provide this information
 * Only variation in e_t is included, not errors in parameters
+* We can view these values using `hilo`
+
+```r
+avg_forecast |>
+  hilo() |>
+```
 * By default 80% and 95%
 * Can change using `level`
 
 ```r
-avg_forecast
-avg_forecast <- forecast(avg_model, level = c(50, 95))
-avg_forecast
-plot(avg_forecast)
+hilo(avg_forecast, level = c(50, 95))
+autoplot(avg_forecast, level = c(50, 95))
 ```
 
-* Does it look like 95% of the empirical points fall within the gray band?
+* Does it look like 95% of the empirical points will fall within the gray band?
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
@@ -133,13 +149,14 @@ plot(avg_forecast)
 > Have students build a non-seasonal ARIMA model: 36 month horizon, 80 and 99% prediction intervals
 > Then discuss.
 
-#### How this forcast works
+#### How this forecast works
 
 ```r
-arima_model = auto.arima(NDVI_ts, seasonal = FALSE)
-arima_model
+arima_model = portal_data |>
+  model(ARIMA(NDVI ~ pdq(2, 0, 0) + PDQ(0, 0, 0)))
+report(arima_model)
 arima_forecast = forecast(arima_model)
-plot(arima_forecast)
+autoplot(arima_forecast, portal_data)
 ```
 
 * Forecast one step into the future
@@ -155,37 +172,85 @@ plot(arima_forecast)
 * Not much better than non-seasonal when looking at fit to data
 
 ```r
-seasonal_arima_model = auto.arima(NDVI_ts)
-seasonal_arima_forecast = forecast(seasonal_arima_model, h = 36, level = c(80, 99))
-plot(seasonal_arima_forecast)
+seasonal_arima_model = portal_data |>
+  model(ARIMA(NDVI ~ pdq(2, 0, 0) + PDQ(1, 0, 0)))
+seasonal_arima_forecast = forecast(seasonal_arima_model, h = 36)
+autoplot(seasonal_arima_forecast, portal_data)
 ```
 * Do you think it might be a better model for forecasting?
 * We'll find out how to tell next week.
 
-### Forecasts from cross-sectional approach
+### Fitting the best model and forecasting
+
+* If we want to fit the best version of a particular model we can remove the specification of the time lag dependency
+
+```r
+best_arima_model = portal_data |>
+  model(ARIMA(NDVI))
+best_arima_model
+```
+
+* So the best model has a third order moving average component and a first order seasonal auto-regressive component
+* The predictions are very similar to our other seasonal model
+
+```r
+best_arima_forecast = forecast(seasonal_arima_model, h = 36)
+autoplot(best_arima_forecast, portal_data)
+```
+
+## Incorporating external co-variates
+
+* NDVI should be related to rain, so how do we add NDVI to this kind of model
+* Build a model like last time
+
+```r
+rain_model = model(portal_data, ARIMA(NDVI ~ rain + pdq(2, 0, 0) + PDQ(1, 0, 0)))
+rain_model = model(portal_data, ARIMA(NDVI ~ rain))
+```
+
+* To forecast with covariates we need forecasts for those covariates
+* The `new_data()` function lets us create a new `tsibble` starting at the end of the time-series from another `tsibble`
+
+TODO: replace with actual future end of time-series rain values
+```r
+future_rain = new_data(portal_data, 8) |>
+  mutate(rain = mean(portal_data$rain))
+```
+
+* Error in these forecasts can be an issue can forecasting with covariates harder
+
+```r
+rain_forecast = forecast(rain_model, new_data = future_rain)
+autoplot(rain_forecast, portal_data)
+```
+
+
+
+
+```r
+fit <- model(portal_data, ARIMA(NDVI ~ fourier(K=2) + PDQ(0,0,0)))
+forecasted <- forecast(fit)
+autoplot(forecasted)
+autoplot(forecasted, portal_data)
+```
+
+## Forecasts from cross-sectional approach
 
 * Just predictor variables, not time-series component
 * Predict NDVI based on rain data
-* Southern Arizona's vegetation relies on summer monsoons, so focus on that precip
-
-```r
-library(dplyr)
-library(lubridate)
-
-data$date = as.Date(data$date, "%m/%d/%Y")
-monsoon_data <- data %>%
-  mutate(month = month(date), year = year(date)) %>% 
-  filter(month %in% c(7, 8, 9)) %>%
-  group_by(year) %>%
-  summarize(monsoon_rain = sum(rain), monsoon_ndvi = mean(NDVI))
-```
+* Southern Arizona's vegetation response to precip depends on the season so want to include that in the model
 
 * Visualize the relationship
 
 ```r
-ggplot(monsoon_data, aes(x = monsoon_rain, y = monsoon_ndvi)) +
+portal_data <- mutate(portal_data)
+ggplot(portal_data, aes(x = rain, y = NDVI)) +
   geom_point() +
   geom_smooth(method = "lm")
+```
+
+```r
+gg_subseries(portal_data, NDVI)
 ```
 
 * Fit a linear model
@@ -194,10 +259,21 @@ ggplot(monsoon_data, aes(x = monsoon_rain, y = monsoon_ndvi)) +
 rain_model = lm('monsoon_ndvi ~ monsoon_rain', data = monsoon_data)
 ```
 
+```r
+rain_model = model(portal_data, TSLM(NDVI ~ rain + season()))
+```
+
 * Make a forecast using that model
 * Requires forecast values for precipition
 
 ```r
-rain_forecast = forecast(rain_model, newdata = data.frame(monsoon_rain = c(120, 226, 176, 244)))
+rain_forecast = forecast(rain_model, newdata = data.frame(monsoon_rain = c(120, 226, 176, 244), ))
 plot(rain_forecast)
 ```
+
+```r
+forecasts = tsibble(rain = c(120, 226, 176, 244), month = yearmonth(c("2014-12", "2015-01", "2015-02", "2015-03")))
+rain_forecast = forecast(rain_model, new_data = forecasts)
+autoplot(rain_forecast, portal_data)
+```
+
