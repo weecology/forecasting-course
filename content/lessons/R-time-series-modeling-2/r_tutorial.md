@@ -135,24 +135,6 @@ gg_tsresiduals(arima_model)
 
 * Seasonal autocorrelation is now gone
 
-#### (optional) Compare to seasonal only model
-
-* Let's compare our full ARIMA model to just a seasonal model
-* We can set the PDQ values using two PDQ functions
-* `pdq()` takes the non-seasonal `p`, `d`, and `q` arguments
-* `PDQ()` takes the seasonal `p`, `d`, and `q` arguments
-
-```r
-season_only_arima_model <- portal_data |>
-  model(ARIMA(NDVI ~ pdq(0, 0, 0) + PDQ(1, 0, 0)))
-season_only_arima_model_aug = augment(season_only_arima_model)
-autoplot(season_only_arima_model_aug, NDVI) + autolayer(season_only_arima_model_aug, .fitted, color = "orange")
-gg_tsresiduals(season_only_arima_model)
-```
-
-* So the seasonal signal gets some of the locations of the peaks (it's green in the summer) but not how green it is
-* And just modeling season gets rid of the seasonal signal in the residuals, but not the short term autocorrelation
-
 > You do:
 > * Fit an ARIMA model to the `rain` data
 > * Plot your data with the model fit on top
