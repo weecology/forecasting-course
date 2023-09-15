@@ -154,7 +154,8 @@ gg_tsdisplay(portal_data, NDVI)
 * Current value depends on past values
 * The simplest version of this type of model is an AR1 model
 
-> **leave room to add y_t-2**
+> *leave room to add y_t-2*
+
 > `y_t = c + b_1 * y_t-1 + e_t, where e_t ~ N(0, sigma)`
 
 * c is a constant, like the intercept in regression
