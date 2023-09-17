@@ -11,7 +11,7 @@ editable: true
 
 > How (generally) do species distribution models work?
 
-* Model relationship between species occurence and environment and use to predict species presence at unsampled places and times
+* Model relationship between species occurrence and environment and use to predict species presence at unsampled places and times
 
 > What is the distinction between environmental & geographic space?
 
@@ -87,4 +87,4 @@ editable: true
 
 * JSDMS
 * More process
-* Active evalution
+* Active evaluation
