@@ -18,7 +18,7 @@ editable: true
 
 ## Thinking probabilistically
 
-* How do the boxes in the the graphical model of logistic growth relate to the
+* How do the boxes in the graphical model of logistic growth relate to the
   sources of uncertainty?
 
 ## Predictability
