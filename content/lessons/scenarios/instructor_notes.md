@@ -22,7 +22,7 @@ editable: true
 * But recognizing uncertainty and potential for surprises
 * Constructing story lines for each possible future to guide decision making
 
-> Has any one been involed in scenario planning?
+> Has anyone been involved in scenario planning?
 
 > Which are the benefits of scenario planning?
 
@@ -36,9 +36,9 @@ editable: true
 > What are some challenges you can envision for scenario planning?
 
 
-> Are scenarios qualititive, quantitative, both?
+> Are scenarios qualitative, quantitative, both?
 
-* Can be qualitative, semi-quantitative, full quantative
+* Can be qualitative, semi-quantitative, full quantitative
 
 > What are the reasons that environmental scenario planning needs ecology?
 

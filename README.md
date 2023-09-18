@@ -18,7 +18,7 @@ To use the materials for learning we recommend viewing them through [the rendere
 
 All of the code, lesson content, data, and infrastructure for this site is openly licensed so you can use any of it in your own courses.
 
-Lesson material can be accessed from [the website](https://course.naturecast.org) or using the raw markdown files in the [`content/lessons` directory](https://github.com/weecology/forecasting-course/tree/main/content/lessons) of this repository. Each lesson is stored in it's own named subdirectory. 
+Lesson material can be accessed from [the website](https://course.naturecast.org) or using the raw markdown files in the [`content/lessons` directory](https://github.com/weecology/forecasting-course/tree/main/content/lessons) of this repository. Each lesson is stored in its own named subdirectory. 
 
 There are three general approaches to using the material in teaching:
 

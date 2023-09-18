@@ -42,7 +42,7 @@ collection to the study of phenology?
 frequency relative to the scale of phenology (2-week intervals for the processed data)
 
 > Do you feel that its important or possible to forecast shifts that precisely?
-* This is an opinion question designed to get them thinking about data quality issues (and uncertainty in data) and how that might influence our ability to predict different types of phenomenona
+* This is an opinion question designed to get them thinking about data quality issues (and uncertainty in data) and how that might influence our ability to predict different types of phenomena
 
 > Phenology has been studied extensively, but where are most of the long-term records from? What biases does this insert into our understanding of phenology?
 * Temperate zones
@@ -60,7 +60,7 @@ optimize resource acquisition.
 * An opinion question to get them thinking about the strengths and weaknesses of the different approaches.
 * Statsitical: don't need to understand details of a system or all the processes and how they interact (which is the state we're in for most ecological systems) but reliant on past relationships. If processes change, then what?
 * Theoretical: Usually extremely simplified models of systems, but we may have data for some of the parameters. Should be capturing most important processes, but their simplified nature may miss important interactors.
-* Process-based: STudents will often get hung up on differences between theoretical vs. process-based models. Process-based is based on improtant theoretical/conceptual processes, but often with more details and interactions with other processes. Pointing students towards island biogeography theory, lotka-volterra equations, and similar theoretical simplifications and discussing whether those simplifications would work for their systems and what they might want to add to generate a process based model.
+* Process-based: Students will often get hung up on differences between theoretical vs. process-based models. Process-based is based on important theoretical/conceptual processes, but often with more details and interactions with other processes. Pointing students towards island biogeography theory, lotka-volterra equations, and similar theoretical simplifications and discussing whether those simplifications would work for their systems and what they might want to add to generate a process based model.
 
 
 If time here are some additional items to discuss:

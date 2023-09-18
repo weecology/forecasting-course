@@ -10,7 +10,7 @@ editable: true
 ## Why ecological forecasting?
 
 * Why do we need ecological forecasting?
-* What are some of things we need to be able to make forecasts?
+* What are some of the things we need to be able to make forecasts?
 
 ## Forecastability?
 
@@ -38,7 +38,7 @@ editable: true
 
 ## Forecasting data and methods
 
-* What are the general types of models that can be used for forecasting and how to they differ?
+* What are the general types of models that can be used for forecasting and how do they differ?
 * What are the different ways in which model parameters are determined?
 * When might these different approaches be most appropriate in ecology?
 * What are the different ways in which time and can incorporated into models?

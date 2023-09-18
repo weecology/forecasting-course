@@ -35,7 +35,7 @@ over its history. When we are exposed to earth's history, it's in the context of
     * Human effects on large fauna
     * Same species (except for those that went extinct)
 * Differences:
-    * Higher land and resource approporiation by humans today
+    * Higher land and resource appropriation by humans today
     * Novel habitats (cities)
     * Increased fragmentation via roads, farmlands, and other human-built barriers to movements
     * Increased movement between continents via introduced species

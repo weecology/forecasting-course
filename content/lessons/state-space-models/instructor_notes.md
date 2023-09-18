@@ -17,7 +17,7 @@ editable: true
   * Fits separate percent cover estimates for each knot
   * Smooths (or krigs) between knots based on distance (exponential decay)
 
-* What are the four sets of simluations (computation experiments) performed in the paper?
+* What are the four sets of simulations (computation experiments) performed in the paper?
   1.  compare simulated equilibrium cover to observed (start at low cover and simulate with samples from observed climate)
   2. compare observed and simulated cover for each year and location
   3. forecast future equilibrium populate states (start at low cover and
@@ -32,7 +32,7 @@ editable: true
 * How do the results of this study differ from species-distribution modeling
   based approaches and what does this tell us?
 
-* Does the model using spatially explicit environmental factors?
+* Does the model use spatially explicit environmental factors?
   * No
   * Would require downscaling
   * How could this influence the outcome?
