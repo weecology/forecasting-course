@@ -10,21 +10,20 @@ editable: true
 * Load the packages
 
 ```r
-library(readr)
-library(tsibble)
-library(fable)
-library(dplyr)
-library(feasts)
+library(tsibble) # convert time-series data in a tsibble
+library(fable) # main package for modeling and forecasting with time-series data
+library(feasts) # time-series data visualization
+library(dplyr) # data manipulation
 ```
 
 * Then load the data
 
 ```r
-raw_data = read_csv("content/data/portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
-portal_data <- raw_data |>
+data = read.csv("portal_timeseries.csv")
+data_ts <- raw_data |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
-portal_data
+data_ts
 ```
 
 ## ARIMA models
@@ -79,8 +78,7 @@ portal_data
 * The ARIMA model structure is available in `fable` in the `ARIMA()` function
 
 ```r
-arima_model = portal_data |>
-  model(ARIMA(NDVI))
+arima_model = model(data_ts, ARIMA(NDVI))
 ```
 
 * If we don't provide it any details on model structure it will try to find the best fitting ARIMA model
@@ -124,9 +122,7 @@ arima_model_aug = augment(arima_model)
 autoplot(arima_model_aug, NDVI) + autolayer(arima_model_aug, .fitted, color = "orange")
 ```
 
-* Looks a lot better
-* But if we look carefully the peaks are typically lagged by 1-2 time steps
-* There is a high prediction for t because there has a big observation at t-1
+* Looks good
 * Check the residuals
 
 ```r
@@ -140,6 +136,8 @@ gg_tsresiduals(arima_model)
 > * Plot your data with the model fit on top
 > * Plot the residuals
 
+* What do you think about this result?
+
 ## External co-variates
 
 ### TSLM
@@ -148,7 +146,7 @@ gg_tsresiduals(arima_model)
 * We'll look at this with some data on the abundance of the desert pocket mouse
 
 ```r
-pp_data = read_csv("content/data/pp_abundance_timeseries.csv") |>
+pp_data = read_csv("pp_abundance_timeseries.csv") |>
   as_tsibble(index = newmoonnumber)
 gg_tsdisplay(pp_data, abundance)
 ```
