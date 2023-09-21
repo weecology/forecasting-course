@@ -60,7 +60,6 @@ Modify the max orders, if needed, and rerun the model.
 * Let's first load the packages we'll need for today
 
 ```r
-library(readr) # easily read in time-series data
 library(tsibble) # convert time-series data in a tsibble
 library(fable) # main package for modeling and forecasting with time-series data
 library(feasts) # time-series data visualization
@@ -70,11 +69,18 @@ library(dplyr) # data manipulation
 * Then load our data
 
 ```r
-raw_data = read_csv("portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
-portal_data <- raw_data |>
+data = read.csv("portal_timeseries.csv")
+data_ts <- raw_data |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
-portal_data
+data_ts
+```
+
+* We're going to be working with the NDVI data
+* Reminder ourselves that that looks like
+
+```r
+gg_tsdisplay(data_ts, NDVI)
 ```
 
 ### White noise model
@@ -97,8 +103,7 @@ MEAN()
 * To fit that general model structure to our data we use the `model()` function
 
 ```r
-avg_model = portal_data |>
-  model(MEAN(NDVI))
+avg_model = model(data_ts, MEAN(NDVI))
 ```
 
 * We can then look at the resulting model information using the `report()` function
@@ -146,7 +151,7 @@ gg_tsresiduals(avg_model)
 * Remember that we have lag 1 and lag 2 autocorrelation plus a season signal
 
 ```r
-gg_tsdisplay(portal_data, NDVI)
+gg_tsdisplay(data_ts, NDVI)
 ```
 
 * Let's start with just the lag 1 and lag 2 autocorrelation
@@ -177,8 +182,7 @@ gg_tsdisplay(portal_data, NDVI)
 * If we want to specify how many autoregressive terms to include we specify the model as an R formula
 
 ```r
-ar_model = portal_data |>
-  model(AR(NDVI ~ order(2)))
+ar_model = model(data_ts, AR(NDVI ~ order(2)))
 ```
 
 * The `order()` function lets us specify how many lags to include
@@ -225,4 +229,4 @@ gg_tsresiduals(ar_model)
 > * Plot the residuals
 
 * How do the residuals look?
-* Why do you think there might be a two year autoregressive component but not a one year?
+* Why do you think there might be a stronger two year autoregressive component that the one year component?
