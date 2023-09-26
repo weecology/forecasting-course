@@ -20,7 +20,7 @@ library(dplyr) # data manipulation
 
 ```r
 data = read.csv("portal_timeseries.csv")
-data_ts <- raw_data |>
+data_ts <- data |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
 data_ts
@@ -146,7 +146,7 @@ gg_tsresiduals(arima_model)
 * We'll look at this with some data on the abundance of the desert pocket mouse
 
 ```r
-pp_data = read_csv("pp_abundance_timeseries.csv") |>
+pp_data = read.csv("pp_abundance_timeseries.csv") |>
   as_tsibble(index = newmoonnumber)
 gg_tsdisplay(pp_data, abundance)
 ```
@@ -160,8 +160,7 @@ gg_tsdisplay(pp_data, abundance)
 * We can do this in a time-series context with the `TSLM()` function
 
 ```r
-tslm_model = pp_data |>
-  model(TSLM(abundance ~ mintemp))
+tslm_model = model(pp_data, TSLM(abundance ~ mintemp))
 report(tslm_model)
 ```
 
@@ -172,19 +171,15 @@ tslm_model_aug = augment(tslm_model)
 autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
 ```
 
-* TSLM also lets us add season and trend components
-* It's possible we have a decrease over time so let's add a trend
+* It has the seasonal ups and downs but not differences in high years vs low years
+* Let's try adding another predictor
+* We'll add precipitation when it is cool
+* The driver of vegetation and therefore food when PP's are most active
+* We do this by adding more variables to our formula using the `+` sign
 
 ```r
-tslm_model = tslm_model = pp_data |>
-  model(TSLM(abundance ~ mintemp + trend()))
-```
-
-* This adds time itself as a predictor
-
-| `y_t = c + b_1 * mintemp_t + b_2 * t + e_t`
-
-```r
+tslm_model = model(pp_data, TSLM(abundance ~ mintemp + cool_precip))
+report(tslm_model)
 tslm_model_aug = augment(tslm_model)
 autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
 ```
@@ -200,6 +195,39 @@ gg_tsresiduals(tslm_model)
 * And that's a problem because regression assumes data points are independent
 * The autocorrelation tells us that they aren't
 * So any statistical inferences would be questionable
+* This ramp suggests that there might be a trend
+* It's possible we have a decrease over time
+
+* We can try to model the trend explicitly to remove the autocorrelation
+* We can do this by adding a fitted trend to our model using `trend()`
+
+```r
+tslm_model = tslm_model = pp_data |>
+  model(TSLM(abundance ~ mintemp + cool_precip + trend()))
+tslm_model_aug = augment(tslm_model)
+autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
+```
+
+* This adds time itself as a predictor
+
+| `y_t = c + b_1 * mintemp_t + b_2 coolprecip_t + b_3 * t + e_t`
+
+* Basically it says that there's a trend that we can't explain
+* But we include it in the model
+* If this removes all of the autocorrelation then we're in good shape
+
+```r
+gg_tsresiduals(tslm_model)
+```
+
+* It gets the longer-term autocorrelation
+* But the short lag AR is still there 
+
+> You do:
+> * Make a TSLM model but try some different combinations of predictors
+> * Plot your data with the model fit on top
+> * Plot the residuals
+
 
 ### ARIMA + Exogenous variables
 
