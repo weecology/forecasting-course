@@ -24,7 +24,7 @@ content:
       - 'Introduction to Time Series Data'
       - 'Time series modeling in R 1'
       - 'Time series modeling in R 2'
-      - 'Ask us anything 1'
+      - 'Time series modeling in R 3'
       - 'Introduction to Ecological Forecasting'
       - 'Introduction to Forecasting in R'
       - 'Uncertainty in Forecasting'
