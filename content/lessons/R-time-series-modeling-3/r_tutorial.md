@@ -39,7 +39,10 @@ gg_tsdisplay(pp_data, abundance)
 * Try to predict abundances with minimum temperature
 * Because this species hibernates when it gets cold
 
-| `y_t = c + b_1 * mintemp_t + e_t`
+{{< math >}}
+$$y_t = c + \beta_1 x_t + \epsilon_t$$
+{{< /math >}}
+
 
 * We can do this in a time-series context with the `TSLM()` function
 
@@ -98,7 +101,9 @@ tslm_model = tslm_model = model(pp_data, TSLM(abundance ~ mintemp + cool_precip 
 
 * This adds time itself as a predictor
 
-| `y_t = c + b_1 * mintemp_t + b_2 * coolprecip_t + b_3 * t + e_t`
+{{< math >}}
+$$y_t = c + \beta_1 x_{1,t} + \beta_2 x_{2,t} + \beta_3 t +  \epsilon_t$$
+{{< /math >}}
 
 * Basically it says that there's a trend that we can't explain
 * But we include it in the model
@@ -146,14 +151,17 @@ report(arima_exog_model)
 * Model has automatically incorporated the trend we fit with TSLM
 * We can generally think of this model as being something like
 
-| `y_t = c + b_1 * mintemp + b_2 * y_t-1 + theta_1 * e_t-1 + e_t`
+{{< math >}}
+$$y_t = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+{{< /math >}}
 
 * This is called an ARMAX model, with the X standing for eXogenous predictors
 * Fable actually fits a linear regression with ARIMA errors
 
-| `y_t = c + b_1 * mintemp + n_t`
-
-| `n_t = b_2 * n_t-1 + theta_1 * e_t-1 + e_t`
+{{< math >}}
+$$y_t = c + \beta_1 x_{1,t} + \eta_t$$
+$$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+{{< /math >}}
 
 * The model includes time-series structure & external covariates
 * With interpretable coefficients
