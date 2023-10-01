@@ -39,4 +39,49 @@ pp = rodents |>
   as_tsibble(index = newmoonnumber) |>
   select(newmoonnumber, abundance, date, mintemp, precipitation, cool_precip, warm_precip, precip)
 
-write_csv(pp, "pp_abundance_timeseries.csv")
+write_csv(pp, "data/pp_abundance_timeseries.csv")
+
+# In cases with two surveys in a month (blue moon) average them
+# In one case we have zero samples one month and two samples the following month
+# Drop the average value for the second month, move the first value up a month,
+# and use the remaining value for the second month
+
+pp_2014_feb <- pp |>
+  as_tibble() |>
+  filter(date == "2014-03-01") |>
+  mutate(month = yearmonth("2014 Feb")) |>
+  select(month, abundance, mintemp, precip = precipitation, cool_precip, warm_precip)
+
+pp_2014_mar <- pp |>
+  as_tibble() |>
+  filter(date == "2014-03-30") |>
+  mutate(month = yearmonth("2014 Mar")) |>
+  select(month, abundance, mintemp, precip = precipitation, cool_precip, warm_precip)
+
+pp_data_month <- pp |>
+  as_tibble() |>
+  mutate(month = yearmonth(date)) |>
+  group_by(month) |>
+  summarize(abundance = round(mean(abundance)),
+    mintemp = mean(mintemp),
+    precip = mean(precipitation),
+    cool_precip = mean(cool_precip),
+    warm_precip = mean(warm_precip)) |>
+  filter(month != yearmonth("2014 Mar"))
+
+pp_data_clean <- pp_data_month |>
+  rbind(pp_2014_feb) |>
+  rbind(pp_2014_mar) |>
+  arrange(month)
+
+write_csv(pp_data_clean, "content/data/pp_abundance_by_month.csv")
+
+
+# Get the next two years of climate data for forecasting
+# There just happen to be no month vs newmoon issues during this period
+pp_future_climate <- weather |>
+  filter(newmoonnumber >= 527, newmoonnumber < 527 + 24) |>
+  mutate(month = yearmonth(date)) |>
+  select(month, mintemp, precipitation, cool_precip, warm_precip, date)
+
+write_csv(pp_future_climate, "content/data/pp_future_climate.csv")
