@@ -9,5 +9,8 @@ editable: true
 
 ## Software installation requirements
 
-* `ggplot2` R package: `install.packages('ggplot2')`
-* `forecast` R package: `install.packages('forecast')` 
+* R packages: `install.packages(c('fable', 'feasts', 'tsibble', 'dplyr', 'ggplot2'))`
+
+## Data
+
+* Download the [Desert Pocket Mouse by month data](/data/pp_abundance_abundance_by_month.csv) *this is different than the data used in the time-series modeling material*
