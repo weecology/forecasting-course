@@ -9,6 +9,9 @@ editable: true
 
 ## Video Tutorials
 
+*Video tutorials are based on the old `forecast` package.*
+*Text tutorials have been updated to use `fable` and associated packages.*
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kyPg3jV4pJ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/govzki35PIQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -17,19 +20,22 @@ editable: true
 
 ### Setup
 
-```r
-library(readr)
-library(fable)
-library(tsibble) #yearmonth
-library(feasts) #ACF
-library(dplyr)
-library(ggplot2)
+* Load the packages
 
-raw_data = read_csv("content/data/portal_timeseries.csv", col_types = cols(date = col_date(format = "%m/%d/%Y")))
-portal_data <- raw_data |>
-  mutate(month = yearmonth(date)) |>
+```r
+library(tsibble)
+library(fable)
+library(feasts)
+library(dplyr)
+```
+
+* Load the data
+
+```r
+pp_data = read.csv("pp_abundance_by_month.csv") |>
+  mutate(month = yearmonth(month)) |>
   as_tsibble(index = month)
-head(portal_data)
+pp_data
 ```
 
 ### Steps in forecasting
@@ -46,234 +52,187 @@ head(portal_data)
 * Process we went through over the last few weeks
 * Look at the time series
 
-```{r}
-autoplot(portal_data, NDVI)
-```
-
-* Look at the autocorrelation structure
-
-```{r}
-portal_data |>
-  ACF(NDVI) |>
-  autoplot()
+```r
+gg_tsdisplay(pp_data, abundance)
 ```
 
 ### Choose and fit models
 
-* Simples model was white noise or the "naive" model:
+* Start with simple model AR1 model:
 
-  > y_t = c + e_t, where e_t ~ N(0, sigma)
+{{< math >}}
+$$y_t = c + \beta_1 y_{t-1} + \epsilon_t$$
+{{< /math >}}
 
-* Fit this model using `MEAN()`
+* Fit this model using `ARIMA()`
+* Use `pdq()` AR order to 1, differencing to 0, MA to 0
+* Use `PDQ()` to set all seasonal components to 0
 
 ```r
-avg_model = portal_data |>
-  model(MEAN(NDVI)) |>
-  report()
+ar1_model = model(pp_data, ARIMA(abundance ~ pdq(1,0,0) + PDQ(0,0,0)))
+report(ar1_model)
 ```
-
 
 ### Make forecasts
 
 * To make forecasts from a model we ask what the model would predict at the time-step
-* For the average model we just need to know what c is, which is just the mean(NDVI_ts)
+* For the AR1 model this depends on $c$, $\beta_1$, $y_{t-1}$, and $\epsilon_t$
 
 ```r
-avg_forecast = avg_model |>
-  forecast(h = 12)
+ar1_forecast = forecast(ar1_model)
+ar1_forecast
 ```
 
-* Model object has information on
-  * Method used for forecasting
-  * Values for fitting the model
-  * Information about the model
-  * Mean values for the forecast
+* Forecast object has information on
+  * Model used for forecasting
+  * Time step being forecast
+  * The expected value, or point forecast, is in `$.mean`
+  * And information about the error term in `abundance <dist>`
 
-* The expected value, or point forecast, is in `$.mean`
-
-```r
-avg_forecast$.mean
-```
-
-* Change the number of time-steps in the forecast using h
+* Change the number of time-steps in the forecast using h (default to 2 seasonal cycles)
 
 ```r
-avg_forecast = forecast(avg_model, h = 50)
+ar1_forecast = forecast(ar1_model, h = 36)
 ```
 
 #### Visualize
 
-* Use the built-in `autoplot` function
+* Visualize using `autoplot`
 
 ```r
-autoplot(avg_forecast)
+autoplot(ar1_forecast)
 ```
 
 * This just shows the forecast
 * Let's also add the time series we trained the model on
 
 ```r
-autoplot(avg_forecast, portal_data)
+autoplot(ar1_forecast, pp_data)
 ```
+
+* Forecast one step into the future
+* Use the forecast value as $y_{t-1}$ to forecast second step
+* Can see the model at work
+* First step influenced strongly low value at the previous time-step
+* Abundance is zero, so predicted value is $c$, or about 6
+* Second step value of $y_{t-1}$ is the value we just forecast, 6
+* So our new predict value is roughly 6 + 0.8 * 6, so about 11
+* Gradually reverts to the mean
 
 #### Uncertainty
 
-* Important to know how confident our forecast is
-* Shaded areas provide this information
-* Only variation in e_t is included, not errors in parameters
-* We can view these values using `hilo`
+* Lots of possible outcomes for this forecast depending on random error
+* We can look at this by using the `bootstrap` setting
 
 ```r
-avg_forecast |>
-  hilo() |>
+ar1_forecast = forecast(ar1_model, bootstrap = TRUE, times = 1)
+autoplot(ar1_forecast, pp_data)
 ```
+
+* This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at teach time step
+* Let's run it a few times
+
+* Want to quantify how variable we expect these possible forecast outcomes are
+* If we set `times` to `1000`
+
+```r
+ar1_forecast = forecast(ar1_model, bootstrap = TRUE, times = 1000)
+autoplot(ar1_forecast, pp_data)
+```
+
+* Shaded areas provide this information
+* These are the "prediction intervals"
+* The region within which some percentage of our forecast values will occur
 * By default 80% and 95%
 * Can change using `level`
 
 ```r
-hilo(avg_forecast, level = c(50, 95))
-autoplot(avg_forecast, level = c(50, 95))
+autoplot(ar1_forecast, pp_data, level = c(50, 80))
 ```
 
-* Does it look like 95% of the empirical points will fall within the gray band?
+* With `bootstrap = TRUE` `fable` makes 1000 individual forecasts
+* Drawing an error from the normal distribution at each time step
+* Shows the ranges that contain the appropriate percentage of predicts
+* For many models the values can be calculated without making separate forecasts
+* This is the default behavior
+
+```r
+ar1_forecast = forecast(ar1_model)
+autoplot(ar1_forecast, pp_data, level = c(50, 80))
+```
+
+* Only variation in $\epsilon_t$ is included, not errors in parameters
+* We can view access these values using `hilo`
+
+```r
+ar1_forecast |>
+  hilo() |>
+  print(width = 90)
+```
+
+```r
+ar1_forecast |>
+  hilo(level = c(50, 80)) |>
+  print(width = 90)
+```
+
+* Does it look like 80% of the empirical points will fall within the lighter band?
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
-### Forecasting with more complex models
-
-* Non-seasonal ARIMA
-* `y_t = c + b1 * y_t-1 + b2 * y_t-2 + e_t`
-
-> Instructors note: Actually `y_t = (1 - b1 - b2) * c + b1 * y_t-1 + b2 * y_t-2 + e_t` due to non-zero mean
-
-> Have students build a non-seasonal ARIMA model: 36 month horizon, 80 and 99% prediction intervals
-> Then discuss.
-
-#### How this forecast works
+#### Full ARIMA
 
 ```r
-arima_model = portal_data |>
-  model(ARIMA(NDVI ~ pdq(2, 0, 0) + PDQ(0, 0, 0)))
+arima_model = model(pp_data, ARIMA(abundance))
 report(arima_model)
-arima_forecast = forecast(arima_model)
-autoplot(arima_forecast, portal_data)
 ```
 
-* Forecast one step into the future
-* Use the forecast value as `y_t-1` to forecast second step
-* Can see the model at work
-* First step influenced strongly postively by previous time-step which is high so above mean
-* Second step is pulled below negative AR2 parameter
-* Gradually reverts to the mean
-
-#### Seasonal ARIMA
-
-* Best model we found last time
-* Not much better than non-seasonal when looking at fit to data
+* Best model has a 1st order auto-regressive component and 1st and 2nd order seasonal auto-regressive components
 
 ```r
-seasonal_arima_model = portal_data |>
-  model(ARIMA(NDVI ~ pdq(2, 0, 0) + PDQ(1, 0, 0)))
-seasonal_arima_forecast = forecast(seasonal_arima_model, h = 36)
-autoplot(seasonal_arima_forecast, portal_data)
-```
-* Do you think it might be a better model for forecasting?
-* We'll find out how to tell next week.
-
-### Fitting the best model and forecasting
-
-* If we want to fit the best version of a particular model we can remove the specification of the time lag dependency
-
-```r
-best_arima_model = portal_data |>
-  model(ARIMA(NDVI))
-best_arima_model
+arima_forecast = forecast(arima_model, h = 36)
+autoplot(arima_forecast, pp_data, level = 80)
 ```
 
-* So the best model has a third order moving average component and a first order seasonal auto-regressive component
-* The predictions are very similar to our other seasonal model
+#### Incorporating external co-variates
 
-```r
-best_arima_forecast = forecast(seasonal_arima_model, h = 36)
-autoplot(best_arima_forecast, portal_data)
-```
-
-## Incorporating external co-variates
-
-* NDVI should be related to rain, so how do we add NDVI to this kind of model
+* We know from last time that `mintemp` is a good predictor
 * Build a model like last time
 
 ```r
-rain_model = model(portal_data, ARIMA(NDVI ~ rain + pdq(2, 0, 0) + PDQ(1, 0, 0)))
-rain_model = model(portal_data, ARIMA(NDVI ~ rain))
+arima_exog_model = model(pp_data, ARIMA(abundance ~ mintemp))
+report(arima_exog_model)
 ```
 
+* Our model takes the form
+
+{{< math >}}
+$$y_t = c + \beta_1 x_{1,t} + \eta_t$$
+$$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+{{< /math >}}
+
+* So we need values of $x_{1,t}$ to make predictions for time step $t$
 * To forecast with covariates we need forecasts for those covariates
-* The `new_data()` function lets us create a new `tsibble` starting at the end of the time-series from another `tsibble`
 
-TODO: replace with actual future end of time-series rain values
-```r
-future_rain = new_data(portal_data, 8) |>
-  mutate(rain = mean(portal_data$rain))
-```
-
-* Error in these forecasts can be an issue can forecasting with covariates harder
+* Since our time-series ended in 2020 we'll use the observed values for the next two years
 
 ```r
-rain_forecast = forecast(rain_model, new_data = future_rain)
-autoplot(rain_forecast, portal_data)
+climate_forecasts = read.csv("content/data/pp_future_climate.csv") |>
+  mutate(month = yearmonth(month)) |>
+  as_tsibble(index = month)
+climate_forecasts
 ```
 
-
-
+* This data needs to be a `tsibble` with the same index
+* But future dates and all of the covariates included in the model
 
 ```r
-fit <- model(portal_data, ARIMA(NDVI ~ fourier(K=2) + PDQ(0,0,0)))
-forecasted <- forecast(fit)
-autoplot(forecasted)
-autoplot(forecasted, portal_data)
+arima_exog_forecast = forecast(arima_exog_model, new_data = climate_forecasts)
+autoplot(arima_exog_forecast, pp_data)
 ```
 
-## Forecasts from cross-sectional approach
+* Our point estimates now go below 0
+* Possible because of the exogenous driver, but not desireable
+* Otherwise looks reasonable
 
-* Just predictor variables, not time-series component
-* Predict NDVI based on rain data
-* Southern Arizona's vegetation response to precip depends on the season so want to include that in the model
-
-* Visualize the relationship
-
-```r
-portal_data <- mutate(portal_data)
-ggplot(portal_data, aes(x = rain, y = NDVI)) +
-  geom_point() +
-  geom_smooth(method = "lm")
-```
-
-```r
-gg_subseries(portal_data, NDVI)
-```
-
-* Fit a linear model
-
-```r
-rain_model = lm('monsoon_ndvi ~ monsoon_rain', data = monsoon_data)
-```
-
-```r
-rain_model = model(portal_data, TSLM(NDVI ~ rain + season()))
-```
-
-* Make a forecast using that model
-* Requires forecast values for precipition
-
-```r
-rain_forecast = forecast(rain_model, newdata = data.frame(monsoon_rain = c(120, 226, 176, 244), ))
-plot(rain_forecast)
-```
-
-```r
-forecasts = tsibble(rain = c(120, 226, 176, 244), month = yearmonth(c("2014-12", "2015-01", "2015-02", "2015-03")))
-rain_forecast = forecast(rain_model, new_data = forecasts)
-autoplot(rain_forecast, portal_data)
-```
-
+* Next time: how do we know if they are good or not?
