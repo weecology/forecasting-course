@@ -2,7 +2,7 @@
 title: "R Tutorial"
 weight: 3
 type: book
-summary: R tutorial on evaluating forecasts using the forecast package
+summary: R tutorial on evaluating forecasts and forecast models
 show_date: false
 editable: true
 ---
@@ -46,6 +46,24 @@ data = read.csv("data/portal_timeseries.csv")
 NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
 tsdisplay(NDVI_ts)
 ```
+
+### Evaluating forecast model fits
+
+* We can fit multiple models to a single dataset and then compare them
+
+```r
+pp_models = model(
+  pp_data,
+  arima = ARIMA(abundance),
+  arima_exog = ARIMA(abundance ~ mintemp),
+  tslm = TSLM(abundance ~ mintemp + cool_precip))
+ppmodels
+pp_models |> glance()
+```
+
+* But comparisons typically rely on IID residuals
+* We know we don't have this for TSLM, so it's likelihood and IC values are invalid
+* These comparisons also typically tell us about 1 step ahead forecasts and we may care about more steps
 
 ### Hindcasting
 
