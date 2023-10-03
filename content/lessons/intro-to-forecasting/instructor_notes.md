@@ -15,7 +15,7 @@ editable: true
 * Manage environmental change
 * Test how well we understand ecosystems
 
-> What are two some of things we need to be able to make forecasts?
+> What are some of things we need to be able to make forecasts?
 
 * Models
 * Data
@@ -79,12 +79,12 @@ editable: true
 
 ## Forecasting data and methods
 
-> What are the general types of models that can be used for forecasting and how to they differ?
+> What are the general types of models that can be used for forecasting and how do they differ?
 
 * Data-driven vs. Process modeling
   * What is a good example of cross-sectional forecasting in ecology?
   * What is a good example of time-series forecasting?
-* Within data-driven "Time series" vs. "Explanatory
+* Within data-driven "Time series" vs. "Explanatory"
 
 > What are the different ways in which model parameters are determined?
 
@@ -94,10 +94,11 @@ editable: true
 
 > When might these different approaches be most appropriate in ecology?
 
-> What are the different ways in which time and can incorporated into these models?
+> What are the different ways in which time can be incorporated into these models?
 
 * Explicitly
-* Implicitly (driving variables that change) or not included
+* Implicitly (driving variables that change)
+* Not included
 
 ## Basic steps
 
@@ -110,12 +111,3 @@ editable: true
 
 * How good do you think we currently are at forecasting in ecology?
 * What does the history of weather forecasting tell you about how that might change?
-
-## Start with dynamics
-
-* The title of this course is Ecological Forecasting and Dynamics
-* That's because if we want to be able to forecast the future we need to understand how ecological systems change through time
-* We will start by spending several weeks learning about
-    * Key aspects of ecological dynamics
-    * How to find and analyze time-series data
-* Then we will move on to using these concepts, data, and tools for thinking about and making forecasts
