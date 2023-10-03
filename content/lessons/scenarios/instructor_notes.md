@@ -28,7 +28,7 @@ editable: true
 
 * Identify strategies for different possible futures
 * Be prepared to respond to different possible futures and respond if unexpected scenarios occur
-* Actively engage stake-holders in planning and decision making processes in ways that create awareness of future changes
+* Actively engage those using and impacted by the forecasts in planning and decision making processes in ways that create awareness of future changes
 * Good for systematic planning in uncertain situations
 * Allows consideration of different decisions leading to different outcomes
 * Actively recognizes uncertainty/surprises

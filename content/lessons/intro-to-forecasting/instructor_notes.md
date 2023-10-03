@@ -39,7 +39,7 @@ editable: true
 
 > How should we think about what to forecast in ecology?
 
-* Talk to stake holders
+* Talk to those who need or are impacted by the forecast
 * Consider whether we have the data/models we need
 
 ## Terminology

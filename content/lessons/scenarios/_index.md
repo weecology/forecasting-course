@@ -13,7 +13,7 @@ editable: true
 **Learning Objectives:**
 * Define and describe scenario based forecasting methods and their uses
 * Distinguish between scenario planning, predictions, and forecasting
-* Describe approaches to multi-stakeholder decision making using scenarios  
+* Describe approaches to multi-group decision making using scenarios  
 
 {{% /callout %}}
 
