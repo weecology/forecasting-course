@@ -13,4 +13,4 @@ editable: true
 
 ## Data
 
-* Download the [Desert Pocket Mouse by month data](/data/pp_abundance_abundance_by_month.csv) *this is different than the data used in the time-series modeling material*
+* Download the [Desert Pocket Mouse by month data](/data/pp_abundance_by_month.csv) *this is different than the data used in the time-series modeling material*
