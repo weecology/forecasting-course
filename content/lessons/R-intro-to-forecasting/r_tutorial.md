@@ -92,7 +92,7 @@ ar1_forecast
 * Change the number of time-steps in the forecast using h (default to 2 seasonal cycles)
 
 ```r
-ar1_forecast = forecast(ar1_model, h = 36)
+ar1_forecast = forecast(ar1_model, h = 20)
 ```
 
 #### Visualize
@@ -110,18 +110,22 @@ autoplot(ar1_forecast)
 autoplot(ar1_forecast, pp_data)
 ```
 
-* Forecast one step into the future
-* Use the forecast value as $y_{t-1}$ to forecast second step
+* Forecast one step into the future at time
+* First step - use last observed value as $y_{t-1}$
+* Second step - use the first forecast value as $y_{t-1}$
 * Can see the model at work
-* First step influenced strongly low value at the previous time-step
+* 1st step influenced by the low value at the previous time-step
 * Abundance is zero, so predicted value is $c$, or about 6
 * Second step value of $y_{t-1}$ is the value we just forecast, 6
 * So our new predict value is roughly 6 + 0.8 * 6, so about 11
 * Gradually reverts to the mean
+* $6 + 0.8 \times 30 \approx 30$
 
 #### Uncertainty
 
-* Lots of possible outcomes for this forecast depending on random error
+* But we haven't talked about $\epsilon$ yet
+* At each step there we include random error
+* So lots of possible outcomes
 * We can look at this by using the `bootstrap` setting
 
 ```r
@@ -132,7 +136,7 @@ autoplot(ar1_forecast, pp_data)
 * This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at teach time step
 * Let's run it a few times
 
-* Want to quantify how variable we expect these possible forecast outcomes are
+* Quantify variability of forecast outcomes
 * If we set `times` to `1000`
 
 ```r
@@ -140,28 +144,26 @@ ar1_forecast = forecast(ar1_model, bootstrap = TRUE, times = 1000)
 autoplot(ar1_forecast, pp_data)
 ```
 
-* Shaded areas provide this information
+* Center line is the point estimate, the average value over the 1000 forecasts
+* Shaded areas provides uncertainty
 * These are the "prediction intervals"
-* The region within which some percentage of our forecast values will occur
-* By default 80% and 95%
-* Can change using `level`
+* The region within which some percentage of our 1000 forecast values occurred
 
-```r
-autoplot(ar1_forecast, pp_data, level = c(50, 80))
-```
-
-* With `bootstrap = TRUE` `fable` makes 1000 individual forecasts
-* Drawing an error from the normal distribution at each time step
-* Shows the ranges that contain the appropriate percentage of predicts
 * For many models the values can be calculated without making separate forecasts
-* This is the default behavior
+* This is the default behavior that we first saw
 
 ```r
 ar1_forecast = forecast(ar1_model)
 autoplot(ar1_forecast, pp_data, level = c(50, 80))
 ```
 
-* Only variation in $\epsilon_t$ is included, not errors in parameters
+* Default prediction intervals are 80% and 95%
+* Can change using `level`
+
+```r
+autoplot(ar1_forecast, pp_data, level = c(50, 80))
+```
+
 * We can view access these values using `hilo`
 
 ```r
@@ -180,32 +182,24 @@ ar1_forecast |>
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
-#### Full ARIMA
-
-```r
-arima_model = model(pp_data, ARIMA(abundance))
-report(arima_model)
-```
-
-* Best model has a 1st order auto-regressive component and 1st and 2nd order seasonal auto-regressive components
-
-```r
-arima_forecast = forecast(arima_model, h = 36)
-autoplot(arima_forecast, pp_data, level = 80)
-```
+> Instructors note - Only variation in $\epsilon_t$ is included, not uncertainty in parameters
 
 #### Incorporating external co-variates
 
-* We know from last time that `mintemp` is a good predictor
-* Build a model like last time
+* We know from last time that `mintemp` w/ARIMA errors is a good model
 
 ```r
 arima_exog_model = model(pp_data, ARIMA(abundance ~ mintemp))
 report(arima_exog_model)
 ```
 
-* Our model takes the form
+* We can think of our model as
 
+{{< math >}}
+$$y_t = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+{{< /math >}}
+
+> Instructors note - the actual model is 
 {{< math >}}
 $$y_t = c + \beta_1 x_{1,t} + \eta_t$$
 $$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
@@ -217,14 +211,16 @@ $$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
 * Since our time-series ended in 2020 we'll use the observed values for the next two years
 
 ```r
-climate_forecasts = read.csv("content/data/pp_future_climate.csv") |>
+climate_forecasts = read.csv("pp_future_climate.csv") |>
   mutate(month = yearmonth(month)) |>
   as_tsibble(index = month)
 climate_forecasts
 ```
 
-* This data needs to be a `tsibble` with the same index
-* But future dates and all of the covariates included in the model
+* This data needs to be a `tsibble`
+* With the same index column but future dates
+* All of the covariates included in the model
+* Use optional `new_data` argument to include drivers
 
 ```r
 arima_exog_forecast = forecast(arima_exog_model, new_data = climate_forecasts)
