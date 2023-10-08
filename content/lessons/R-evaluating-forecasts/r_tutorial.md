@@ -7,6 +7,9 @@ show_date: false
 editable: true
 ---
 
+*Video tutorials are based on the old `forecast` package.*
+*Text tutorials have been updated to use `fable` and associated packages.*
+
 ## Video Tutorials
 
 ### Hindcasting & Visual Evaluation
@@ -38,13 +41,22 @@ editable: true
 
 ### Setup
 
-```r
-library(forecast)
-library(ggplot2)
+* Load the packages
 
-data = read.csv("data/portal_timeseries.csv")
-NDVI_ts = ts(data$NDVI, start = c(1992, 3), end = c(2014, 11), frequency = 12)
-tsdisplay(NDVI_ts)
+```r
+library(tsibble)
+library(fable)
+library(feasts)
+library(dplyr)
+```
+
+* Load the data
+
+```r
+portal_data = read.csv("content/data/portal_timeseries.csv") |>
+  mutate(month = yearmonth(date)) |>
+  as_tsibble(index = month)
+portal_data
 ```
 
 ### Evaluating forecast model fits
@@ -52,25 +64,27 @@ tsdisplay(NDVI_ts)
 * We can fit multiple models to a single dataset and then compare them
 
 ```r
-pp_models = model(
-  pp_data,
-  arima = ARIMA(abundance),
-  arima_exog = ARIMA(abundance ~ mintemp),
-  tslm = TSLM(abundance ~ mintemp + cool_precip))
-ppmodels
-pp_models |> glance()
+portal_models = model(
+  portal_data,
+  ar2 = ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)),
+  arima = ARIMA(NDVI), 
+  arima_exog = ARIMA(NDVI ~ rain)
+)
+portal_models
+glance(portal_models)
 ```
 
 * But comparisons typically rely on IID residuals
 * We know we don't have this for TSLM, so it's likelihood and IC values are invalid
 * These comparisons also typically tell us about 1 step ahead forecasts and we may care about more steps
 
-### Hindcasting
-
-* There are two approaches to evaluating forecasts
-* One is to make a forecast for the future, collect new data, and then see how well the forecast performed
+* So it's best to evaluate forecasts themselves
+* Ideally we make a forecast for the future, collect new data, and then see how well the forecast performed
 * This is the gold standard, but it requires waiting for time to pass
 * Therefore, most work developing forecasting models focuses on "hindcasting" or "backcasting"
+
+### Hindcasting
+
 * Split existing time-series into 2 pieces
 * Fit to data from the first part of an observed time-series
 * Test on data from the end of the observed time-series
@@ -78,22 +92,23 @@ pp_models |> glance()
 
 #### Test and training data
 
-* To split the time-series into training data and testing data we use the `window` function
-* First argument is the time-series
-* Additional arguments for start and end dates
+* To split the time-series into training data and testing data we use the `filter` function from dplyr
+* 1st argument is the tsibble
+* 2nd argument is the condition
+* Data runs through the end of 2019, so use up to 2017 for training data
 
 ```r
-NDVI_train <- window(NDVI_ts, end = c(2011, 11))
-NDVI_test <- window(NDVI_ts, start = c(2011, 12))
+train <- filter(portal_data, month < yearmonth("2011 Dec"))
+test <- filter(portal_data, month >= yearmonth("2011 Dec"))
 ```
 
 #### Build model on training data
 
 * We then fit our model to the training data
-* Let's start with a non-seasonal ARIMA
+* Let's start with our non-seasonal MA2 model
 
 ```r
-arima_model = auto.arima(NDVI_train, seasonal = FALSE)
+ma2_model = model(train, ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)))
 ```
 
 #### Make forecast for the test data
@@ -102,7 +117,7 @@ arima_model = auto.arima(NDVI_train, seasonal = FALSE)
 * We reserved 3 years of test data so we want to forecasts 36 months into the future
 
 ```r
-arima_forecast = forecast(arima_model, h = 36)
+ma2_forecast = forecast(ma2_model, h = 36)
 ```
 
 ### Visual Evaluation
@@ -111,85 +126,56 @@ arima_forecast = forecast(arima_model, h = 36)
 * Remember that we can plot the data the model is fit to and the forecast using `autoplot`
 
 ```r
-autoplot(arima_forecast)
+autoplot(ma2_forecast, train)
 ```
 
 * If we want to add the observations from the test data we can do this by adding `autolayer`
 
 ```r
-autoplot(arima_forecast) + autolayer(NDVI_test)
+autoplot(ma2_forecast, train) + autolayer(test, NDVI)
 ```
 
 * This adds a new layer to our the `ggplot` objection created by `autoplot` with the test data
-* This shows that while the average is in the right general area the forecast doesn't the follow ups and downs
-
-* Another way to visually evaluate forecasts is using observed-predicted plots
-  * Predicted value on x
-  * Observed value on y
-
-```r
-plot(arima_forecast$mean, NDVI_test)
-```
-
-* Because the x and y values are time-series `plot` makes a line plot
-* Can be useful sometimes but just makes things hard to see in this case
-* So let's convert them to regular vectors before plotting
-
-```r
-plot(as.vector(arima_forecast$mean), as.vector(NDVI_test))
-```
-
-* Finally we want to add a 1:1 line that shows when the observed and predicted values are equal
-
-```r
-abline(0, 1)
-```
-
-* Predicted value very quickly converges to mean
-* Not much relationship between observed and predicted values
-* Because no variation in predicted values
-
-> * **Now it's you're turn.**
-> * Forecast and visualize a seasonal ARIMA model
+* How does it look?
 
 ### Quantitative Evaluation
+
+* Quantitative evaluation of point estimates is based on forecast errors
+
+{{< math >}}
+$$e_{t+h} = y_{t+h} - \hat{y}_{t+h}$$
+{{< /math >}}
 
 * `accuracy` function shows a number of common measures of forecast accuracy
   * 1st argument: forecast object from model on training data
   * 2nd argument: test data time-series
 
 ```r
-accuracy(arima_forecast, NDVI_test)
+accuracy(ma2_forecast, test)
 ```
 
-* Shows errors on both training and test data
-* Errors are higher on test than training because training data is being fit
-* RMSE is a common method for evaluating forecast performance as is the Brier score
-  (RMSE^2)
+* RMSE is a common method for evaluating forecast performance
+
 
 > * **Now it's your turn.**
-> * Write code to quantify the accuracy of the seasonal ARIMA model
+> * Write code to quantify the accuracy of the full ARIMA model
 
 * Here's what I would have done
 
 ```r
-seasonal_arima_model = auto.arima(NDVI_train)
-seasonal_arima_forecast = forecast(seasonal_arima_model, h = 36)
-autoplot(seasonal_arima_forecast) + autolayer(NDVI_test)
-
-plot(as.vector(seasonal_arima_forecast$mean), as.vector(NDVI_test))
-abline(0, 1)
-
-accuracy(seasonal_arima_forecast, NDVI_test)
+arima_model = model(train, arima = ARIMA(NDVI))
+arima_forecast = forecast(arima_model, test)
+autoplot(arima_forecast, train) + autolayer(test, NDVI)
+accuracy(arima_forecast, test)
 ```
 
-* Compare accuracy to non-seasonal ARIMA
+* Compare accuracy to MA2
 
 ```r
-accuracy(arima_forecast, NDVI_test)
+accuracy(arima_forecast, test)
 ```
 
-* So the season model appears to perform better on point estimates
+* So the full ARIMA is better on point estimates
 
 #### Coverage
 
@@ -198,18 +184,19 @@ accuracy(arima_forecast, NDVI_test)
 * Prediction Interval: range of values in which a percentage of observations
   should occur
 * 80% prediction interval is the range of values we expect 80% of observations to fall between
-* These values are stored in the forecast object as `$lower` and `$upper`
 
 ```r
-arima_forecast$lower
-arima_forecast$upper
+ma2_intervals <- hilo(ma2_forecast, level = 80) |>
+  unpack_hilo("80%")
+ma2_intervals$`80%_lower`
+ma2_intervals$`80%_upper`
 ```
 
 * We can find the observed points that occur in this range by checking for points that match both conditions
-* So we want `NDVI_test` to be greater than `lower` and less than `upper`
+* So we want NDVI to be greater than lower and less than upper
 
 ```r
-in_interval <- NDVI_test > arima_forecast$lower[,1] & NDVI_test < arima_forecast$upper[,1]
+in_interval <- test$NDVI > ma2_intervals$`80%_lower` & test$NDVI < ma2_intervals$`80%_upper`
 ```
 
 * We can then determine what proportion of these values are `TRUE`, i.e., fall in the prediction interval
@@ -226,11 +213,11 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 * Let's compare this result to the uncertainty of the seasonal model
 
 ```r
-in_interval_season <- NDVI_test > seasonal_arima_forecast$lower[,1] & NDVI_test < seasonal_arima_forecast$upper[,1]
-length(in_interval_seasonal[in_interval_seasonal == TRUE]) / length(in_interval_seasonal)
+in_interval <- test$NDVI > arima_intervals$`80%_lower` & test$NDVI < arima_intervals$`80%_upper`
+length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
 
-* Seasonal is better because it is closer to the coverage interval of 0.8
+* The full ARIMA is better because it is closer to the coverage interval of 0.8
 
 ### Forecast horizon
 
@@ -239,8 +226,8 @@ length(in_interval_seasonal[in_interval_seasonal == TRUE]) / length(in_interval_
 * Plot the error for each individual forecast for both models
 
 ```r
-plot(sqrt((arima_forecast$mean - NDVI_test)^2))
-lines(sqrt((seasonal_arima_forecast$mean -  NDVI_test)^2), col = 'blue')
+plot(sqrt((ma2_forecast$.mean - test$NDVI)^2))
+lines(sqrt((ma2_forecast$.mean -  test$NDVI)^2), col = 'blue')
 ```
 
 * General trend towards increasing error with increasing horizon
