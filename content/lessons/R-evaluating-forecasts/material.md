@@ -9,5 +9,8 @@ editable: true
 
 ## Software installation requirements
 
-* `ggplot2` R package: `install.packages('ggplot2')`
-* `forecast` R package: `install.packages('forecast')` 
+* R packages: `install.packages(c('fable', 'feasts', 'tsibble', 'dplyr', 'ggplot2'))`
+
+## Data
+
+* Download the [Portal NDVI time-series data](/data/portal_timeseries.csv)
