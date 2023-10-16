@@ -2,7 +2,7 @@
 title: "State space models in R 1"
 linkTitle: "R: State space models 1"
 type: book
-weight: 16
+weight: 25
 summary: Introductory tutorial on state space modeling in R
 show_date: false
 editable: true
