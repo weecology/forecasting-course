@@ -2,7 +2,7 @@
 title: "Empirical Dynamic Modeling in R"
 linkTitle: "R: Empirical Dynamic Modeling"
 type: book
-weight: 26
+weight: 27
 summary: R Tutorial on fitting and making forecasts using empirical dynamic modeling
 show_date: false
 editable: true

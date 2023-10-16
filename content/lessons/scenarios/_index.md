@@ -2,7 +2,7 @@
 title: "Scenario based forecasting"
 linkTitle: "Forecasting scenarios"
 type: book
-weight: 27
+weight: 28
 summary: Discussion of scenario based approaches to forecasting, which explore general classes of future outcomes to facilitate decision making.
 show_date: false
 editable: true
