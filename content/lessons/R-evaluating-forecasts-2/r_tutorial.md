@@ -22,34 +22,39 @@ editable: true
 
 ## Written Tutorial
 
-### Steps in forecasting
-
-1. Problem definition
-2. Gather information
-3. Exploratory analysis
-4. Choosing and fitting models
-5. Make forecasts
-6. **Evaluate forecasts**
-
 ### Setup
 
-* Load the packages
+* Starting point from Evaluating Forecasts 1
 
 ```r
 library(tsibble)
 library(fable)
 library(feasts)
 library(dplyr)
-```
 
-* Load the data
-
-```r
 portal_data = read.csv("content/data/portal_timeseries.csv") |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
-portal_data
+
+train <- filter(portal_data, month < yearmonth("2011 Dec"))
+test <- filter(portal_data, month >= yearmonth("2011 Dec"))
+
+ma2_model = model(train, ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)))
+ma2_forecast = forecast(ma2_model, test)
+models = model(train,
+               ma2 = ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)),
+               arima = ARIMA(NDVI))
+forecasts = forecast(models, test)
+autoplot(forecasts, train) + autolayer(test, NDVI)
+accuracy(forecasts, test)
 ```
+
+### Introduction
+
+* So far we've been dealing with point estimates
+* This means we are just comparing the observed value to the mean predicted value
+* _Draw a set of axes with two parallel vertical lines_
+* _Label 1 prediction and 1 observation_
 
 ### Coverage
 
@@ -79,7 +84,9 @@ in_interval <- test$NDVI > ma2_intervals$`80%_lower` & test$NDVI < ma2_intervals
 length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
 
-* We want this value to be as close to the value of the interval as possible, so we want it to be close to 0.8
+* Called "coverage"
+* Want coverage value to be as close to the value of the interval as possible
+* So we want it to be close to 0.8
 
 > * **Now it's your turn.**
 > * Write code to evaluate the coverage of the seasonal ARIMA model
@@ -87,7 +94,11 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 * Let's compare this result to the uncertainty of the seasonal model
 
 ```r
-in_interval <- test$NDVI > arima_intervals$`80%_lower` & test$NDVI < arima_intervals$`80%_upper`
+arima_model = model(train, ARIMA(NDVI))
+arima_forecast = forecast(arima_model, test)
+arima_intervals <- hilo(arima_forecast, level = 80) |>
+  unpack_hilo("80%")
+in_interval = test$NDVI > arima_intervals$`80%_lower` & test$NDVI < arima_intervals$`80%_upper`
 length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
 
@@ -97,12 +108,18 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 
 * Scores that incorporate uncertainty
 * Reward prediction intervals that are just wide enough
+* Instead of evaluating the mean prediction (point forecast) evaluate the prediction interval
+* _Add two sets of intervals on the axes_
 
 * Winkler Score
 * Width of the prediction interval + a penalty for points outside the interval
 * The width component rewards models with narrower prediction intervals
 * The penalty rewards models without too many points outside the prediction intervals
 * Penalties are calibrated to reward models with best coverage
+
+* Include the Winkler score accuracy by adding two arguments
+* A list, with a name for the score a function used to calculate it
+* Any arguments that function requires (a prediction interval level in this case)
 
 ```r
 accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
