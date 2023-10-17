@@ -140,10 +140,12 @@ autoplot(ma2_forecast, train) + autolayer(test, NDVI)
 
 ### Quantitative Evaluation
 
+#### Point Estimates
+
 * Quantitative evaluation of point estimates is based on forecast errors
 
 {{< math >}}
-$$e_{t+h} = y_{t+h} - \hat{y}_{t+h}$$
+$$\epsilon_{t+h} = y_{t+h} - \hat{y}_{t+h}$$
 {{< /math >}}
 
 * `accuracy` function shows a number of common measures of forecast accuracy
@@ -160,21 +162,19 @@ accuracy(ma2_forecast, test)
 > * **Now it's your turn.**
 > * Write code to quantify the accuracy of the full ARIMA model
 
-* Here's what I would have done
+* I'm going to add the full ARIMA in to my existing code
 
 ```r
-arima_model = model(train, arima = ARIMA(NDVI))
-arima_forecast = forecast(arima_model, test)
-autoplot(arima_forecast, train) + autolayer(test, NDVI)
-accuracy(arima_forecast, test)
+models = model(train,
+               ma2 = ARIMA(NDVI ~ pdq(0,0,0) + PDQ(0,0,0),
+               arima = ARIMA(NDVI))
+forecasts = forecast(models, test)
+autoplot(forecasts, train) + autolayer(test, NDVI)
+accuracy(forecasts, test)
 ```
 
-* Compare accuracy to MA2
-
-```r
-accuracy(arima_forecast, test)
-```
-
+* autoplot graphs both sets of forecasts for comparison 
+* accuracy shows all metrics for both forecasts for comparison 
 * So the full ARIMA is better on point estimates
 
 #### Coverage
