@@ -105,12 +105,22 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 * Penalties are calibrated to reward models with best coverage
 
 ```r
-models = model(train,
-               ma2 = ARIMA(NDVI ~ pdq(0,0,0) + PDQ(0,0,0),
-               arima = ARIMA(NDVI))
-forecasts = forecast(models, test)
-autoplot(forecasts, train) + autolayer(test, NDVI)
 accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
+```
+
+* Winkler requires choosing a single prediction interval
+* Ideally we'd include information on lots of prediction intervals
+* Instead of evaluting the mean check how closely the entire distribution of the residuals matches the predicted distribution
+* _Add two sets of distributions to the axes with modes matching means_
+* The best models most closely match the empirical distribution
+
+* Doing this is technically complicated
+* Continuous Rank Probability Score
+* Scores each value relative to the predicted cumulative distribution function
+* A value far from the mean is penalized less if the uncertainty is hight
+
+```r
+accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS), level = 80)
 ```
 
 ### Forecast horizon
