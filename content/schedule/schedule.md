@@ -30,7 +30,7 @@ content:
       - 'Uncertainty in Forecasting'
       - 'No Class'
       - 'Evaluating Forecasts in R'
-      - 'Ask us anything 2'
+      - 'Evaluating Forecasts in R 2'
       - 'Forecasting using species distribution models'
       - 'Species Distribution Models in R'
       - 'Hurricane Forecasts'
