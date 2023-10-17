@@ -177,9 +177,11 @@ accuracy(forecasts, test)
 * accuracy shows all metrics for both forecasts for comparison 
 * So the full ARIMA is better on point estimates
 
-#### Coverage
+#### Incorporating Uncertainty
 
-* How do we test the uncertainty
+##### Coverage
+
+* How do we think about uncertainty
 * We have these blue prediction intervals, but how do we evalute them
 * Prediction Interval: range of values in which a percentage of observations
   should occur
@@ -218,6 +220,26 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
 
 * The full ARIMA is better because it is closer to the coverage interval of 0.8
+
+##### Scores Incorporating Uncertainty
+
+* Scores that incorporate uncertainty
+* Reward prediction intervals that are just wide enough
+
+* Winkler Score
+* Width of the prediction interval + a penalty for points outside the interval
+* The width component rewards models with narrower prediction intervals
+* The penalty rewards models without too many points outside the prediction intervals
+* Penalties are calibrated to reward models with best coverage
+
+```r
+models = model(train,
+               ma2 = ARIMA(NDVI ~ pdq(0,0,0) + PDQ(0,0,0),
+               arima = ARIMA(NDVI))
+forecasts = forecast(models, test)
+autoplot(forecasts, train) + autolayer(test, NDVI)
+accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
+```
 
 ### Forecast horizon
 
