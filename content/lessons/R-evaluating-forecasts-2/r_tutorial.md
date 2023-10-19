@@ -32,7 +32,7 @@ library(fable)
 library(feasts)
 library(dplyr)
 
-portal_data = read.csv("content/data/portal_timeseries.csv") |>
+portal_data = read.csv("portal_timeseries.csv") |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
 
@@ -52,6 +52,9 @@ accuracy(forecasts, test)
 ### Introduction
 
 * So far we've been dealing with point estimates
+* _Draw a time-series forecast with wide and narrow prediction intervals and a point outside the narrow, but inside the wide interval_
+* Point estimate comparisons say that these two forecasts are equivalent
+* But the forecast with the wider interval is better
 * This means we are just comparing the observed value to the mean predicted value
 * _Draw a set of axes with two parallel vertical lines_
 * _Label 1 prediction and 1 observation_
@@ -75,7 +78,8 @@ ma2_intervals$`80%_upper`
 * So we want NDVI to be greater than lower and less than upper
 
 ```r
-in_interval <- test$NDVI > ma2_intervals$`80%_lower` & test$NDVI < ma2_intervals$`80%_upper`
+in_interval <- test$NDVI > ma2_intervals$`80%_lower` &
+  test$NDVI < ma2_intervals$`80%_upper`
 ```
 
 * We can then determine what proportion of these values are `TRUE`, i.e., fall in the prediction interval
@@ -113,6 +117,17 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 
 * Winkler Score
 * Width of the prediction interval + a penalty for points outside the interval
+
+{{< math >}}
+\begin{cases}
+W = (upper - lower) + \frac{2}{\alpha}(lower - y_t) \mbox{, if } y_t < lower
+\\
+W = (upper - lower) \mbox{, if } lower < y_t < upper
+\\
+W = (upper - lower) + \frac{2}{\alpha}(y_t - upper)
+\end{cases} \mbox{, if } y_t > upper
+{{< /math >}}
+
 * The width component rewards models with narrower prediction intervals
 * The penalty rewards models without too many points outside the prediction intervals
 * Penalties are calibrated to reward models with best coverage
@@ -127,28 +142,39 @@ accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
 
 * Winkler requires choosing a single prediction interval
 * Ideally we'd include information on lots of prediction intervals
-* Instead of evaluting the mean check how closely the entire distribution of the residuals matches the predicted distribution
-* _Add two sets of distributions to the axes with modes matching means_
+* Instead of evaluting the mean check how likely an observation is given the full predicted distribution
+* _Add a distribution to the axes with the mode matching $\hat{y}$_
 * The best models most closely match the empirical distribution
 
 * Doing this is technically complicated
 * Continuous Rank Probability Score
 * Scores each value relative to the predicted cumulative distribution function
-* A value far from the mean is penalized less if the uncertainty is hight
+* A value far from the mean is penalized less if the uncertainty is high
+* We can add this by adding another model to our `list`
 
 ```r
 accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS), level = 80)
+```
+
+* And if we want to add back some of the other metrics we'd been seeing by default we can do that to
+
+```r
+accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE), level = 80)
 ```
 
 ### Forecast horizon
 
 * Forecasts generally get worse through time
 * Can look at this by comparing the fit at different forecast horizons
-* Plot the error for each individual forecast for both models
+* `accuracy` helps us do this with the `by` argument
+* Evaluates the score separately for each unique value in a column
 
 ```r
-plot(sqrt((ma2_forecast$.mean - test$NDVI)^2))
-lines(sqrt((ma2_forecast$.mean -  test$NDVI)^2), col = 'blue')
+accuracies = accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE), level = 80, by = c(".model", "month"))
+accuracies
+
+ggplot(data = accuracies, mapping = aes(x = month, y = crps, color = .model)) +
+  geom_line()
 ```
 
 * General trend towards increasing error with increasing horizon
