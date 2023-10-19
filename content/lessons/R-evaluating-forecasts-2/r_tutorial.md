@@ -137,10 +137,17 @@ accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
 * Doing this is technically complicated
 * Continuous Rank Probability Score
 * Scores each value relative to the predicted cumulative distribution function
-* A value far from the mean is penalized less if the uncertainty is hight
+* A value far from the mean is penalized less if the uncertainty is high
+* We can add this by adding another model to our `list`
 
 ```r
 accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS), level = 80)
+```
+
+* And if we want to add back some of the other metrics we'd been seeing by default we can do that to
+
+```r
+accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE), level = 80)
 ```
 
 ### Forecast horizon
