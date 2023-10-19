@@ -32,7 +32,7 @@ library(fable)
 library(feasts)
 library(dplyr)
 
-portal_data = read.csv("content/data/portal_timeseries.csv") |>
+portal_data = read.csv("portal_timeseries.csv") |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
 
