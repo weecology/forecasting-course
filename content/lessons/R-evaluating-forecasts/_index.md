@@ -2,7 +2,7 @@
 title: "Evaluating Forecasts in R"
 linkTitle: "R: Forecast evaluation"
 type: book
-weight: 14
+weight: 15
 summary: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package
 show_date: false
 editable: true
