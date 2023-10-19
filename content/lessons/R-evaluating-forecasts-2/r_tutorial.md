@@ -52,6 +52,9 @@ accuracy(forecasts, test)
 ### Introduction
 
 * So far we've been dealing with point estimates
+* _Draw a time-series forecast with wide and narrow prediction intervals and a point outside the narrow, but inside the wide interval_
+* Point estimate comparisons say that these two forecasts are equivalent
+* But the forecast with the wider interval is better
 * This means we are just comparing the observed value to the mean predicted value
 * _Draw a set of axes with two parallel vertical lines_
 * _Label 1 prediction and 1 observation_
@@ -127,8 +130,8 @@ accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
 
 * Winkler requires choosing a single prediction interval
 * Ideally we'd include information on lots of prediction intervals
-* Instead of evaluting the mean check how closely the entire distribution of the residuals matches the predicted distribution
-* _Add two sets of distributions to the axes with modes matching means_
+* Instead of evaluting the mean check how likely an observation is given the full predicted distribution
+* _Add a distribution to the axes with the mode matching $\hat{y}$_
 * The best models most closely match the empirical distribution
 
 * Doing this is technically complicated
