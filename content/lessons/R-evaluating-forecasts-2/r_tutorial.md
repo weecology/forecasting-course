@@ -78,7 +78,8 @@ ma2_intervals$`80%_upper`
 * So we want NDVI to be greater than lower and less than upper
 
 ```r
-in_interval <- test$NDVI > ma2_intervals$`80%_lower` & test$NDVI < ma2_intervals$`80%_upper`
+in_interval <- test$NDVI > ma2_intervals$`80%_lower` &
+  test$NDVI < ma2_intervals$`80%_upper`
 ```
 
 * We can then determine what proportion of these values are `TRUE`, i.e., fall in the prediction interval
