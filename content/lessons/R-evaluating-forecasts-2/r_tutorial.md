@@ -147,11 +147,15 @@ accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS), level = 80
 
 * Forecasts generally get worse through time
 * Can look at this by comparing the fit at different forecast horizons
-* Plot the error for each individual forecast for both models
+* `accuracy` helps us do this with the `by` argument
+* Evaluates the score separately for each unique value in a column
 
 ```r
-plot(sqrt((ma2_forecast$.mean - test$NDVI)^2))
-lines(sqrt((ma2_forecast$.mean -  test$NDVI)^2), col = 'blue')
+accuracies = accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE), level = 80, by = c(".model", "month"))
+accuracies
+
+ggplot(data = accuracies, mapping = aes(x = month, y = crps, color = .model)) +
+  geom_line()
 ```
 
 * General trend towards increasing error with increasing horizon
