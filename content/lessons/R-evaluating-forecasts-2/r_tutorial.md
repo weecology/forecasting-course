@@ -116,6 +116,17 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 
 * Winkler Score
 * Width of the prediction interval + a penalty for points outside the interval
+
+{{< math >}}
+\begin{cases}
+W = (upper - lower) + \frac{2}{\alpha}(lower - y_t) \mbox{, if } y_t < lower
+\\
+W = (upper - lower) \mbox{, if } lower < y_t < upper
+\\
+W = (upper - lower) + \frac{2}{\alpha}(y_t - upper)
+\end{cases} \mbox{, if } y_t > upper
+{{< /math >}}
+
 * The width component rewards models with narrower prediction intervals
 * The penalty rewards models without too many points outside the prediction intervals
 * Penalties are calibrated to reward models with best coverage
