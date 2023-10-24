@@ -24,8 +24,9 @@ editable: true
 
 ```r
 library(ggplot2)
-library(dismo)
 library(dplyr)
+library(terra)
+library(dismo)
 ```
 
 ## Data
@@ -58,8 +59,8 @@ head(hooded_warb_data)
 * Load those using the `stack()`, which is part of the `raster` package which gets loaded when we load `dismo`
 
 ```r
-env_data_current = stack("env_current.grd")
-env_data_forecast = stack("env_forecast.grd")
+env_data_current = rast("env_current.grd")
+env_data_forecast = rast("env_forecast.grd")
 plot(env_data_current$tmin)
 plot(env_data_current$precip)
 ```
