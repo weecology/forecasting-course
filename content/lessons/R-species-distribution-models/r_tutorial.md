@@ -23,10 +23,10 @@ editable: true
 * We'll also load `ggplot2` for plotting and `dplyr` for data manipulation
 
 ```r
+library(dismo)
 library(ggplot2)
 library(dplyr)
 library(terra)
-library(dismo)
 ```
 
 ## Data
