@@ -56,7 +56,7 @@ head(hooded_warb_data)
 * We can see that this file has information on locations as latitude & longitude plus whether or not the species is present at that location
 
 * The environmental data is stored in raster stacks in `.grd` files
-* Load those using the `stack()`, which is part of the `raster` package which gets loaded when we load `dismo`
+* Load those using the `rast()`, which is part of the `terra` package
 
 ```r
 env_data_current = rast("env_current.grd")
