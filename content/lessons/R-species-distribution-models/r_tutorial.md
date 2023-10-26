@@ -189,10 +189,11 @@ plot(evaluation, 'ROC')
 * We'll use `'prevalence'` which predicts approximately the right number of presencences 
 
 ```r
-tr <- threshold(evaluation, stat = 'prevalence')
-plot(predictions > tr, ext = extent(-140, -50, 25, 60))
+thresh <- threshold(evaluation, stat = 'prevalence')
+plot(predictions > thresh, ext = extent(-140, -50, 25, 60))
 points(present, pch='+', cex = 0.5)
 ```
+
 ## Make forecasts
 
 * To make predictions for the future we use the exact same approach, but using forecasts for future environmental conditions
