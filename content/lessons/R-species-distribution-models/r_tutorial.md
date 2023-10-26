@@ -23,10 +23,10 @@ editable: true
 * We'll also load `ggplot2` for plotting and `dplyr` for data manipulation
 
 ```r
+library(dismo)
 library(ggplot2)
 library(dplyr)
 library(terra)
-library(dismo)
 ```
 
 ## Data
@@ -56,7 +56,7 @@ head(hooded_warb_data)
 * We can see that this file has information on locations as latitude & longitude plus whether or not the species is present at that location
 
 * The environmental data is stored in raster stacks in `.grd` files
-* Load those using the `stack()`, which is part of the `raster` package which gets loaded when we load `dismo`
+* Load those using the `rast()`, which is part of the `terra` package
 
 ```r
 env_data_current = rast("env_current.grd")
@@ -73,16 +73,13 @@ plot(env_data_current$precip)
 * To do this we get just the position data for the locations by selecting the `lon` and `lat` columns
 * And then use the `extract()` function from the raster package
 * It takes a raster that we want to extract data from as the first argument and the point locations to extract as the second argument
+* Then we need to attach these extracted environmental values back to our presence absence data using `bind_rows()`
+
 
 ```r
-hooded_warb_locations = select(hooded_warb_data, lon, lat)
-hooded_warb_env = extract(env_data_current, hooded_warb_locations)
-```
-
-* Then we need to attached these extracted environmental values back to our presence absence data using `cbind()`
-
-```r
-hooded_warb_data = cbind(hooded_warb_data, hooded_warb_env)
+hooded_warb_data = env_data_current |>
+  extract(select(hooded_warb_data, lon, lat)) |>
+  bind_cols(hooded_warb_data)
 ```
 
 * Now we can look at where the species occurs in 2D environmental space
@@ -113,8 +110,43 @@ logistic_regr_model <- glm(present ~ tmin + precip,
 summary(logistic_regr_model)
 ```
 
+## Plot the model predictions
+
+* To make predictions and forecasts from this model we use the overloaded `predict` function from the `terra` package
+* Arguments
+    * Raster of environmental conditions
+    * Model
+    * `type = "response"` to get probabilities
+
+```r
+predictions <- predict(env_data_current, logistic_regr_model, type = "response")
+present_loc <- select(filter(hooded_warb_data, present == 1), lon, lat)
+plot(predictions, ext = extent(-140, -50, 25, 60))
+points(present_loc, pch='+', cex = 0.5)
+```
+
+* This shows us the probability that each species will be present across spatial locations
+* Sometimes we we want to identify the locations where we expect the species to occur instead
+* To do this we can only show predictions that are greater than some threshold
+* So, we could say that if our model says there is a 50% chance of a species being present that it is present
+
+```r
+plot(predictions > 0.5, ext = extent(-140, -50, 25, 60))
+points(present, pch='+', cex = 0.5)
+```
+
+* Different thresholds often have better characteristics depending on what we value
+* Might want to make sure that all locations that a species could possibly occur are included
+* E.g., > 25% probability of occurring
+
+```r
+plot(predictions > 0.25, ext = extent(-140, -50, 25, 60))
+points(present, pch='+', cex = 0.5)
+```
+
 ## Evaluate the model performance
 
+* When we evaluate model performance we often do so across many thresholds
 * To evaluate model performance for binary classification problems, like our presence vs absence model, we often use Receiver Operating Characteristic or ROC curves
 * These are plots of false positives (cases where we predict a species is present but it isn't) on the x axis
 * Against true positives (cases where we predict a species is present and it is present) on the y axis
@@ -147,49 +179,21 @@ plot(evaluation, 'ROC')
 ```
 
 * Looks good, but it is important to know that this is biased when using absences from large scales
+## Automatically choosing thresholds
 
-
-## Plot the model predictions
-
-* To make predictions and forecasts from this model we use the overloaded `predict` function from the `raster` package
-* Arguments
-    * Raster of environmental conditions
-    * Model
-    * `type = "response"` to get probabilities
-
-```r
-predictions <- predict(env_data_current, logistic_regr_model, type = "response")
-present <- select(filter(hooded_warb_data, present == 1), lon, lat)
-plot(predictions, ext = extent(-140, -50, 25, 60))
-points(present, pch='+', cex = 0.5)
-```
-
-* This shows us the probability that each species will be present across spatial locations
-* Sometimes we we want to identify the locations where we expext the species to occur instead
-* To do this we can only show predictions that are greater than some threshold
-* So, we could say that if our model says there is a 50% chance of a species being present that it is present
-
-```r
-plot(predictions > 0.5, ext = extent(-140, -50, 25, 60))
-points(present, pch='+', cex = 0.5)
-```
-
-* This 50% threshold is one of the values from our ROC curve
-* Can also choose a different threshold
-* E.g., > 25% probability of occuring
-* Different thresholds often have better characterisics depending on what we value
-* We might want to make sure that all locations that a species could possibly occur are included
-* Or we might want to make sure our model predicts approximately the right number of presencences
+* We can then use this `evaluation` to automatically choose thresholds
+* One common approach is to make sure our model predicts approximately the right number of presences
 * Can choose this automatically using `threshold()`
 * First argument is our `evaluation` object
 * Second argument allows us to specific what is important to us
 * We'll use `'prevalence'` which predicts approximately the right number of presencences 
 
 ```r
-tr <- threshold(evaluation, stat = 'prevalence')
-plot(predictions > tr, ext = extent(-140, -50, 25, 60))
+thresh <- threshold(evaluation, stat = 'prevalence')
+plot(predictions > thresh, ext = extent(-140, -50, 25, 60))
 points(present, pch='+', cex = 0.5)
 ```
+
 ## Make forecasts
 
 * To make predictions for the future we use the exact same approach, but using forecasts for future environmental conditions
