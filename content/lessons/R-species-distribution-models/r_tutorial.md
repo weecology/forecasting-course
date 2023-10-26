@@ -73,16 +73,13 @@ plot(env_data_current$precip)
 * To do this we get just the position data for the locations by selecting the `lon` and `lat` columns
 * And then use the `extract()` function from the raster package
 * It takes a raster that we want to extract data from as the first argument and the point locations to extract as the second argument
+* Then we need to attach these extracted environmental values back to our presence absence data using `bind_rows()`
+
 
 ```r
-hooded_warb_locations = select(hooded_warb_data, lon, lat)
-hooded_warb_env = extract(env_data_current, hooded_warb_locations)
-```
-
-* Then we need to attached these extracted environmental values back to our presence absence data using `cbind()`
-
-```r
-hooded_warb_data = cbind(hooded_warb_data, hooded_warb_env)
+hooded_warb_data = env_data_current |>
+  extract(select(hooded_warb_data, lon, lat)) |>
+  bind_cols(hooded_warb_data)
 ```
 
 * Now we can look at where the species occurs in 2D environmental space
