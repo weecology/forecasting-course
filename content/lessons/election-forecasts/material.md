@@ -7,5 +7,6 @@ show_date: false
 editable: true
 ---
 
-* Reading: [How FiveThirtyEight's House, Senate and Governor Models Work](https://fivethirtyeight.com/methodology/how-fivethirtyeights-house-and-senate-models-work/)
+* Reading: [A User Guide to FiveThirtyEight's 2016 General Election Forecast](https://fivethirtyeight.com/features/a-users-guide-to-fivethirtyeights-2016-general-election-forecast/)
+
 
