@@ -2,7 +2,7 @@
 title: "State Space Models in Ecology"
 linkTitle: "State Space Models in Ecology"
 type: book
-weight: 24
+weight: 25
 summary: Learn about and discuss the use of state space models for ecological modeling and forecasting
 show_date: false
 editable: true

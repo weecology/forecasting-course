@@ -1,5 +1,5 @@
 ---
-title: "Reading"
+title: "Reading & Video"
 weight: 1
 type: book
 summary: " "
