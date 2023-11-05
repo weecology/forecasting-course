@@ -1,8 +1,8 @@
 ---
-title: "State space models in R 1"
-linkTitle: "R: State space models 1"
+title: "State Space Models in R 1"
+linkTitle: "R: State Space Models 1"
 type: book
-weight: 25
+weight: 26
 summary: Introductory tutorial on state space modeling in R
 show_date: false
 editable: true
