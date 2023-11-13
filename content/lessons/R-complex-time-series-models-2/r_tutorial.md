@@ -7,6 +7,8 @@ show_date: false
 editable: true
 ---
 
+**In development. Not ready for teaching**
+
 ## State space models
 
 * Time-series model

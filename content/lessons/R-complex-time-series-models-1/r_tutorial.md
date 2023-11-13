@@ -2,12 +2,12 @@
 title: "R Tutorial"
 weight: 3
 type: book
-summary: "Complex time-series models: Part 1"
+summary: "Complex Time-Series Models in R 1"
 show_date: false
 editable: true
 ---
 
-Material influenced by Nicholas J Clark's excellent course on
+*Material heavily influenced by [Nicholas J Clark](https://researchers.uq.edu.au/researcher/15140)'s excellent course on
 [Ecological forecasting with mvgam and brms](https://nicholasjclark.github.io/physalia-forecasting-course/)*
 
 ## Installation
