@@ -1,31 +1,44 @@
 ---
-title: "R Tutorial Part 1"
+title: "R Tutorial"
 weight: 3
 type: book
-summary: "State space modeling tutorial: Part 1"
+summary: "More complex time-series models: Part 1"
 show_date: false
 editable: true
 ---
 
-*Heavily influenced by the
-the
-[state space modeling activity](https://github.com/EcoForecast/EF_Activities/blob/master/Exercise_06_StateSpace.Rmd) from
-Michael Dietz's
-excellent
+Material influenced by the
+[state space modeling activity](https://github.com/EcoForecast/EF_Activities/blob/master/Exercise_06_StateSpace.Rmd)
+from Michael Dietz's excellent
 [Ecological Forecasting book](https://www.amazon.com/Ecological-Forecasting-Michael-C-Dietze/dp/0691160570)
-and Nicholas J Clark's course on [Ecological forecasting with mvgam and brms](https://nicholasjclark.github.io/physalia-forecasting-course/)*
+and Nicholas J Clark's course on
+[Ecological forecasting with mvgam and brms](https://nicholasjclark.github.io/physalia-forecasting-course/)*
 
-> cmdstan needs to be installed
 
 ## Installation
 
+### Pre-installation Windows
+
+Before starting installation on Windows you will need to [install RTools](https://cran.r-project.org/bin/windows/Rtools/).
+
+If you don't already have it installed:
+
+1. Follow the link
+2. Select your appropriate version of R
+3. Download the installer
+4. Run it with the defaults
+
+### Installation
+
 ```r
 install.packages(c("brms", "dplyr", "gratia", "ggplot2",
-          "marginaleffects", "tidybayes", "zoo",
-          "viridis", "remotes"))
+                   "marginaleffects", "tidybayes", "zoo",
+                   "viridis", "remotes"))
 install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 remotes::install_github('nicholasjclark/mvgam', force = TRUE)
 ```
+
+#### macOS and Linux
 
 ```r
 library(cmdstanr)
@@ -34,28 +47,30 @@ install_cmdstan()
 cmdstan_version()
 ```
 
+#### Windows
+
+```r
+library(cmdstanr)
+check_cmdstan_toolchain(fix = TRUE)
+install_cmdstan()
+cmdstan_version()
+```
+
 If these returns a version number like `"2.32.2"` then things are working properly.
 
 ## Text Tutorial
 
-### State space models
-
-* Time-series model
-* Only first order autoregressive component
-* Separately model
-  * the process model - how the system evolves in time or space
-  * the observation model - observation error or indirect observations
-* Estimates the true value of the underlying **latent** state variables
+* So far we've developed relatively simple time-series models
+* Linear time-series dependance
+* Linear responses to environmental factors
+* Normally distributed errors
+* No model of observation error
+* Most of these are violated in ecological systems
+* So start fitting more complex models
 
 ### Data
 
 * Data on the population dynamics of the Desert Pocket Mouse
-
-```r
-library(mvgam)
-data("portal_data")
-head(portal_data)
-```
 
 ### Model
 
@@ -81,7 +96,7 @@ x_t+1 = b0 + b1 * x_t + e_t
 
 #### Observation model
 
-* Counts of rodents in traps aren't perfect measures of the number of number of rodents at the site
+* Counts of rodents in traps aren't perfect measures of the number of rodents
   (which are what should be changing in the process model and what we care about)
 * So model this imperfect observation
 
@@ -96,48 +111,33 @@ y_t = Pois(x_t)
 * Use [STAN][(http://mcmc-jags.sourceforge.net](https://mc-stan.org/))
 * Uses MCMC to explore parameter space to fit the model using Bayesian methods
 * Typically requires learning a separate language - STAN is it's own language
-* This lets you right arbitrarily complex models, but really needs a course in Bayesian methods
+* This lets you write arbitrarily complex models, but really needs a course in Bayesian methods
 * So, we're going to use an R package called `mvgam` to implement our models
-* We're going to use it because it's the simplest way to make a state space time-series model in R
-* We'll use it again when we learn about GAMs
+* We're going to use it because it's the simplest way to make complex time-series model in R
 
 ```r
 library(mvgam)
+library(dplyr)
 ```
 
 * mvgam requires that we modify our data a bit
+* Requires a `time` variable be present in the data to index temporal observations starting at 1.
+* Our `newmoonnumber` indexes the monthly samples so convert it to a start at 1
+* Also requires a a `series`` variable, which needs to be a factor
+* Needed for analyzing multiple time series at once (e.g., multiple species)
 
 ```r
-model_data <- portal_data %>%
-  
-  # mvgam requires a 'time' variable be present in the data to index
-  # the temporal observations. This is especially important when tracking 
-  # multiple time series. In the Portal data, the 'moon' variable indexes the
-  # lunar monthly timestep of the trapping sessions
-  dplyr::mutate(time = moon - (min(moon)) + 1) %>%
-  
-  # We can also provide a more informative name for the outcome variable, which 
-  # is counts of the 'PP' species (Chaetodipus penicillatus) across all control
-  # plots
-  dplyr::mutate(count = PP) %>%
-  
-  # The other requirement for mvgam is a 'series' variable, which needs to be a
-  # factor variable to index which time series each row in the data belongs to.
-  # Again, this is more useful when you have multiple time series in the data
-  dplyr::mutate(series = as.factor('PP')) %>%
-  dplyr::mutate(ndvi_lag12 = dplyr::lag(ndvi, 12)) %>%
-  
-  # Select the variables of interest to keep in the model_data
-  dplyr::select(series, year, time, count, mintemp, ndvi, ndvi_lag12)
+pp_data <- read.csv("content/data/pp_abundance_timeseries.csv") |>
+  mutate(time = newmoonnumber - (min(newmoonnumber)) + 1) |>
+  mutate(series = as.factor('PP')) |>
+  select(time, series, abundance, mintemp, cool_precip)
 ```
 
-* Train/test split
+* We have 124 months of data so reserve 24 for testing
 
 ```r
-model_data %>%                      
-  dplyr::filter(time <= 160) -> data_train 
-model_data %>% 
-  dplyr::filter(time > 160) -> data_test
+data_train <- filter(pp_data, time <= 100) 
+data_test <- filter(pp_data, time > 100)
 ```
 
 ### Simply time-series models in mvgam
@@ -154,7 +154,7 @@ model_data %>%
 * Then we can specify the data for fitting the model and the data for making/evaluating forecasts 
 
 ```r
-baseline_model = mvgam(count ~ mintemp,
+baseline_model = mvgam(abundance ~ mintemp,
                        trend_model = "AR1",
                        family = gaussian(),
                        data = data_train,
@@ -220,11 +220,11 @@ $$\mathrm{log(\mu_t)} = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \mathcal{N}(0,\s
 * The log transformation of $\mu$ ensures that $\mu$ is positive
 
 ```r
-poisson_model = mvgam(count ~ mintemp,
-                       trend_model = "AR1",
-                       family = poisson(link = "log"),
-                       data = data_train,
-                       newdata = data_test)
+poisson_model = mvgam(abundance ~ mintemp,
+                      trend_model = "AR1",
+                      family = poisson(link = "log"),
+                      data = data_train,
+                      newdata = data_test)
 ```
 
 * No more warnings at the end
@@ -242,7 +242,15 @@ plot(poisson_model, type = "forecast", newdata = data_test)
 
 * Now all of our predictions are positive!
 
-### State space
+### State space models
+
+* Time-series model
+* Only first order autoregressive component
+* Separately model
+  * the process model - how the system evolves in time or space
+  * the observation model - observation error or indirect observations
+* Estimates the true value of the underlying **latent** state variables
+
 
 * State space model of AR1 + rain w/Poisson error
 
@@ -252,15 +260,18 @@ $$\mathrm{log(\mu_t)} = c + \beta_1 x_{1,t} + \beta_2 \mu_{t-1} + \mathcal{N}(0,
 {{< /math >}}
 
 ```r
-state_space_model = mvgam(count ~ 1,
-                         trend_formula = ~ mintemp,
-                         trend_model = "AR1",
-                         family = poisson(link = "log"),
-                         data = data_train,
-                         newdata = data_test)
-plot(state_space_model, type = "forecast", newdata = data_test)
+state_space_model = mvgam(abundance ~ 1,
+                          trend_formula = ~ mintemp,
+                          trend_model = "AR1",
+                          family = poisson(link = "log"),
+                          data = data_train,
+                          newdata = data_test)
+plot(state_space_model, type = "forecast")
 ```
 
+```r
+output = state_space_model$model_output
+```
 ### 
 * Normally would want several chains with different starting positions to avoid
   local minima
