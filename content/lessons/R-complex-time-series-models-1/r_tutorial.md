@@ -62,7 +62,7 @@ pp_data <- read.csv("content/data/pp_abundance_timeseries.csv")
 
 ```r
 pp_data <- read.csv("content/data/pp_abundance_timeseries.csv") |>
-  mutate(time = newmoonnumber - (min(newmoonnumber)) + 1) |>
+  mutate(time = newmoonnumber - min(newmoonnumber) + 1) |>
   mutate(series = as.factor('PP')) |>
   select(time, series, abundance, mintemp, cool_precip)
 ```
