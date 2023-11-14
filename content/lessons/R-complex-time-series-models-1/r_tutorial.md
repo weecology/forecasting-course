@@ -28,13 +28,14 @@ If this returns a version number like `"2.32.2"` then things are working properl
 * Normally distributed errors
 * No model of observation error
 * No interactions between species
+* Can't handle missing data
 * Most of these are violated in ecological systems
 * So start fitting more complex models
 
 ## mvgam
 
 * Models like this are not trivial to fit
-* Use [STAN][(http://mcmc-jags.sourceforge.net](https://mc-stan.org/))
+* Use [STAN](https://mc-stan.org/)
 * Uses MCMC to explore parameter space to fit the model using Bayesian methods
 * Typically requires learning a separate language - STAN is it's own language
 * This lets you write arbitrarily complex models, but really needs a course in Bayesian methods
@@ -62,7 +63,7 @@ pp_data <- read.csv("content/data/pp_abundance_timeseries.csv")
 
 ```r
 pp_data <- read.csv("content/data/pp_abundance_timeseries.csv") |>
-  mutate(time = newmoonnumber - (min(newmoonnumber)) + 1) |>
+  mutate(time = newmoonnumber - min(newmoonnumber) + 1) |>
   mutate(series = as.factor('PP')) |>
   select(time, series, abundance, mintemp, cool_precip)
 ```
@@ -140,6 +141,12 @@ mcmc_plot(baseline_model, type = "trace", variable = c("mintemp", "ar1[1]", "sig
 * But part of what's going on here is that we're using a poorly specified model given the data because we've assumed Gaussian errors
 * So let's look at the model & forecast and then keep going
 
+* We can look at the model structure using `summary()`
+
+```r
+summary(baseline_model)
+```
+
 * If we plot the model we'll get some diagnostic plots
 
 ```r
@@ -154,6 +161,7 @@ plot(baseline_model)
 * So let's look at the forecasts
 * To make forecasts for Bayesian models we include data for `y` that is `NA`
 * This tells the model that we don't know the values and therefore the model estimates them as part of the fitting process
+* Handy because it means these models can handle missing data
 * To make a true forecast one `NA` is added to the end of `y` for each time step we want to forecast
 * To hindcast the values for `y` that are part of the test set are replaced with `NA`
 
@@ -220,6 +228,19 @@ plot(poisson_model)
 
 * Model structure looks OK, be we still have some residual seasonal lag we haven't captured
 
+* Now let's look at the forecast
+
+```r
+poisson_forecast = forecast(poisson_model, newdata = data_test)
+plot(poisson_forecast)
+```
+
+* Now all of our predictions are positive!
+* But while the point estimates seem reasonable the uncertainties see really large
+
+### Visualizing environmental drivers
+
+* As our models get more complicate it's important to make sure we understand what they are doing
 * We can visualize the environmental component of the model using `type = pterms`
 * `pterms` is short for "parametric terms"
 * Which is what we have since we modeled a linear relationship with a fixed slope
@@ -236,19 +257,10 @@ plot(poisson_model, type = 'pterms')
 plot_predictions(poisson_model, condition = "mintemp")
 ```
 
-* Since `log(abundance) is linearly related to temperature
+* Since `log(abundance)` is linearly related to temperature
 * This makes the response to untransformed abundance exponential
 * That doesn't feel right
-
-* Now let's look at the forecast
-
-```r
-poisson_forecast = forecast(poisson_model, newdata = data_test)
-plot(poisson_forecast)
-```
-
-* Now all of our predictions are positive!
-* But while the point estimates seem reasonable the uncertainties see really large
+* Could be part of the reason for our really large upper prediction intervals
 
 ## Non-linear responses
 
