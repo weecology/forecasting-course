@@ -28,6 +28,7 @@ If this returns a version number like `"2.32.2"` then things are working properl
 * Normally distributed errors
 * No model of observation error
 * No interactions between species
+* Can't handle missing data
 * Most of these are violated in ecological systems
 * So start fitting more complex models
 
@@ -154,6 +155,7 @@ plot(baseline_model)
 * So let's look at the forecasts
 * To make forecasts for Bayesian models we include data for `y` that is `NA`
 * This tells the model that we don't know the values and therefore the model estimates them as part of the fitting process
+* Handy because it means these models can handle missing data
 * To make a true forecast one `NA` is added to the end of `y` for each time step we want to forecast
 * To hindcast the values for `y` that are part of the test set are replaced with `NA`
 
