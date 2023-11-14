@@ -228,6 +228,19 @@ plot(poisson_model)
 
 * Model structure looks OK, be we still have some residual seasonal lag we haven't captured
 
+* Now let's look at the forecast
+
+```r
+poisson_forecast = forecast(poisson_model, newdata = data_test)
+plot(poisson_forecast)
+```
+
+* Now all of our predictions are positive!
+* But while the point estimates seem reasonable the uncertainties see really large
+
+### Visualizing environmental drivers
+
+* As our models get more complicate it's important to make sure we understand what they are doing
 * We can visualize the environmental component of the model using `type = pterms`
 * `pterms` is short for "parametric terms"
 * Which is what we have since we modeled a linear relationship with a fixed slope
@@ -247,16 +260,7 @@ plot_predictions(poisson_model, condition = "mintemp")
 * Since `log(abundance)` is linearly related to temperature
 * This makes the response to untransformed abundance exponential
 * That doesn't feel right
-
-* Now let's look at the forecast
-
-```r
-poisson_forecast = forecast(poisson_model, newdata = data_test)
-plot(poisson_forecast)
-```
-
-* Now all of our predictions are positive!
-* But while the point estimates seem reasonable the uncertainties see really large
+* Could be part of the reason for our really large upper prediction intervals
 
 ## Non-linear responses
 
