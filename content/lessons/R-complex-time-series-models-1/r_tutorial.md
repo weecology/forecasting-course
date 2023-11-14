@@ -34,7 +34,7 @@ If this returns a version number like `"2.32.2"` then things are working properl
 ## mvgam
 
 * Models like this are not trivial to fit
-* Use [STAN][(http://mcmc-jags.sourceforge.net](https://mc-stan.org/))
+* Use [STAN](https://mc-stan.org/)
 * Uses MCMC to explore parameter space to fit the model using Bayesian methods
 * Typically requires learning a separate language - STAN is it's own language
 * This lets you write arbitrarily complex models, but really needs a course in Bayesian methods
