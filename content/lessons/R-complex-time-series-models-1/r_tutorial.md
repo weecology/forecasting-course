@@ -244,7 +244,7 @@ plot(poisson_model, type = 'pterms')
 plot_predictions(poisson_model, condition = "mintemp")
 ```
 
-* Since `log(abundance) is linearly related to temperature
+* Since `log(abundance)` is linearly related to temperature
 * This makes the response to untransformed abundance exponential
 * That doesn't feel right
 
