@@ -141,6 +141,12 @@ mcmc_plot(baseline_model, type = "trace", variable = c("mintemp", "ar1[1]", "sig
 * But part of what's going on here is that we're using a poorly specified model given the data because we've assumed Gaussian errors
 * So let's look at the model & forecast and then keep going
 
+* We can look at the model structure using `summary()`
+
+```r
+summary(baseline_model)
+```
+
 * If we plot the model we'll get some diagnostic plots
 
 ```r
