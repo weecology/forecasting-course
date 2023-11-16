@@ -190,22 +190,40 @@ plot(baseline_forecast)
 * Instead of $N(\mu, \sigma^2)$
 
 {{< math >}}
-$$y_t = \mathrm{Pois}(\mu_t)$$
+$$y_t = \mathrm{Pois}(\lambda_t)$$
 {{< /math >}}
 
 
-* The Poisson distribution generates only integer draws based on a mean
+* The Poisson distribution has one parameter $\lambda$
+* Which is both the mean and the variance
+* It generates only integer draws based on a mean
+
+```r
+rpois(n = 10, lambda = 5)
+hist(rpois(n = 1000, lambda = 5))
+```
+
 * If the mean is 1.5 sometimes you'll draw a 1, sometimes a 2, sometimes a 0, etc.
 
-* $\mu_t$ can be a decimal
+* $\lambda_t$ can be a decimal
+
+```r
+hist(rpois(n = 1000, lambda = 4.5))
+```
+
 * We could expect an average of 4.5 rodents based on the environment even though we can only observe an integer number
-* But $\mu_t$ does have to be positive because we can't reasonably expect to see negative rodents
+* But $\lambda_t$ does have to be positive because we can't reasonably expect to see negative rodents
+
+```r
+hist(rpois(n = 1000, lambda = -4.5))
+```
+
 * To handle this we use a log link function to give us only positive values of $\mu_t$
 * The log link means that instead of modeling $\mu_t$ directly we model $log(\mu_t)$
 
 {{< math >}}
-$$y_t = \mathrm{Pois}(\mu_t)$$
-$$\mathrm{log(\mu_t)} = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \mathcal{N}(0,\sigma^{2})$$
+$$y_t = \mathrm{Pois}(\lambda_t)$$
+$$\mathrm{log(\lambda_t)} = c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 {{< /math >}}
 
 ```r
@@ -271,7 +289,7 @@ plot_predictions(poisson_model, condition = "mintemp")
 * We can model using in `mvgam` by using a Generalized Additive Model that fits a smoother to the relationship
 
 ```r
-poisson_gam_model = mvgam(abundance ~ s(mintemp, bs = 'bs', k = 5),
+poisson_gam_model = mvgam(abundance ~ s(mintemp),
                           trend_model = "AR1",
                           family = poisson(link = "log"),
                           data = data_train)
