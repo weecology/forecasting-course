@@ -289,7 +289,7 @@ plot_predictions(poisson_model, condition = "mintemp")
 * We can model using in `mvgam` by using a Generalized Additive Model that fits a smoother to the relationship
 
 ```r
-poisson_gam_model = mvgam(abundance ~ s(mintemp, bs = 'bs', k = 5),
+poisson_gam_model = mvgam(abundance ~ s(mintemp),
                           trend_model = "AR1",
                           family = poisson(link = "log"),
                           data = data_train)
