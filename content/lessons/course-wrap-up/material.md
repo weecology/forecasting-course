@@ -9,4 +9,4 @@ editable: true
 
 ## Reading
 
-[Prediction, precaution, and policy under global change](https://landscapepartnership.org/maps-data/climate-context/cc-resources/ClimateSciPDFs/Science-2015-Schindler-953-4.pdf/app-download-file/file/Science-2015-Schindler-953-4.pdf)
+None, just come to class and let's chat!
