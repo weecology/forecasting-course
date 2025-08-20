@@ -70,7 +70,38 @@
 {{ $sort_by := $st.Params.content.sort_by | default "Date" }}
 {{ $sort_ascending := $st.Params.content.sort_ascending | default (eq $st.Params.content.order "asc") | default false }}
 {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-{{ $query = sort $query $sort_by $sort_order }}
+
+{{/* Custom sort by lesson order if lessons filter is used */}}
+{{ if $st.Params.content.filters.lessons }}
+  {{ $lessons := $st.Params.content.filters.lessons }}
+  {{ $dates := $st.Params.content.filters.dates }}
+  {{ $sorted_query := slice }}
+
+  {{ range $lesson_index, $lesson := $lessons }}
+    {{ $found := false }}
+    {{ range $query }}
+      {{ if eq .Title $lesson }}
+        {{ $sorted_query = $sorted_query | append . }}
+        {{ $found = true }}
+      {{ end }}
+    {{ end }}
+
+    {{/* If lesson not found in pages, create placeholder */}}
+    {{ if not $found }}
+      {{ $placeholder := dict
+          "Title" $lesson
+          "Params" (dict "placeholder" true "lesson_date" (index $dates $lesson_index))
+          "RelPermalink" "#"
+          "Type" "lesson"
+          "Summary" ""
+      }}
+      {{ $sorted_query = $sorted_query | append $placeholder }}
+    {{ end }}
+  {{ end }}
+  {{ $query = $sorted_query }}
+{{ else }}
+  {{ $query = sort $query $sort_by $sort_order }}
+{{ end }}
 
 {{/* Offset and Limit */}}
 {{ if gt $items_offset 0 }}
