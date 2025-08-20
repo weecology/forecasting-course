@@ -53,7 +53,7 @@
     <div class="section-subheading article-title mb-0 mt-0">
       {{ if $is_placeholder }}
         {{ $date := $item.Params.lesson_date | default "" }}
-        <span style="color: #666; font-style: italic;">{{ $date }} - {{ $item.Title }} (Coming Soon)</span>
+        <span style="color: #666; font-style: italic;">{{ $date }} - {{ $item.Title }}</span>
       {{ else }}
         <a href="{{$link}}" {{ $target | safeHTMLAttr }}>{{ printf "%s" $item.Title | printf "%s%s" " - " | printf "%s%s" (index $lesson_dict $item.Title) }}</a>
       {{ end }}
