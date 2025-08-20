@@ -74,12 +74,28 @@
 {{/* Custom sort by lesson order if lessons filter is used */}}
 {{ if $st.Params.content.filters.lessons }}
   {{ $lessons := $st.Params.content.filters.lessons }}
+  {{ $dates := $st.Params.content.filters.dates }}
   {{ $sorted_query := slice }}
+
   {{ range $lesson_index, $lesson := $lessons }}
+    {{ $found := false }}
     {{ range $query }}
       {{ if eq .Title $lesson }}
         {{ $sorted_query = $sorted_query | append . }}
+        {{ $found = true }}
       {{ end }}
+    {{ end }}
+
+    {{/* If lesson not found in pages, create placeholder */}}
+    {{ if not $found }}
+      {{ $placeholder := dict
+          "Title" $lesson
+          "Params" (dict "placeholder" true "lesson_date" (index $dates $lesson_index))
+          "RelPermalink" "#"
+          "Type" "lesson"
+          "Summary" ""
+      }}
+      {{ $sorted_query = $sorted_query | append $placeholder }}
     {{ end }}
   {{ end }}
   {{ $query = $sorted_query }}
