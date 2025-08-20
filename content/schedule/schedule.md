@@ -81,9 +81,6 @@ content:
   # Choose how many pages you would like to offset by
   # Useful if you wish to show the first item in the Featured widget
   offset: 0
-  # Field to sort by, such as Date or Title
-  sort_by: 'Weight'
-  sort_ascending: true
 design:
   # Choose a listing view
   view: community/schedule

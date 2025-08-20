@@ -70,7 +70,22 @@
 {{ $sort_by := $st.Params.content.sort_by | default "Date" }}
 {{ $sort_ascending := $st.Params.content.sort_ascending | default (eq $st.Params.content.order "asc") | default false }}
 {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-{{ $query = sort $query $sort_by $sort_order }}
+
+{{/* Custom sort by lesson order if lessons filter is used */}}
+{{ if $st.Params.content.filters.lessons }}
+  {{ $lessons := $st.Params.content.filters.lessons }}
+  {{ $sorted_query := slice }}
+  {{ range $lesson_index, $lesson := $lessons }}
+    {{ range $query }}
+      {{ if eq .Title $lesson }}
+        {{ $sorted_query = $sorted_query | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $query = $sorted_query }}
+{{ else }}
+  {{ $query = sort $query $sort_by $sort_order }}
+{{ end }}
 
 {{/* Offset and Limit */}}
 {{ if gt $items_offset 0 }}
