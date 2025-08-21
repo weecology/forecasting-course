@@ -7,4 +7,4 @@ show_date: false
 editable: true
 ---
 
-*  Reading [Shifting plant phenology in response to global change](https://doi.org/10.1016/j.tree.2007.04.003)
+*  Reading [Shifts in competitive structures can drive variation in species' phenology](https://doi.org/10.1002/ecy.4160)
