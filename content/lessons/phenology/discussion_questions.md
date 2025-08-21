@@ -8,7 +8,7 @@ editable: true
 ---
 
 * What is phenology?
-* This paper is very focused on plants, but what are some examples of phenology for non-plants?
+* This paper focuses on reproduction, but what are other examples of seasonal activities?
 * What are some of the ways that climate and phenology are linked?
 * Given how big the phenology shifts detected have been, what data characteristics would you need to detect them? What data challenges are associated with this type of data?
 * Is it important or necessary to forecast shifts that precisely in general?
