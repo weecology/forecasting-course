@@ -53,13 +53,13 @@ in the class gets a chance to contribute.
 
 If you don't feel comfortable talking during class you can provide written responses to the assigned class discussion questions by submitting them to the instructors using the messaging system in Canvas. Instructor notes are also provided via the course website so that students have access to information being discussed in class. The Canvas discussion board can also be used to ask questions and generate discussion with the class related to the topic material.
 
-To help prepare students for paper discussions, and help professors understanding things that need clarification during class, everyone is asked to describe things that confused them about reading the paper the night before the paper discussion.
+To help prepare students for paper discussions, and help professors understand things that need clarification during class, everyone is asked to describe things that confused them about reading the paper the night before the paper discussion.
 
 #### R-tutorials
 
 R-tutorials consist of live coding in class where students follow along with the instructor, do informal exercises on their own, and ask questions.
 
-Completed R-tutorials are submitted on Canvas and graded for completion. If you need to miss class on the day of an R tutorial you can follow along with the written R tutorial notes and and submit the resulting R for the assignment as normal.
+Completed R-tutorials are submitted on Canvas and graded for completion. If you need to miss class on the day of an R tutorial you can follow along with the written R tutorial notes and and submit the resulting R code for the assignment as normal.
 
 ### Attendance Policy
 
