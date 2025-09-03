@@ -7,6 +7,6 @@ show_date: false
 editable: true
 ---
 Before doing the lesson: 
-* Install the R packages: fpp3, slider
+* Install the R packages: fpp3, slider, dplyr
 * Download the data file: [portal_timeseries.csv](/data/portal_timeseries.csv)
 
