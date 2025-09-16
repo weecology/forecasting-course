@@ -12,7 +12,7 @@ editable: true
 1. Watch Time series modeling: starting with white noise
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OO-KjD1sOBQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-2. Import portal_timeseries.csv in R using read.csv. 
+2. Import portal_timeseries.csv in R using read.csv.
 Convert the NDVI data column into a time series object using ts(). Name that time series object: NDVI.ts
 Convert the rain column into a time series object using ts(). Name that time series object: rain.ts
 
@@ -31,7 +31,7 @@ Add the fitted model for rain to that plot using lines()
 
 7. Generate the acf and pacf plots for rain.ts
 Examine those plots and decide what a good initial ARIMA model structure would be (AR vs MA?, How many orders?)
-Fit that model using the Arima() function. 
+Fit that model using the Arima() function.
 Examine the residuals of the model using checkresiduals()
 
 8. Watch Modeling seasonal signals in ARIMA models
@@ -70,7 +70,7 @@ library(dplyr) # data manipulation
 
 ```r
 data = read.csv("portal_timeseries.csv")
-data_ts <- raw_data |>
+data_ts <- data |>
   mutate(month = yearmonth(date)) |>
   as_tsibble(index = month)
 data_ts
@@ -176,7 +176,7 @@ gg_tsdisplay(data_ts, NDVI)
 
 > `y_t = c + b1 * y_t-1 + b2 * y_t-2 + e_t, where e_t ~ N(0, sigma)`
 
-> Instructors note: Actually `y_t = (1 - b1 - b2) * c + b1 * y_t-1 + b2 * y_t-2 + e_t` due to non-zero mean 
+> Instructors note: Actually `y_t = (1 - b1 - b2) * c + b1 * y_t-1 + b2 * y_t-2 + e_t` due to non-zero mean
 
 * This type of model structure is available in `fable`'s `AR()` model
 * If we want to specify how many autoregressive terms to include we specify the model as an R formula
