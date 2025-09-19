@@ -136,9 +136,9 @@ gg_tsresiduals(tslm_model)
 > * Plot the residuals
 
 
-### ARIMA + Exogenous variables
+### Dynamic regression models
 
-* We can solve this by combining the two approaches
+* We can solve the autocorrelation issue in our time-seris linear model by combining it with ARIMA
 * In an ARIMA model we can specify external covariates like in a linear model
 
 ```r
@@ -168,7 +168,7 @@ $$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
 
 ```r
 arima_exog_model_aug <- augment(arima_exog_model)
-autoplot(arimax_model_aug, abundance) + autolayer(arimax_model_aug, .fitted, color = "orange")
+autoplot(arima_exog_model_aug, abundance) + autolayer(arima_exog_model_aug, .fitted, color = "orange")
 gg_tsresiduals(arima_exog_model)
 ```
 
