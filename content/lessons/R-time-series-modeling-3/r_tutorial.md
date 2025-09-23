@@ -19,6 +19,7 @@ editable: true
 library(tsibble)
 library(fable)
 library(feasts)
+library(ggtime)
 ```
 
 * Load the data
@@ -55,7 +56,8 @@ report(tslm_model)
 
 ```r
 tslm_model_aug = augment(tslm_model)
-autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
+autoplot(tslm_model_aug, abundance) +
+  autolayer(tslm_model_aug, .fitted, color = "orange")
 ```
 
 * It has the seasonal ups and downs but not differences in high years vs low years
@@ -75,7 +77,8 @@ report(tslm_model)
 
 ```r
 tslm_model_aug = augment(tslm_model)
-autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
+autoplot(tslm_model_aug, abundance) +
+  autolayer(tslm_model_aug, .fitted, color = "orange")
 ```
 
 * Looks pretty good
@@ -96,7 +99,10 @@ gg_tsresiduals(tslm_model)
 * We can do this by adding a fitted trend to our model using `trend()`
 
 ```r
-tslm_model = tslm_model = model(pp_data, TSLM(abundance ~ mintemp + cool_precip + trend()))
+tslm_model = model(
+  pp_data,
+  TSLM(abundance ~ mintemp + cool_precip + trend())
+)
 ```
 
 * This adds time itself as a predictor
@@ -118,7 +124,8 @@ report(tslm_model)
 
 ```r
 tslm_model_aug = augment(tslm_model)
-autoplot(tslm_model_aug, abundance) + autolayer(tslm_model_aug, .fitted, color = "orange")
+autoplot(tslm_model_aug, abundance) +
+  autolayer(tslm_model_aug, .fitted, color = "orange")
 ```
 
 * Better matching of ups and downs
@@ -128,7 +135,7 @@ gg_tsresiduals(tslm_model)
 ```
 
 * It gets the longer-term autocorrelation
-* But the short lag AR is still there 
+* But the short lag AR is still there
 
 > You do:
 > * Make a TSLM model but try some different combinations of predictors
@@ -168,7 +175,8 @@ $$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
 
 ```r
 arima_exog_model_aug <- augment(arima_exog_model)
-autoplot(arima_exog_model_aug, abundance) + autolayer(arima_exog_model_aug, .fitted, color = "orange")
+autoplot(arima_exog_model_aug, abundance) +
+  autolayer(arima_exog_model_aug, .fitted, color = "orange")
 gg_tsresiduals(arima_exog_model)
 ```
 
