@@ -162,12 +162,20 @@ report(arima_exog_model)
 $$y_t = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
 {{< /math >}}
 
-* This is called an ARMAX model, with the X standing for eXogenous predictors
+* This is called an ARIMAX model, with the X standing for eXogenous predictors
+* Since the fitted model has differencing all of the variables are differenced
+* _Add primes to equation and remove c_
+
+{{< math >}}
+$$y't = \beta_1 x'_{1,t} + \beta_2 y'_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+{{< /math >}}
+
+* Differencing removes the constant
 * Fable actually fits a linear regression with ARIMA errors
 
 {{< math >}}
-$$y_t = c + \beta_1 x_{1,t} + \eta_t$$
-$$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+$$y'_t = \beta_1 x'_{1,t} + \eta'_t$$
+$$\eta'_t = \beta_2 \eta'_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
 {{< /math >}}
 
 * The model includes time-series structure & external covariates
