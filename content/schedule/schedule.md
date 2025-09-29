@@ -26,7 +26,7 @@ content:
       - 'Time series modeling in R 3'
       - 'Introduction to Ecological Forecasting'
       - 'Introduction to Forecasting in R'
-      - 'Uncertainty in Forecasting'
+      - 'Uncertainty in Forecasting - '
       - 'Evaluating Forecasts in R'
       - 'Evaluating Forecasts in R 2'
       - 'Forecasting Project - Introduction'
