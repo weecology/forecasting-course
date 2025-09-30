@@ -164,20 +164,6 @@ autoplot(ar1_forecast, pp_data, level = c(50, 80))
 autoplot(ar1_forecast, pp_data, level = c(50, 80))
 ```
 
-* We can view access these values using `hilo`
-
-```r
-ar1_forecast |>
-  hilo() |>
-  print(width = 90)
-```
-
-```r
-ar1_forecast |>
-  hilo(level = c(50, 80)) |>
-  print(width = 90)
-```
-
 * Does it look like 80% of the empirical points will fall within the lighter band?
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
