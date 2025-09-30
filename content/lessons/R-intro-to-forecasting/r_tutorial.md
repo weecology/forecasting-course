@@ -115,7 +115,7 @@ autoplot(ar1_forecast, pp_data)
 * Second step - use the first forecast value as $y_{t-1}$
 * Can see the model at work
 * 1st step influenced by the low value at the previous time-step
-* Abundance is zero, so predicted value is $c$, or about 6
+* Abundance is zero, so predicted value is $c + 0$, or about 6
 * Second step value of $y_{t-1}$ is the value we just forecast, 6
 * So our new predict value is roughly 6 + 0.8 * 6, so about 11
 * Gradually reverts to the mean
