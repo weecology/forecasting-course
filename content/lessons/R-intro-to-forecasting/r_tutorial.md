@@ -133,6 +133,8 @@ ar1_forecast = forecast(ar1_model, bootstrap = TRUE, times = 1)
 autoplot(ar1_forecast, pp_data)
 ```
 
+> Instructors note - Only variation in $\epsilon_t$ is included, not uncertainty in parameters
+
 * This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at teach time step
 * Let's run it a few times
 
@@ -168,7 +170,7 @@ autoplot(ar1_forecast, pp_data, level = c(50, 80))
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
-> Instructors note - Only variation in $\epsilon_t$ is included, not uncertainty in parameters
+> Pick a different time-series model and make and visualize a forecast for abundance
 
 #### Incorporating external co-variates
 
@@ -218,3 +220,5 @@ autoplot(arima_exog_forecast, pp_data)
 * Otherwise looks reasonable
 
 * Next time: how do we know if they are good or not?
+
+> Pick a different set of covariates and make and visualize a forecast for abundance
