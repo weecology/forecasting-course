@@ -191,7 +191,7 @@ accuracy(ma2_forecast, test)
 
 ```r
 models = model(train,
-               ma2 = ARIMA(NDVI ~ pdq(0,0,0) + PDQ(0,0,0),
+               ma2 = ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)),
                arima = ARIMA(NDVI))
 forecasts = forecast(models, test)
 autoplot(forecasts, train) + autolayer(test, NDVI)
