@@ -135,6 +135,7 @@ autoplot(ma2_forecast, train) + autolayer(test, NDVI)
 #### Point Estimates
 
 * Quantitative evaluation of point estimates is based on forecast errors
+* *Draw forecast showing errors*
 
 {{< math >}}
 $$\epsilon_{t+h} = y_{t+h} - \hat{y}_{t+h}$$
