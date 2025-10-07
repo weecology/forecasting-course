@@ -140,6 +140,39 @@ autoplot(ma2_forecast, train) + autolayer(test, NDVI)
 $$\epsilon_{t+h} = y_{t+h} - \hat{y}_{t+h}$$
 {{< /math >}}
 
+* This gives us one error for each forecast horizon
+* Need a way to combine them
+* Easiest is to take the average across all horizons
+* Called the Mean Error
+
+{{< math >}}
+$$ME = mean(y_{t+h} - \hat{y}_{t+h})$$
+{{< /math >}}
+
+* But big positive errors and big negative errors cancel out, so bad predictions could have low ME
+* To focus on the magnitude of the error we most commonly use a metric called the Root Mean Squared Error
+* Square the error, resulting in all errors having a positive value
+
+{{< math >}}
+$$(y_{t+h} - \hat{y}_{t+h})^2$$
+{{< /math >}}
+
+* Then take the mean
+
+{{< math >}}
+$$mean[(y_{t+h} - \hat{y}_{t+h})^2]$$
+{{< /math >}}
+
+* This is the Mean Squared Error
+* But the units are now in terms of the response squared, which can be hard to interpret
+* So we take the square Root
+
+{{< math >}}
+$$RMSE = \sqrt{mean[(y_{t+h} - \hat{y}_{t+h})^2]}$$
+{{< /math >}}
+
+* Which gives us a measure of the average error in the units of the response variable
+
 * `accuracy` function shows a number of common measures of forecast accuracy
   * 1st argument: forecast object from model on training data
   * 2nd argument: test data time-series
