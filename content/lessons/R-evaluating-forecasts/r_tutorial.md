@@ -58,8 +58,8 @@ portal_data
 ```r
 portal_models = model(
   portal_data,
-  ma2 = ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)),
-  arima = ARIMA(NDVI), 
+  arima = ARIMA(NDVI),
+  tslm = TSLM(NDVI),
   arima_exog = ARIMA(NDVI ~ rain)
 )
 portal_models
@@ -87,7 +87,8 @@ glance(portal_models)
 * To split the time-series into training data and testing data we use the `filter` function from dplyr
 * 1st argument is the tsibble
 * 2nd argument is the condition
-* Data runs through the end of 2019, so use up to 2017 for training data
+* Data runs through the November 2014
+* Hold out 3 years for evaluation
 
 ```r
 train <- filter(portal_data, month < yearmonth("2011 Dec"))
@@ -124,11 +125,19 @@ autoplot(ma2_forecast, train)
 * If we want to add the observations from the test data we can do this by adding `autolayer`
 
 ```r
-autoplot(ma2_forecast, train) + autolayer(test, NDVI)
+autoplot(ma2_forecast, train) +
+  autolayer(test, NDVI)
 ```
 
 * This adds a new layer to our the `ggplot` objection created by `autoplot` with the test data
 * How does it look?
+* Compared to how it looked when we compare it to the fit to the training data
+
+```r
+autoplot(ma2_forecast, train) +
+  autolayer(test, NDVI) +
+  autolayer(augment(ma2_model), .fitted, color = "blue")
+```
 
 ### Quantitative Evaluation
 
@@ -200,6 +209,7 @@ autoplot(forecasts, train, level = 50, alpha = 0.75)
 accuracy(forecasts, test)
 ```
 
-* autoplot graphs both sets of forecasts for comparison 
-* accuracy shows all metrics for both forecasts for comparison 
+* autoplot graphs both sets of forecasts for comparison
+* accuracy shows all metrics for both forecasts for comparison
 * So the full ARIMA is better on point estimates
+* Also seems better on uncertainty, which we'll learn about next time
