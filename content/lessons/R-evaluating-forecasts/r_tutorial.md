@@ -194,7 +194,8 @@ models = model(train,
                ma2 = ARIMA(NDVI ~ pdq(0,0,2) + PDQ(0,0,0)),
                arima = ARIMA(NDVI))
 forecasts = forecast(models, test)
-autoplot(forecasts, train) + autolayer(test, NDVI)
+autoplot(forecasts, train, level = 50, alpha = 0.75)
+  + autolayer(test, NDVI)
 accuracy(forecasts, test)
 ```
 
