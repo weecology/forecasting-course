@@ -69,17 +69,17 @@ accuracy(forecasts, test)
 
 ```r
 ma2_intervals <- hilo(ma2_forecast, level = 80) |>
-  unpack_hilo("80%")
-ma2_intervals$`80%_lower`
-ma2_intervals$`80%_upper`
+  unpack_hilo(`80%`)
+lower <- ma2_intervals$`80%_lower`
+upper <- ma2_intervals$`80%_upper`
 ```
 
 * We can find the observed points that occur in this range by checking for points that match both conditions
 * So we want NDVI to be greater than lower and less than upper
 
 ```r
-in_interval <- test$NDVI > ma2_intervals$`80%_lower` &
-  test$NDVI < ma2_intervals$`80%_upper`
+observation <-test$NDVI
+in_interval <- observation > lower & observation < upper
 ```
 
 * We can then determine what proportion of these values are `TRUE`, i.e., fall in the prediction interval
@@ -124,13 +124,14 @@ W = (upper - lower) + \frac{2}{\alpha}(lower - y_t) \mbox{, if } y_t < lower
 \\
 W = (upper - lower) \mbox{, if } lower < y_t < upper
 \\
-W = (upper - lower) + \frac{2}{\alpha}(y_t - upper)
-\end{cases} \mbox{, if } y_t > upper
+W = (upper - lower) + \frac{2}{\alpha}(y_t - upper) \mbox{, if } y_t > upper
+\end{cases}
 {{< /math >}}
 
 * The width component rewards models with narrower prediction intervals
 * The penalty rewards models without too many points outside the prediction intervals
 * Penalties are calibrated to reward models with best coverage
+{{< math >}}$$\alpha = 1 - interval$${{< /math >}}
 
 * Include the Winkler score accuracy by adding two arguments
 * A list, with a name for the score a function used to calculate it
@@ -170,7 +171,13 @@ accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE),
 * Evaluates the score separately for each unique value in a column
 
 ```r
-accuracies = accuracy(forecasts, test, list(winkler = winkler_score, crps = CRPS, mae = MAE), level = 80, by = c(".model", "month"))
+accuracies = accuracy(
+  forecasts,
+  test,
+  list(winkler = winkler_score, crps = CRPS, mae = MAE),
+  level = 80,
+  by = c(".model", "month")
+)
 accuracies
 
 ggplot(data = accuracies, mapping = aes(x = month, y = crps, color = .model)) +
