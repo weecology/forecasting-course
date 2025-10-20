@@ -57,9 +57,8 @@ library(dplyr)
 pp_data <- read.csv("pp_abundance_timeseries.csv")
 ```
 
-* mvgam requires it's own specific data format and doesn't currently work with tsibbles
-* Requires a `time` variable be present in the data to index temporal observations starting at 1.
-* Our `newmoonnumber` indexes the monthly samples so convert it to a start at 1
+* mvgam doesn't currently work with tsibbles
+* It requires an integer `time` variable be present in the data (like `index`)
 * Also requires a a `series` variable, which needs to be a factor
 * Helps when analyzing multiple time series at once (e.g., multiple species)
 
@@ -74,8 +73,8 @@ pp_data <- read.csv("pp_abundance_timeseries.csv") |>
 * Reserve 24 for testing
 
 ```r
-data_train <- filter(pp_data, time <= 100) 
-data_test <- filter(pp_data, time > 100)
+data_train <- filter(pp_data, time <= max(time) - 24)
+data_test <- filter(pp_data, time > max(time) - 24)
 ```
 
 ## Simply time-series models in mvgam
