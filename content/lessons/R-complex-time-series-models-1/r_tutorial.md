@@ -52,7 +52,7 @@ library(dplyr)
 * Data on the population dynamics of the Desert Pocket Mouse
 
 ```r
-pp_data <- read.csv("content/data/pp_abundance_timeseries.csv") 
+pp_data <- read.csv("pp_abundance_timeseries.csv")
 ```
 
 * mvgam requires it's own specific data format and doesn't currently work with tsibbles
@@ -62,8 +62,8 @@ pp_data <- read.csv("content/data/pp_abundance_timeseries.csv")
 * Helps when analyzing multiple time series at once (e.g., multiple species)
 
 ```r
-pp_data <- read.csv("content/data/pp_abundance_timeseries.csv") |>
-  mutate(time = newmoonnumber - min(newmoonnumber) + 1) |>
+pp_data <- read.csv("pp_abundance_timeseries.csv") |>
+  mutate(time = newmoonnumber) |>
   mutate(series = as.factor('PP')) |>
   select(time, series, abundance, mintemp, cool_precip)
 ```
