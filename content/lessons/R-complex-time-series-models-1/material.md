@@ -22,15 +22,18 @@ Download the [Desert Pocket Mouse data](/data/pp_abundance_timeseries.csv)
 1\. Install dependencies:
 
 ```r
-install.packages(c("brms", "dplyr", "gratia", "ggplot2",
-                   "marginaleffects", "tidybayes", "zoo",
-                   "viridis", "remotes"))
+install.packages(c("brms", "collapse", "dplyr", "gratia",
+  "ggplot2", "marginaleffects", "tidybayes", "zoo",
+  "viridis", "remotes"))
 ```
 
 2\. Install cmdstanr:
 
 ```r
-install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+install.packages(
+  "cmdstanr",
+  repos = c("https://mc-stan.org/r-packages/", getOption("repos"))
+)
 ```
 
 3\.Install mvgam:
