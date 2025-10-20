@@ -15,6 +15,8 @@ editable: true
 * Check if your installation worked
 
 ```r
+library(cmdstanr)
+
 cmdstan_version()
 ```
 
