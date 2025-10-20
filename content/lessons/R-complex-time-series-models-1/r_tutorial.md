@@ -392,8 +392,9 @@ scores <- score(poisson_gam_forecast)
 scores <- score(poisson_gam_forecast, interval_width = 0.5)
 ```
 
-* If we want to calculate the coverage we can sum 
+* If we want to calculate the coverage we can sum
 
 ```r
-sum(scores$PP$in_interval) / nrow(scores$PP)
+in_interval = scores$PP$in_interval
+length(in_interval[in_interval == TRUE]) / length(in_interval)
 ```
