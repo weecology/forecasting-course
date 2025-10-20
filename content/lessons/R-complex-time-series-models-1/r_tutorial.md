@@ -106,7 +106,7 @@ $$u_t =  c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 * Instead of including the AR component in the model we add a separate `trend_model` argument
 * We'll use `AR(p = 1)`
 * Specify the error `family = gaussian()`
-* Then we can specify the data for fitting the model and the data for making/evaluating forecasts 
+* Then we can specify the data for fitting the model and the data for making/evaluating forecasts
 
 ```r
 baseline_model = mvgam(abundance ~ mintemp,
@@ -123,20 +123,25 @@ baseline_model = mvgam(abundance ~ mintemp,
 * One way to fit them is using Bayesian methods
 * These methods iteratively search parameter space for the best parameter values
 * Using something called Markov Chain Monte Carlo (MCMC)
-* _Draw 2D parameter search on board_
+* _Draw 2D parameter space owith $\beta_1$ and $\beta_2$ on axes_
+* MCMC starts with some initial point
+* _Draw a point_
+* And the searches through the parameter space
+* _Draw iterative steps with connected lines_
+* Using an algorithm that eventually leads to points being sampled around the best fitting values
+* _Draw converged sampling with connected lines_
 * The `"Iteration"` lines are telling us that the model is working it's way through this process
 * The `"Warmup"` lines are iterations that are used to get in the right parameter space but then thrown away
 * The `"Sampling"` lines are iterations that serve as samples for each of the parameters we are fitting
 * Having multiple samples gives us the uncertainty in the parameters by looking at how variable those values are
-* The different `"chains"` are because we typically go through this process multiple times to check than we are converging to the right values
+* The different `"chains"` are because we typically go through this process multiple times with different starting points to check than we are converging to the right values
 * We can look at the result of this fitting process using `mcmc_plot`
 
 ```r
 mcmc_plot(baseline_model, type = "trace", variable = c("mintemp", "ar1[1]", "sigma[1]"))
 ```
 
-* The red lines at the bottom are providing the same information as the warnings when we fit the model
-* Something isn't quite right
+* The red lines at the bottom something isn't quite right
 * The model isn't converged yet
 * We could try running it longer
 * But part of what's going on here is that we're using a poorly specified model given the data because we've assumed Gaussian errors
@@ -166,19 +171,18 @@ plot(baseline_model)
 * To make a true forecast one `NA` is added to the end of `y` for each time step we want to forecast
 * To hindcast the values for `y` that are part of the test set are replaced with `NA`
 
-* We can do this in mvgam using the `forecast()` function
+* We can do this automatically in mvgam using the `forecast()` function
 
 ```r
 baseline_forecast = forecast(baseline_model, newdata = data_test)
 ```
 
-* This is slow because it is refitting the model
 * We can then plot the forecast
 
 ```r
 plot(baseline_forecast)
 ```
- 
+
 * These forecasts look similar to those we generated using `fable`
 * Prediction intervals are regularly negative because we've assumed normally distributed error
 * Actual counts can only be non-negative integers: 0, 1, 2...
@@ -255,7 +259,7 @@ plot(poisson_forecast)
 ```
 
 * Now all of our predictions are positive!
-* But while the point estimates seem reasonable the uncertainties see really large
+* But while the point estimates seem reasonable the uncertainties seem really large
 
 ### Visualizing environmental drivers
 
@@ -284,7 +288,7 @@ plot_predictions(poisson_model, condition = "mintemp")
 ## Non-linear responses
 
 * Linear relationships between abundance and the environment are unlikely to hold over reasonable environmental gradients
-* Typically we think of species as have some optimal environmental value
+* Typically we think of species as having some optimal environmental value
 * With decreasing performance as you move away from that environmental value in both directions
 * *Draw standard performance response curve*
 * We can model using in `mvgam` by using a Generalized Additive Model that fits a smoother to the relationship
@@ -325,7 +329,7 @@ plot(poisson_gam_forecast)
 ```
 
 * The extremely wide prediction intervals have been reduced substantially
-* If we look at the diagnostics 
+* If we look at the diagnostics
 
 ```r
 plot(poisson_gam_model)
@@ -333,9 +337,9 @@ plot(poisson_gam_model)
 
 * We can also see that the residual season autocorrelation is improved
 
-## State space models
+## State space models (optional)
 
-* To add an explicit observation model we use the 
+* To add an explicit observation model we use the
 
 ```r
 state_space_model = mvgam(abundance ~ 1,
