@@ -104,13 +104,13 @@ $$u_t =  c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 * Fit using the `mvgam()` function
 * Follows a Base R model structure so start with the model formula
 * Instead of including the AR component in the model we add a separate `trend_model` argument
-* We'll use `"AR1"`
+* We'll use `AR(p = 1)`
 * Specify the error `family = gaussian()`
 * Then we can specify the data for fitting the model and the data for making/evaluating forecasts 
 
 ```r
 baseline_model = mvgam(abundance ~ mintemp,
-                       trend_model = "AR1",
+                       trend_model = AR(p = 1),
                        family = gaussian(),
                        data = data_train)
 ```
@@ -229,7 +229,7 @@ $$\mathrm{log(\lambda_t)} = c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 
 ```r
 poisson_model = mvgam(abundance ~ mintemp,
-                      trend_model = "AR1",
+                      trend_model = AR(p = 1),
                       family = poisson(link = "log"),
                       data = data_train)
 ```
@@ -291,7 +291,7 @@ plot_predictions(poisson_model, condition = "mintemp")
 
 ```r
 poisson_gam_model = mvgam(abundance ~ s(mintemp),
-                          trend_model = "AR1",
+                          trend_model = AR(p = 1),
                           family = poisson(link = "log"),
                           data = data_train)
 ```
@@ -339,8 +339,8 @@ plot(poisson_gam_model)
 
 ```r
 state_space_model = mvgam(abundance ~ 1,
-                          trend_formula = ~ s(mintemp, bs = 'bs', k = 5),
-                          trend_model = "AR1",
+                          trend_formula = ~ s(mintemp),
+                          trend_model = AR(p = 1),
                           family = poisson(link = "log"),
                           data = data_train)
 state_space_forecast = forecast(state_space_model, newdata = data_test)
@@ -353,8 +353,8 @@ plot(state_space_forecast)
 * We can also just incorporate the test data directly in the model fitting step
 
 ```r
-poisson_gam_model = mvgam(abundance ~ s(mintemp, bs = 'bs', k = 5),
-                      trend_model = "AR1",
+poisson_gam_model = mvgam(abundance ~ s(mintemp),
+                      trend_model = AR(p = 1),
                       family = poisson(link = "log"),
                       data = data_train,
                       newdat = data_test)
