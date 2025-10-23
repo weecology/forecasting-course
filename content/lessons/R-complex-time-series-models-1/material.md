@@ -32,7 +32,7 @@ install.packages(c("brms", "collapse", "dplyr", "gratia",
 ```r
 install.packages(
   "cmdstanr",
-  repos = c("https://mc-stan.org/r-packages/", getOption("repos"))
+  repos = c('https://stan-dev.r-universe.dev', getOption("repos"))
 )
 ```
 

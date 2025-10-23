@@ -30,7 +30,10 @@ install.packages(c("brms", "dplyr", "gratia", "ggplot2",
 2\. Install cmdstanr:
 
 ```r
-install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+install.packages(
+  "cmdstanr",
+  repos = c('https://stan-dev.r-universe.dev', getOption("repos"))
+)
 ```
 
 3\.Install mvgam:
