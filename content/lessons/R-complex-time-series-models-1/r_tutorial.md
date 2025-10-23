@@ -97,7 +97,7 @@ $$y_t = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \mathcal{N}(0,\sigma^{2})$$
 * Which can also be written as
 
 {{< math >}}
-$$y_t = \mathcal{N}(\mu,\sigma^{2})$$
+$$y_t = \mathcal{N}(\mu_t,\sigma^{2})$$
 $$u_t =  c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 {{< /math >}}
 
