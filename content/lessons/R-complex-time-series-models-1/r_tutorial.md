@@ -164,14 +164,7 @@ plot(baseline_model)
 
 ### Bayesian model forecasting
 
-* So let's look at the forecasts
-* To make forecasts for Bayesian models we include data for `y` that is `NA`
-* This tells the model that we don't know the values and therefore the model estimates them as part of the fitting process
-* Handy because it means these models can handle missing data
-* To make a true forecast one `NA` is added to the end of `y` for each time step we want to forecast
-* To hindcast the values for `y` that are part of the test set are replaced with `NA`
-
-* We can do this automatically in mvgam using the `forecast()` function
+* To make forecasts in mvgam we use the `forecast()` function (just like fable)
 
 ```r
 baseline_forecast = forecast(baseline_model, newdata = data_test)
