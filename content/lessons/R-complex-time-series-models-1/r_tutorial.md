@@ -165,6 +165,7 @@ plot(baseline_model)
 ### Bayesian model forecasting
 
 * To make forecasts in mvgam we use the `forecast()` function (just like fable)
+* Use `newdata` (not `new_data` as in fable) to include the test data for the driver forecasts
 
 ```r
 baseline_forecast = forecast(baseline_model, newdata = data_test)
@@ -191,33 +192,23 @@ plot(baseline_forecast)
 $$y_t = \mathrm{Pois}(\lambda_t)$$
 {{< /math >}}
 
-
 * The Poisson distribution has one parameter $\lambda$
 * Which is both the mean and the variance
 * It generates only integer draws based on a mean
 
 ```r
-rpois(n = 10, lambda = 5)
-hist(rpois(n = 1000, lambda = 5))
-```
-
-* If the mean is 1.5 sometimes you'll draw a 1, sometimes a 2, sometimes a 0, etc.
-
-* $\lambda_t$ can be a decimal
-
-```r
+rpois(n = 10, lambda = 4.5)
 hist(rpois(n = 1000, lambda = 4.5))
 ```
 
+* If the mean is 4.5 sometimes you'll draw a 4, sometimes a 5, sometimes a 0 or a 10
+
+* $\lambda_t$ can be a decimal
 * We could expect an average of 4.5 rodents based on the environment even though we can only observe an integer number
-* But $\lambda_t$ does have to be positive because we can't reasonably expect to see negative rodents
+* But $\lambda_t$ it does have to be positive because we can't reasonably expect to see negative rodents
 
-```r
-hist(rpois(n = 1000, lambda = -4.5))
-```
-
-* To handle this we use a log link function to give us only positive values of $\mu_t$
-* The log link means that instead of modeling $\mu_t$ directly we model $log(\mu_t)$
+* To handle this we use a log link function to give us only positive values of $\lambda_t$
+* The log link means that instead of modeling $\lambda_t$ directly we model $log(\lambda_t)$
 
 {{< math >}}
 $$y_t = \mathrm{Pois}(\lambda_t)$$
@@ -393,5 +384,5 @@ scores <- score(poisson_gam_forecast, interval_width = 0.5)
 
 ```r
 in_interval = scores$PP$in_interval
-length(in_interval[in_interval == TRUE]) / length(in_interval)
+length(in_interval[in_interval == 1]) / length(in_interval)
 ```
