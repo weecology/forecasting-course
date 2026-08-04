@@ -1,0 +1,26 @@
+---
+title: Introduction to Forecasting in R
+description: R tutorial introducing how to make forecasts from time-series models using the forecast package
+order: 12
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Make forecasts from time-series models using R
+
+:::

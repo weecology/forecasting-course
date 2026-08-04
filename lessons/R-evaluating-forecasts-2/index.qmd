@@ -1,0 +1,27 @@
+---
+title: Evaluating Forecasts in R 2
+description: R tutorial on evaluating forecast accuracy and uncertainty using the forecast package
+order: 16
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Evaluate point forecast accuracy in R
+* Evaluate forecast uncertainty in R
+
+:::

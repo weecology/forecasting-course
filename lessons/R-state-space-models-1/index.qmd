@@ -1,0 +1,29 @@
+---
+title: State Space Models in R 1
+description: Introductory tutorial on state space modeling in R
+order: 26
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  - r_tutorial_mvgam.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Fit simple state space models in R
+* Interpret simple state space models from R
+* Make forecasts using simple state space models in R
+
+:::

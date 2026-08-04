@@ -1,0 +1,30 @@
+---
+title: Course Introduction
+description: Introduction to the class
+order: 1
+listing:
+  contents:
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Understand course expectations and requirements
+* Inform teachers and classmates about research interests and how they align with the course
+* Describe and discuss current perspectives on ecological forecasting
+
+:::
+
+For the first day of class we'll introduce ourselves, go over how the course will work, and have an opening discussion about ecological forecasting.

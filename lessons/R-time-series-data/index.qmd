@@ -1,0 +1,28 @@
+---
+title: Working with times and dates in R
+description: Formatting times and dates in R to make working with time series data easier
+order: 4
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Discover unique challenges with working with time-date information on computers
+* Be able to properly format time-date data 
+* Apply time-date knowledge to ecological data
+
+:::

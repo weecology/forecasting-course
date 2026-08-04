@@ -1,0 +1,28 @@
+---
+title: Time series modeling in R 1
+description: Learn time-series modeling in R using ecological data
+order: 10
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Apply lessons on autocorrelation, seasonal dynamics, and time-date formatting
+* Describe what an ARIMA model is
+* Fit ARIMA models to ecological data
+
+:::

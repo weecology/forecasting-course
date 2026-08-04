@@ -1,0 +1,16 @@
+---
+title: Schedule
+description: The order in which the lessons are taught at the University of Florida
+sidebar: false
+---
+
+This is the order in which the material is taught at the University of Florida,
+with the dates from the most recent offering of the course. Self-guided learners
+can follow the same sequence.
+
+{{< include _schedule_table.md >}}
+
+Project work days and presentations do not have lesson pages.
+
+To change the schedule, edit [`schedule/schedule.csv`](https://github.com/weecology/forecasting-course/blob/main/schedule/schedule.csv)
+and run `python3 scripts/build_schedule.py`.

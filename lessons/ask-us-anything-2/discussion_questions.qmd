@@ -1,0 +1,6 @@
+---
+title: Discussion Questions
+order: 2
+---
+
+Bring any questions related to the course that you've been wanting to ask we'll talk about them.

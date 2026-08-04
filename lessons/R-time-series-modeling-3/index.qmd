@@ -1,0 +1,29 @@
+---
+title: Time series modeling in R 3
+description: Integrate exogenous variables into time-series models in R using ecological data
+order: 10
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Describe what a TSLM model is
+* Fit TSLM models to ecological data
+* Describe how to integrate linear models and ARIMA
+* Fit linear models with ARIMA errors
+
+:::

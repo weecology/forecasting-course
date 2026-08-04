@@ -1,0 +1,13 @@
+---
+title: Data & Software
+description: Software installation requirements
+order: 1
+---
+
+## Software installation requirements
+
+* R packages: `install.packages(c('fable', 'feasts', 'tsibble', 'dplyr', 'ggplot2'))`
+
+## Data
+
+* Download the [Portal NDVI time-series data](/data/portal_timeseries.csv)

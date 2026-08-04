@@ -1,0 +1,28 @@
+---
+title: Fitting time-series GAMS in R
+order: 18
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - r_tutorial.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* First lesson objective
+* Second lesson objective
+
+:::

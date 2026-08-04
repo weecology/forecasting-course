@@ -1,0 +1,28 @@
+---
+title: State Space Models in R 2
+description: Introductory tutorial on state space modeling in R
+order: 27
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Add external covariates to state space models
+* Fit more complex state space models in R
+* Make forecasts using more complex state space models in R
+
+:::

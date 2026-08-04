@@ -1,0 +1,29 @@
+---
+title: Introduction to Generalized Additive Models (GAMs)
+description: An introduction to generalized additive models and how then can be used with time-series
+order: 17
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - r_tutorial.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* First lesson objective
+* Second lesson objective
+
+:::

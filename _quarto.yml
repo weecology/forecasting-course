@@ -1,0 +1,312 @@
+project:
+  type: website
+  output-dir: _site
+  # Regenerates schedule/_schedule_table.md from schedule.csv before every
+  # render, so the published schedule can never drift from the CSV. A bad
+  # lesson title exits nonzero here and aborts the render.
+  pre-render: scripts/build_schedule.R
+  render:
+    - index.qmd
+    - about/*.qmd
+    - Contributing/*.qmd
+    - getting-started/*.qmd
+    - lessons/*.qmd
+    - lessons/*/*.qmd
+    - schedule/*.qmd
+    - syllabus/*.qmd
+    # Raw R scratch files with no front matter; kept in the repo, not published.
+    - "!lessons/R-state-space-models-1/r_tutorial_new.qmd"
+    - "!lessons/R-state-space-models-1/r_tutorial_new_notes.qmd"
+  resources:
+    - data/**
+    - media/**
+    - "**/*.pdf"
+    - "**/*.R"
+    # Netlify redirects from the old Hugo URLs; must ship inside _site.
+    - _redirects
+
+# Currently R code in the tutorials is displayed but not run.
+#
+# Quarto still selects the knitr engine for any file containing ```{r} chunks
+# and needs knitr + rmarkdown installed to process them, even with execution
+# disabled. CI installs those two packages; see .github/workflows/publish.yml.
+#
+# To instead run the code, set `enabled: true` (plus `freeze: auto`) and
+# install the necessary packages for the tutorials in CI.
+execute:
+  enabled: false
+
+website:
+  title: "Ecological Forecasting & Dynamics"
+  description: "Open education resource and lesson material for learning ecological forecasting."
+  site-url: https://course.naturecast.org
+  favicon: media/icon.png
+  repo-url: https://github.com/weecology/forecasting-course
+  repo-branch: main
+  repo-actions: [edit, issue]
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - href: lessons/index.qmd
+        text: Lessons
+      - href: schedule/index.qmd
+        text: Schedule
+      - href: syllabus/index.qmd
+        text: Course Info
+      - href: getting-started/index.qmd
+        text: Getting Started
+      - href: about/index.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/weecology/forecasting-course
+        aria-label: GitHub repository
+  page-footer:
+    center: |
+      &copy; Contributors and the University of Florida.
+      This work is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  sidebar:
+    - id: lessons
+      title: Lessons
+      style: floating
+      collapse-level: 1
+      contents:
+      - href: lessons/index.qmd
+        text: All Lessons
+      - section: Course Introduction
+        href: lessons/CourseIntroduction/index.qmd
+        contents:
+        - lessons/CourseIntroduction/discussion_questions.qmd
+        - lessons/CourseIntroduction/instructor_notes.qmd
+      - section: Paleoecological Dynamics
+        href: lessons/paleo-dynamics/index.qmd
+        contents:
+        - lessons/paleo-dynamics/material.qmd
+        - lessons/paleo-dynamics/discussion_questions.qmd
+        - lessons/paleo-dynamics/instructor_notes.qmd
+      - section: 'R: Time and date data'
+        href: lessons/R-time-series-data/index.qmd
+        contents:
+        - lessons/R-time-series-data/material.qmd
+        - lessons/R-time-series-data/r_tutorial.qmd
+      - section: Phenology
+        href: lessons/phenology/index.qmd
+        contents:
+        - lessons/phenology/material.qmd
+        - lessons/phenology/discussion_questions.qmd
+        - lessons/phenology/instructor_notes.qmd
+      - section: 'R: Time series decomposition'
+        href: lessons/R-time-series-decomposition/index.qmd
+        contents:
+        - lessons/R-time-series-decomposition/material.qmd
+        - lessons/R-time-series-decomposition/r_tutorial.qmd
+      - section: Community Dynamics
+        href: lessons/community-dynamics/index.qmd
+        contents:
+        - lessons/community-dynamics/material.qmd
+        - lessons/community-dynamics/discussion_questions.qmd
+        - lessons/community-dynamics/instructor_notes.qmd
+      - section: 'R: Time series autocorrelation'
+        href: lessons/R-time-series-autocorrelation/index.qmd
+        contents:
+        - lessons/R-time-series-autocorrelation/material.qmd
+        - lessons/R-time-series-autocorrelation/r_tutorial.qmd
+      - section: Intro to Time Series Data
+        href: lessons/intro-time-series-data/index.qmd
+        contents:
+        - lessons/intro-time-series-data/discussion_questions.qmd
+        - lessons/intro-time-series-data/instructor_notes.qmd
+      - section: Range shifts
+        href: lessons/range-shifts/index.qmd
+        contents:
+        - lessons/range-shifts/material.qmd
+        - lessons/range-shifts/discussion_questions.qmd
+        - lessons/range-shifts/instructor_notes.qmd
+      - section: 'R: Time series modeling 1'
+        href: lessons/R-time-series-modeling/index.qmd
+        contents:
+        - lessons/R-time-series-modeling/material.qmd
+        - lessons/R-time-series-modeling/r_tutorial.qmd
+      - section: 'R: Time series modeling 2'
+        href: lessons/R-time-series-modeling-2/index.qmd
+        contents:
+        - lessons/R-time-series-modeling-2/material.qmd
+        - lessons/R-time-series-modeling-2/r_tutorial.qmd
+      - section: 'R: Time series modeling 3'
+        href: lessons/R-time-series-modeling-3/index.qmd
+        contents:
+        - lessons/R-time-series-modeling-3/material.qmd
+        - lessons/R-time-series-modeling-3/r_tutorial.qmd
+      - section: Intro to Ecological Forecasting
+        href: lessons/intro-to-forecasting/index.qmd
+        contents:
+        - lessons/intro-to-forecasting/material.qmd
+        - lessons/intro-to-forecasting/discussion_questions.qmd
+        - lessons/intro-to-forecasting/instructor_notes.qmd
+      - section: 'R: Forecasting'
+        href: lessons/R-intro-to-forecasting/index.qmd
+        contents:
+        - lessons/R-intro-to-forecasting/material.qmd
+        - lessons/R-intro-to-forecasting/r_tutorial.qmd
+      - section: Uncertainty
+        href: lessons/uncertainty/index.qmd
+        contents:
+        - lessons/uncertainty/material.qmd
+        - lessons/uncertainty/instructor_notes.qmd
+      - section: Uncertainty
+        href: lessons/uncertainty-dietze-ch-2/index.qmd
+        contents:
+        - lessons/uncertainty-dietze-ch-2/material.qmd
+        - lessons/uncertainty-dietze-ch-2/discussion_questions.qmd
+        - lessons/uncertainty-dietze-ch-2/instructor_notes.qmd
+      - section: No Class
+        href: lessons/ask-us-anything/index.qmd
+        contents:
+        - lessons/ask-us-anything/discussion_questions.qmd
+        - lessons/ask-us-anything/instructor_notes.qmd
+      - section: 'R: Forecast evaluation'
+        href: lessons/R-evaluating-forecasts/index.qmd
+        contents:
+        - lessons/R-evaluating-forecasts/material.qmd
+        - lessons/R-evaluating-forecasts/r_tutorial.qmd
+      - section: 'R: Forecast evaluation 2'
+        href: lessons/R-evaluating-forecasts-2/index.qmd
+        contents:
+        - lessons/R-evaluating-forecasts-2/material.qmd
+        - lessons/R-evaluating-forecasts-2/r_tutorial.qmd
+      - section: Intro to GAMS
+        href: lessons/intro-to-gams/index.qmd
+        contents:
+        - lessons/intro-to-gams/material.qmd
+        - lessons/intro-to-gams/discussion_questions.qmd
+        - lessons/intro-to-gams/r_tutorial.qmd
+        - lessons/intro-to-gams/instructor_notes.qmd
+      - section: Fitting time-series GAMS in R
+        href: lessons/R-time-series-GAMS/index.qmd
+        contents:
+        - lessons/R-time-series-GAMS/material.qmd
+        - lessons/R-time-series-GAMS/discussion_questions.qmd
+        - lessons/R-time-series-GAMS/r_tutorial.qmd
+        - lessons/R-time-series-GAMS/instructor_notes.qmd
+      - section: Forecasting with GAMs in R
+        href: lessons/R-forecasting-gams/index.qmd
+        contents:
+        - lessons/R-forecasting-gams/material.qmd
+        - lessons/R-forecasting-gams/discussion_questions.qmd
+        - lessons/R-forecasting-gams/r_tutorial.qmd
+        - lessons/R-forecasting-gams/instructor_notes.qmd
+      - section: Ask us anything 2
+        href: lessons/ask-us-anything-2/index.qmd
+        contents:
+        - lessons/ask-us-anything-2/discussion_questions.qmd
+        - lessons/ask-us-anything-2/instructor_notes.qmd
+      - section: Species Distribution Models
+        href: lessons/species-distribution-models/index.qmd
+        contents:
+        - lessons/species-distribution-models/material.qmd
+        - lessons/species-distribution-models/discussion_questions.qmd
+        - lessons/species-distribution-models/instructor_notes.qmd
+      - section: 'R: Species Distribution Models'
+        href: lessons/R-species-distribution-models/index.qmd
+        contents:
+        - lessons/R-species-distribution-models/material.qmd
+        - lessons/R-species-distribution-models/r_tutorial.qmd
+        - lessons/R-species-distribution-models/supplemental_code.qmd
+      - section: State Space Models in Ecology
+        href: lessons/state-space-models/index.qmd
+        contents:
+        - lessons/state-space-models/material.qmd
+        - lessons/state-space-models/discussion_questions.qmd
+        - lessons/state-space-models/instructor_notes.qmd
+      - section: 'R: Complex Time-Series Models 1'
+        href: lessons/R-complex-time-series-models-1/index.qmd
+        contents:
+        - lessons/R-complex-time-series-models-1/material.qmd
+        - lessons/R-complex-time-series-models-1/r_tutorial.qmd
+      - section: 'R: Complex Time-Series Models 2'
+        href: lessons/R-complex-time-series-models-2/index.qmd
+        contents:
+        - lessons/R-complex-time-series-models-2/material.qmd
+        - lessons/R-complex-time-series-models-2/r_tutorial.qmd
+      - section: 'R: State Space Models 1'
+        href: lessons/R-state-space-models-1/index.qmd
+        contents:
+        - lessons/R-state-space-models-1/material.qmd
+        - lessons/R-state-space-models-1/r_tutorial.qmd
+        - lessons/R-state-space-models-1/r_tutorial_mvgam.qmd
+      - section: Data-driven models
+        href: lessons/data-driven-forecasts/index.qmd
+        contents:
+        - lessons/data-driven-forecasts/material.qmd
+        - lessons/data-driven-forecasts/discussion_questions.qmd
+        - lessons/data-driven-forecasts/instructor_notes.qmd
+      - section: 'R: Empirical Dynamic Modeling'
+        href: lessons/R-empirical-dynamic-modeling/index.qmd
+        contents:
+        - lessons/R-empirical-dynamic-modeling/material.qmd
+        - lessons/R-empirical-dynamic-modeling/r_tutorial.qmd
+      - section: 'R: State Space Models 2'
+        href: lessons/R-state-space-models-2/index.qmd
+        contents:
+        - lessons/R-state-space-models-2/material.qmd
+        - lessons/R-state-space-models-2/r_tutorial.qmd
+      - section: Forecasting scenarios
+        href: lessons/scenarios/index.qmd
+        contents:
+        - lessons/scenarios/material.qmd
+        - lessons/scenarios/discussion_questions.qmd
+        - lessons/scenarios/instructor_notes.qmd
+      - section: Election forecasts
+        href: lessons/election-forecasts/index.qmd
+        contents:
+        - lessons/election-forecasts/material.qmd
+        - lessons/election-forecasts/discussion_questions.qmd
+        - lessons/election-forecasts/instructor_notes.qmd
+      - section: Forecasting Ethics
+        href: lessons/ethics/index.qmd
+        contents:
+        - lessons/ethics/material.qmd
+        - lessons/ethics/discussion_questions.qmd
+        - lessons/ethics/instructor_notes.qmd
+      - section: Hurricane Forecasts
+        href: lessons/hurricane-forecasts/index.qmd
+        contents:
+        - lessons/hurricane-forecasts/material.qmd
+        - lessons/hurricane-forecasts/discussion_questions.qmd
+        - lessons/hurricane-forecasts/instructor_notes.qmd
+      - section: Course wrap up
+        href: lessons/course-wrap-up/index.qmd
+        contents:
+        - lessons/course-wrap-up/material.qmd
+        - lessons/course-wrap-up/discussion_questions.qmd
+        - lessons/course-wrap-up/instructor_notes.qmd
+      - section: Iterative Forecasting
+        href: lessons/iterative-forecasting/index.qmd
+        contents:
+        - lessons/iterative-forecasting/material.qmd
+        - lessons/iterative-forecasting/discussion_questions.qmd
+        - lessons/iterative-forecasting/instructor_notes.qmd
+      - section: Lesson Template
+        href: lessons/LessonTemplate/index.qmd
+        contents:
+        - lessons/LessonTemplate/material.qmd
+        - lessons/LessonTemplate/discussion_questions.qmd
+        - lessons/LessonTemplate/r_tutorial.qmd
+        - lessons/LessonTemplate/instructor_notes.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap

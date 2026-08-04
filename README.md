@@ -18,7 +18,7 @@ To use the materials for learning we recommend viewing them through [the rendere
 
 All of the code, lesson content, data, and infrastructure for this site is openly licensed so you can use any of it in your own courses.
 
-Lesson material can be accessed from [the website](https://course.naturecast.org) or using the raw markdown files in the [`content/lessons` directory](https://github.com/weecology/forecasting-course/tree/main/content/lessons) of this repository. Each lesson is stored in its own named subdirectory. 
+Lesson material can be accessed from [the website](https://course.naturecast.org) or using the raw markdown files in the [`lessons` directory](https://github.com/weecology/forecasting-course/tree/main/lessons) of this repository. Each lesson is stored in its own named subdirectory. 
 
 There are three general approaches to using the material in teaching:
 
@@ -28,45 +28,46 @@ There are three general approaches to using the material in teaching:
 
 ## Installation
 
-The course website is written in Hugo using the [Wowchemy Documentation theme](https://github.com/wowchemy/hugo-documentation-theme) and broader [Wowchemy system](https://wowchemy.com/)
-
-### Netlify
-
-The easiest way to create your own version of the course is the create a deployed course on Netlify via this template. You need a GitHub account to do this.
-
-Follow the Wowchemy instructions for [Creating a site with Hugo and GitHub](https://wowchemy.com/docs/getting-started/hugo-github-quickstart/),
-but instead of using the "Choose a template" button [click this template link](https://app.netlify.com/start/deploy?repository=https://github.com/weecology/forecasting-course).
-
-This will create a GitHub repository in your GitHub account and live version of the site.
-You can then edit files in the GitHub repository and they will automatically deploy to the website.
-
-Edit `config/_default/params.yaml` to match your version of course.
-In particular update the repository url to match the new repository you created.
-This will ensure that the `Edit this page` links on each page direct you to your version of the material.
+The course website is built with [Quarto](https://quarto.org/) and needs only Quarto and R installed.
+R is used solely to regenerate the schedule table before each render; it uses base R with no packages, and the R code in the tutorials is displayed rather than executed.
 
 ### Locally
 
-Building a Hugo site locally requires that Go, git, NodeJS, and Hugo all be installed.
-Detailed instructions for all operating systems are available on the [Wowchemy - Edit on your PC with Hugo Extended page](https://wowchemy.com/docs/getting-started/install-hugo-extended/).
-
-Once you have a local Hugo installation working clone the site using:
+Install [Quarto](https://quarto.org/docs/get-started/) (1.8 or newer) and [R](https://cloud.r-project.org/), then clone the site:
 
 ```sh
 git clone https://github.com/weecology/forecasting-course.git
+cd forecasting-course
 ```
 
-You can build the site locally in the terminal from the root directory of this repository using:
+Preview the site locally with live reload:
 
 ```sh
-hugo server
+quarto preview
 ```
+
+Or build it into `_site/`:
+
+```sh
+quarto render
+```
+
+### Netlify
+
+The site is rendered by GitHub Actions and uploaded to Netlify for hosting; Netlify itself does not build it.
+
+To create your own deployed version, fork this repository, [add it as a site on Netlify](https://docs.netlify.com/welcome/add-new-site/), and set two repository secrets in GitHub — `NETLIFY_AUTH_TOKEN` (a Netlify personal access token) and `NETLIFY_SITE_ID` (the site's "API ID" in Netlify's site settings).
+The workflow in `.github/workflows/publish.yml` then publishes on every push to `main` and posts a preview deploy on each pull request.
+
+After forking, update `repo-url` in `_quarto.yml` to point at your repository.
+This makes the `Edit this page` link on each page direct to your version of the material.
 
 ## Modifying the Site
 
-* Most content is stored in one folder per lesson in the [`content/lessons` folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons)
-* To add a new lesson make a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/main/content/lessons/LessonTemplate) and modifying the pages in the resulting folder using [markdown](https://www.markdownguide.org/)
-* To modify a lesson edit the markdown files in that lesson folder with the appropriate name. If you followed the instructions on installing on Netlify above, the easiest way to do this is to go to the page you want to edit on the deployed site and click the `Edit this page` link at the bottom.
-* To modify the schedule edit `content/schedule/schedule.md`. In the `lessons` section list the titles of the lessons you want to teach in the order you want to teach them. If you want to include specific dates for each lesson then edit the `dates` section to include those dates in the same order.
+* Most content is stored in one folder per lesson in the [`lessons` folder](https://github.com/weecology/forecasting-course/tree/main/lessons)
+* To add a new lesson make a copy of the [lesson template folder](https://github.com/weecology/forecasting-course/tree/main/lessons/LessonTemplate), edit the pages in the resulting folder using [markdown](https://www.markdownguide.org/), and add the lesson to the `sidebar` section of `_quarto.yml`
+* To modify a lesson edit the `.qmd` files in that lesson folder. The easiest way to find the right file is to go to the page on the deployed site and click the `Edit this page` link.
+* To modify the schedule edit [`schedule/schedule.csv`](https://github.com/weecology/forecasting-course/blob/main/schedule/schedule.csv). The table on the Schedule page is regenerated automatically on every render, and a lesson title that doesn't match a real lesson fails the build. Each row is a date plus either a lesson title (`kind` of `lesson`, which must match a lesson's `title:` exactly) or a one-off event such as a project work day (`kind` of `event`).
 
 ## Contributing
 
@@ -74,6 +75,6 @@ Contributions are always welcome!
 
 * [Open an issue](https://github.com/weecology/forecasting-course/issues/new) to say Hi or if there’s anything we can do to help!
 * Contributions of new lessons are welcome as Pull Requests or we can work with you to add new material and data to the site
-* If you want to create a modified copy of the course including the website either following the instructions for installing on Netlify above or fork/copy the repository and [connect it to Netlify](https://wowchemy.com/docs/hugo-tutorials/deployment/) to automatically build the site.
+* If you want to create a modified copy of the course including the website, fork or copy the repository and [connect it to Netlify](https://docs.netlify.com/welcome/add-new-site/) to automatically build the site.
 
 For more information see our [CONTRIBUTING page](https://github.com/weecology/forecasting-course/tree/main/CONTRIBUTING.md)

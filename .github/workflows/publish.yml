@@ -1,0 +1,85 @@
+name: Publish site
+
+# Renders the Quarto site and deploys it to Netlify.
+#
+# The render runs here rather than on Netlify because `quarto render` invokes
+# scripts/build_schedule.R as a pre-render step, and Netlify's build image has
+# no R. Pushes to main publish to production; pull requests get a preview
+# deploy whose URL is posted back to the PR.
+#
+# Required repository secrets:
+#   NETLIFY_AUTH_TOKEN  - Netlify personal access token
+#   NETLIFY_SITE_ID     - the site's "API ID" from Netlify > Site settings
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # scripts/build_schedule.R needs only base R, but Quarto selects the knitr
+      # engine for any tutorial containing ```{r} chunks and requires these two
+      # packages to process it -- even though `execute: enabled: false` means
+      # none of the code is actually run.
+      - name: Install R packages required by Quarto
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::knitr
+            any::rmarkdown
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render site
+        run: quarto render
+
+      # Guards against the generated schedule table being committed stale.
+      # The pre-render step above rewrites it from schedule.csv, so any diff
+      # here means the committed copy was out of date.
+      - name: Check generated schedule is committed up to date
+        run: |
+          if ! git diff --quiet -- schedule/_schedule_table.md; then
+            echo "::error::schedule/_schedule_table.md is out of date."
+            echo "Run 'Rscript scripts/build_schedule.R' and commit the result."
+            git --no-pager diff -- schedule/_schedule_table.md
+            exit 1
+          fi
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: ./_site
+          production-deploy: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          # Must stay quoted: unquoted, the " #" in the format string would
+          # start a YAML comment and swallow the rest of the expression.
+          deploy-message: "${{ github.event_name == 'pull_request' && format('PR #{0}: {1}', github.event.number, github.event.pull_request.title) || github.event.head_commit.message }}"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5

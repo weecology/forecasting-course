@@ -1,0 +1,29 @@
+---
+title: Election forecasts
+description: Discussion of modelling approaches and data challenges in election forecasting
+order: 29
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+- Describe data issues and modelling approaches used in election forecasting
+- Compare and constrast data issues and modelling approaches to those used in ecological forecasting
+- Assess which aspects of election forecasting may be useful for ecological forecasting
+
+:::
