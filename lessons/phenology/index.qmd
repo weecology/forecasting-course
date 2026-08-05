@@ -1,0 +1,29 @@
+---
+title: Changes in Phenology
+description: Discussing seasonal dynamics and how they change over time
+order: 5
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Describe phenology and how it differs from other types of long-term change
+* Describe different classess of models used in ecological forecasting
+* Compare and contrast challenges for forecasting phenology vs other types of long-term change
+
+:::

@@ -1,21 +1,15 @@
+# The site is built and deployed by GitHub Actions, not by Netlify.
+# See .github/workflows/publish.yml.
+#
+# The render has to happen in CI because `quarto render` runs
+# scripts/build_schedule.R as a pre-render step and Netlify's build image has
+# no R. The workflow uploads the finished _site directory to Netlify instead.
+#
+# `ignore = "exit 0"` always exits 0, which tells Netlify to skip its own
+# build. Without it, a push would start a Netlify build that has neither R nor
+# Quarto and would fail. Redirects now live in the `_redirects` file at the
+# repository root, which Quarto copies into _site so it ships with the deploy.
+
 [build]
-  command = "hugo --gc --minify -b $URL"
-  publish = "public"
-
-[build.environment]
-  HUGO_VERSION = "0.97.3"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.production.environment]
-  HUGO_ENV = "production"
-
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
-
-[[plugins]]
-  package = "netlify-plugin-hugo-cache-resources"
-  [plugins.inputs]
-    debug = true
+  publish = "_site"
+  ignore = "exit 0"

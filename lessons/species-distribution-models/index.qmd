@@ -1,0 +1,29 @@
+---
+title: Forecasting using species distribution models
+description: How forecasts are made from species distribution modelings and the challenges associated with these forecasts
+order: 21
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Describe how species distribution models are built
+* Define different approaches to species distribution modeling and explain how they relate to explanation vs. prediction
+* Describe the challenges associated with distribution modeling based forecasts
+
+:::

@@ -1,0 +1,11 @@
+---
+title: Data & Software
+description: Software installation requirements
+order: 1
+---
+
+## Software installation requirements
+
+* `ggplot2` R package: `install.packages('ggplot2')`
+* `portalr` R package: `install.packages('portalr')`
+* `rEDM` R package: `install.packages('rEDM')`

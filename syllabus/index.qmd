@@ -1,0 +1,60 @@
+---
+title: Course Info
+order: 20
+---
+
+### Course Objectives
+
+The goal of this class is to provide students a basic understanding of
+how populations and communities change through time and to provide fundamental
+concepts of how to forecast those changes. By the end of the semester, students will:
+
+1. Have an appreciation of the dynamics and time scales of change that populations and communities exhibit.
+2. Understand the basic concepts of forecasting that apply across fields and the challenges within ecology
+3. Apply time series concepts to working with ecological time series data
+4. Be able to fit models to data and use those models to make forecasts
+
+### General Course Structure and Expectations
+
+This course is a mixture of class discussion of the primary literature and hands-on
+experience involving data and computing. Completing assigned readings,
+intellectual engagement with topics, discussion participation, and completion of
+R-tutorials are the main ways students will learn in this class. Because of the way
+it is taught at the University of Florida the schedule is designed around two one-hour
+course periods each week. The first period is primarily concept discussion days and
+the second perio is typically an R tutorial or other tools discussion.
+
+### In-person or online
+
+The course is primarily designed to be in-person, but we have had success with a modest
+number of remote participants. R tutorials are easy remotely. The more challenging piece
+is making group discussions work effectively for remote students.
+
+#### Paper discussions:
+
+This discussion is generally centered around the discussion questions that are provided
+in advance but may also expand beyond them. Our goal is to produce a classroom environment where
+everyone is comfortable participating in class discussions. Instructors should manage discussions
+so that everyone has a chance to contribute and make sure that folks who are less comfortable
+interjecting get a chance to participate. We recommend encouraging student help in making sure that
+everyone in the class gets a chance to contribute.
+
+For students who don't feel comfortable talking during class we recommend the option to provide
+written responses to the assigned class discussion questions.
+
+To help prepare students for paper discussions,
+and help professors understand things that need clarification during class,
+we have students describe things that confused them about reading the paper
+the night before the paper discussion via a small LMS assignment.
+
+#### R-tutorials
+
+R-tutorials consist of live coding in class where students follow along with the instructor,
+do informal exercises on their own, and ask questions.
+
+Completed R-tutorials are submitted on Canvas and graded for completion.
+
+### Course Materials
+
+1. All reading materials are made available through the [course website](https://course.naturecast.org/). Most, but not all, of them are openly available.
+2. Computers: Laptops with R and Rstudio installed are required for the R-tutorial part of the course.

@@ -1,6 +1,6 @@
-
-public/
-resources/
+_site/
+.quarto/
 node_modules/
-tech-doc-hugo
 
+/.quarto/
+**/*.quarto_ipynb

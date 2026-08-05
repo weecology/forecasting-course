@@ -1,0 +1,27 @@
+---
+title: No Class
+description: Ask us anything you've been wondering about forecasting and we'll talk about it
+order: 14
+listing:
+  contents:
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* First lesson objective
+* Second lesson objective
+
+:::

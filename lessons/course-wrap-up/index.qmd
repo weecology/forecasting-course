@@ -1,0 +1,28 @@
+---
+title: 'Wrap up: Can we (and what should we) forecast in ecology?'
+description: Synthetic discussion of how to use forecasting in ecology given the strengths, weakness, and approaches we've learned.
+order: 31
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+- Synthetic perspective on the strengths and weakness of ecological forecasting
+- Plans for how to use the material from this course in the future
+
+:::

@@ -1,0 +1,14 @@
+---
+title: Data & Software
+description: Software installation requirements
+order: 1
+---
+
+## Software installation requirements
+
+* R packages: `install.packages(c('fable', 'feasts', 'tsibble', 'dplyr', 'ggplot2'))`
+
+## Data
+
+* Download the [Desert Pocket Mouse by month data](/data/pp_abundance_by_month.csv) *this is different than the data used in the time-series modeling material*
+* Download the [Future climate data](/data/pp_future_climate.csv)

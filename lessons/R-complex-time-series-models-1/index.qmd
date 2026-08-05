@@ -1,0 +1,28 @@
+---
+title: Complex Time-Series Models in R 1
+description: Introductory tutorial on complex time-series models in R
+order: 26
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Fit generalized dynamic linear models in R using mvgam
+* Interpret complex time-series models from mvgam
+* Make forecasts using mvgam models in R
+
+:::

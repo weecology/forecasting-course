@@ -1,0 +1,6 @@
+---
+title: Instructor Notes
+order: 4
+---
+
+This material generates a lot of questions from students so we recommend setting aside one or more days for students to either submit questions in advance, or just bring them to class, and you answer/discuss them.

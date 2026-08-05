@@ -1,0 +1,28 @@
+---
+title: Empirical Dynamic Modeling in R
+description: R Tutorial on fitting and making forecasts using empirical dynamic modeling
+order: 27
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Fit empirical dynamic models using R
+* Interpret output of empirical dynamic models in R
+* Make forecasts using empirical dynamic models using R
+
+:::

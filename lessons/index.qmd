@@ -1,0 +1,21 @@
+---
+title: Lessons
+listing:
+  contents:
+  - '*/index.qmd'
+  type: table
+  fields:
+  - title
+  - description
+  field-display-names:
+    title: Lesson
+    description: Description
+  sort:
+  - order asc
+  - title asc
+  filter-ui: false
+  sort-ui: false
+  page-size: 100
+---
+
+Here you will find links to everything you need for this course on ecological forecasting & dynamics. Material is broken into lessons and each lesson page contains links to whatever material is needed for that topic (videos, papers, discussion questions).

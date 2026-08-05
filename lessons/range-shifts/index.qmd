@@ -1,0 +1,28 @@
+---
+title: Range shifts
+description: Discussion of shifts in species ranges in response to climate change
+order: 10
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* First lesson objective
+* Second lesson objective
+
+:::

@@ -1,0 +1,27 @@
+---
+title: Introduction to Time Series Data
+description: Discussion about ecological data collection and how it relates to forecasting
+order: 8
+listing:
+  contents:
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Gain familiarity with the spatial and temporal scales of ecological data collection
+* Explore relationships between forecasting needs and current ecological data collection
+
+:::

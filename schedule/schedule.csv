@@ -1,0 +1,29 @@
+date,lesson,kind
+August 20th,Course Introduction,lesson
+August 25th,Paleoecological Dynamics,lesson
+August 27th,Working with times and dates in R,lesson
+September 1st,Changes in Phenology,lesson
+September 3rd,Time Series Decomposition in R,lesson
+September 8th,Community Dynamics,lesson
+September 10th,Time Series Autocorrelation in R,lesson
+September 15th,Time series modeling in R 1,lesson
+September 17th,Time series modeling in R 2,lesson
+September 22nd,Time series modeling in R 3,lesson
+September 24th,Introduction to Ecological Forecasting,lesson
+September 29th,Introduction to Forecasting in R,lesson
+October 1st,Uncertainty in Forecasting,lesson
+October 6th,Evaluating Forecasts in R,lesson
+October 8th,Evaluating Forecasts in R 2,lesson
+October 13th,Forecasting Project - Introduction,event
+October 15th,Forecasting Project - Work Day,event
+October 20th,Complex Time-Series Models in R 1,lesson
+October 22nd,Complex Time-Series Models in R 2,lesson
+October 27th,Scenario based forecasting,lesson
+October 29th,Forecasting Project - Work Day,event
+November 3rd,Ethics of Ecological Forecasting,lesson
+November 5th,Forecasting Project - Work Day,event
+November 10th,Forecasting Project - Work Day,event
+November 12th,Forecasting Project - Work Day,event
+November 17th,Forecasting Project - Work Day,event
+November 19th,Forecasting Project - Presentations,event
+December 1st,Wrap up: Can we (and what should we) forecast in ecology?,lesson

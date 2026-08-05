@@ -1,0 +1,29 @@
+---
+title: State Space Models in Ecology
+description: Learn about and discuss the use of state space models for ecological modeling and forecasting
+order: 25
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Define state space models
+* Describe why state space models are useful in ecology
+* Explain how some non-linear state space models capture population dynamics 
+
+:::

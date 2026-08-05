@@ -1,0 +1,18 @@
+# Redirects from the pre-Quarto (Hugo) URLs.
+#
+# Hugo published every page as a directory (/lessons/x/material/); Quarto
+# publishes a file (/lessons/x/material.html). Lesson landing pages and the
+# top-level sections still resolve natively via index.html, so only the child
+# pages need mapping. Keep these as long as old links are in circulation --
+# the site is linked from a published JOSE paper and from Canvas.
+#
+# This file is copied into _site by Quarto (see `resources` in _quarto.yml) so
+# that it ships with the deploy regardless of how the site is published.
+
+/lessons/:lesson/material               /lessons/:lesson/material.html               301
+/lessons/:lesson/discussion_questions   /lessons/:lesson/discussion_questions.html   301
+/lessons/:lesson/instructor_notes       /lessons/:lesson/instructor_notes.html       301
+/lessons/:lesson/r_tutorial             /lessons/:lesson/r_tutorial.html             301
+/lessons/:lesson/r_tutorial_mvgam       /lessons/:lesson/r_tutorial_mvgam.html       301
+/lessons/:lesson/supplemental_code      /lessons/:lesson/supplemental_code.html      301
+/about/audience                         /about/audience.html                         301

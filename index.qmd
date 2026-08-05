@@ -1,0 +1,42 @@
+---
+pagetitle: "Ecological Forecasting & Dynamics Course"
+description-meta: "A course on how ecological systems change over time and how to forecast how they will change in the future."
+toc: false
+sidebar: false
+page-layout: full
+---
+
+::: {.hero-banner}
+# Ecological Forecasting & Dynamics Course
+
+A course on how ecological systems change over time and how to forecast how they
+will change in the future. Reading + discussion + R tutorials.
+
+[Get Started](getting-started/index.qmd){.btn .btn-light .btn-lg role="button"}
+[Browse Lessons](lessons/index.qmd){.btn .btn-outline-light .btn-lg role="button"}
+:::
+
+::: {.grid .feature-grid}
+
+::: {.g-col-12 .g-col-md-4}
+### <i class="bi bi-book"></i> Learn on your own
+
+All lecture notes and R tutorials are openly available so anyone can learn these
+important approaches and skills.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### <i class="bi bi-github"></i> Use & Contribute
+
+Course materials are open and developed on GitHub for use in other courses, and
+contributions are always welcome.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### <i class="bi bi-lightbulb"></i> Taught @UF
+
+This course is taught each Fall at the University of Florida by Drs. Morgan
+Ernest and Ethan White.
+:::
+
+:::

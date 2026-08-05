@@ -1,0 +1,29 @@
+---
+title: Species Distribution Models in R
+description: An R tutorial on using fitting simple species models and making forecasts based on these models
+order: 22
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  - supplemental_code.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Fit basic species distribution models using R
+* Interpret output of species distribution models in R
+* Make forecasts using species distribution models using R
+
+:::

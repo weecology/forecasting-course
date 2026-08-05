@@ -1,0 +1,27 @@
+---
+title: Time Series Autocorrelation in R
+description: Learn about autocorrelation in time series data and using R to examine it
+order: 7.5
+listing:
+  contents:
+  - material.qmd
+  - r_tutorial.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Describe autocorrelation in time series data and what generates it
+* Use R to examine autocorrelation structure in ecological time series data
+
+:::

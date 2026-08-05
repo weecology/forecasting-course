@@ -1,0 +1,30 @@
+---
+title: Introduction to Ecological Forecasting
+description: A brief introduction to the concepts and approaches of ecological forecasting
+order: 11
+listing:
+  contents:
+  - material.qmd
+  - discussion_questions.qmd
+  - instructor_notes.qmd
+  type: table
+  fields:
+  - title
+  field-display-names:
+    title: Page
+  sort: false
+  filter-ui: false
+  sort-ui: false
+  page-size: 50
+---
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Read and communicate using forecasting terminology
+* Describe general approaches to making forecasts
+* Describe and discuss current perspectives on ecological forecasting
+* Describe uncertainty and the implications of uncertainty for ecological forecasting
+
+:::
