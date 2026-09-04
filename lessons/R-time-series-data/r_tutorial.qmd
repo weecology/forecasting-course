@@ -87,7 +87,6 @@ would give it.
 
 To understand what that means, let's plot our data. 
 ```{r}
-daily = daily |> arrange(date)
 ggplot(daily, aes(x=date, y=airt)) + geom_point()
 ```
 
@@ -104,12 +103,26 @@ string of text, whether that's species names or locations or whatever. It sorts
 that data character by character.
 
 So if we have a list of dates: 
-[Write on board: 2023-01-25, 2024-01-20, 2026-01-24]
+```{r}
+playdates = c("2023-01-25", "2024-01-20", "2026-01-24")
+```
 
-When dates are in this format called ISO, sorting still works, but not for the 
-reasons we assume for date. What if we change to:
+And we ask the computer to sort them
+```{r}
+sort(playdates)
+```
 
-[Write on board: 01-25-2023, 01-20-2024, 01-24-2026]
+When dates are in this format it is called ISO, and sorting still works. The computer 
+goes character by character and arranges the dates which happens to work but not 
+for the reasons we assume for dates. We can see this if we change to:
+```{r}
+playdates = c("01-25-2023", "01-20-2024", "01-24-2026")
+```
+
+And we ask the computer to sort them
+```{r}
+sort(playdates)
+```
 
 *Answer: the dates are now sorted character by character and are out of
 order from a date perspective but in order from a character perspective*
@@ -150,9 +163,8 @@ class(daily$date)
 Now let's plot this:
 
 ```{r}
-qplot(x=asdate.date, y=airt, 
-      data=daily,
-      main="Daily Air Temperature")
+ggplot(daily, aes(date, airt)) +
+  geom_point()
 
 ```
 
