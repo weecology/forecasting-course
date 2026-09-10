@@ -21,8 +21,9 @@ library(ggtime)
 * Load the data
 
 ```r
-pp_data = read.csv("pp_abundance_timeseries.csv") |>
-  as_tsibble(index = newmoonnumber)
+pp_data = read.csv("pp_abundance_by_month.csv") |>
+  mutate(month = yearmonth(month)) |>
+  as_tsibble(index = month)
 pp_data
 ```
 
