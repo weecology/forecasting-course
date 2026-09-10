@@ -8,7 +8,7 @@ order: 1
 
 ### Data
 
-Download the [Desert Pocket Mouse data](/data/pp_abundance_timeseries.csv)
+Download the [Desert Pocket Mouse data](/data/pp_abundance_by_month.csv)
 
 ### Software Installation
 
