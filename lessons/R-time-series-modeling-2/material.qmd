@@ -5,5 +5,7 @@ order: 1
 
 Before starting lesson:
 
-* Make sure the Portal time series data is available on your computer
-* No new packages need to be installed for this lesson
+```r
+install.packages(c('tsibble', 'fable', 'feasts', 'ggtime'))
+download.file("https://course.naturecast.org/data/portal_timeseries.csv", "portal_timeseries.csv")
+```
