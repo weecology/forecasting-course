@@ -1,0 +1,71 @@
+---
+title: Annotated Equations
+order: 4
+---
+
+A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd). Each equation is broken down term by term so you can check your understanding of what every symbol is doing.
+
+## Baseline model: AR + covariate + Gaussian error
+
+The starting point in `mvgam` looks like the ARIMAX models from previous lessons — a covariate, an autoregressive term, and Gaussian error — just written and fit a different way (via `mvgam()`'s Bayesian MCMC fitting, instead of `fable`'s `ARIMA()`).
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\mathcal{N}(0,\sigma^2)}}_{\textstyle\color{#718096}{\text{Gaussian noise}}}
+$$
+
+- $y_t$ — the observed value at time $t$ (e.g., desert pocket mouse abundance)
+- $c$ — a constant
+- $\beta_1 x_{1,t}$ — the covariate effect (e.g., minimum temperature)
+- $\beta_2 y_{t-1}$ — the AR part: the effect of the previous value
+- $\mathcal{N}(0,\sigma^2)$ — Gaussian noise with mean 0 and variance $\sigma^2$
+
+**How it's fit:** `mvgam` uses Bayesian methods (MCMC via STAN) rather than the exact-likelihood approach `fable` uses, but for this baseline model the equation itself is the same idea — the AR term is specified separately, via `trend_model = AR(p = 1)`, rather than inside the model formula.
+
+## The same model, decomposed
+
+The additive form above can equivalently be written as an explicit observation distribution around a modeled mean — a small notational shift that matters once we start changing the error distribution.
+
+$$
+y_t = \mathcal{N}(
+  \underbrace{\color{#d53f8c}{\mu_t}}_{\textstyle\color{#d53f8c}{\text{process mean}}},\sigma^2
+)
+$$
+
+$$
+\color{#d53f8c}{\mu_t} = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+$$
+
+- $y_t$ — the observed value at time $t$, drawn from a normal distribution
+- $\mu_t$ — the process mean at time $t$: everything the model can explain
+- $\sigma^2$ — the variance of the observation noise around that mean
+- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — exactly the same constant, covariate, and AR terms as the baseline model, just relocated into $\mu_t$
+
+**Why bother rewriting it:** splitting "what generates $y_t$" ($\mathcal{N}(\mu_t, \sigma^2)$) from "what determines $\mu_t$" makes it straightforward to swap in a different observation distribution without changing how $\mu_t$ is modeled — which is exactly what happens next.
+
+## Modeling count data: Poisson error
+
+Abundance counts are non-negative integers, which a Gaussian error model doesn't respect. Swapping in a Poisson distribution fixes that.
+
+$$
+y_t = \mathrm{Pois}(
+  \underbrace{\color{#d53f8c}{\lambda_t}}_{\textstyle\color{#d53f8c}{\text{rate parameter}}}
+)
+$$
+
+$$
+\underbrace{\color{#d69e2e}{\log(\lambda_t)}}_{\textstyle\color{#d69e2e}{\text{log link}}} = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+$$
+
+- $y_t$ — the observed value at time $t$, now constrained to non-negative integers
+- $\lambda_t$ — the Poisson rate parameter: both the mean and the variance of the distribution, so it must be positive
+- $\log(\lambda_t)$ — the log link: instead of modeling $\lambda_t$ directly, the model predicts $\log(\lambda_t)$, which can be any real number, then exponentiates it back — guaranteeing $\lambda_t$ stays positive
+- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — the same constant, covariate, and AR terms as before, now predicting $\log(\lambda_t)$ instead of $y_t$ directly
+
+**A side effect of the log link:** because the model is linear on the log scale, the relationship between the covariate and the untransformed abundance becomes exponential — worth checking with `plot_predictions()` rather than assuming it looks like the linear relationship on the link scale.
