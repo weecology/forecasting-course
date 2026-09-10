@@ -1,0 +1,82 @@
+---
+title: Annotated Equations
+order: 4
+---
+
+A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd). Each equation is broken down term by term so you can check your understanding of what every symbol is doing.
+
+## White noise model
+
+The simplest possible time-series model: every observation is just noise around a fixed mean.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{mean}}}
+  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+$$
+e_t \sim \underbrace{\color{#6b46c1}{N}}_{\textstyle\color{#6b46c1}{\text{normal distribution}}}\!\left(
+  \underbrace{\color{#2c7a7b}{0}}_{\textstyle\color{#2c7a7b}{\text{mean = 0}}},\; \quad
+  \underbrace{\color{#b7791f}{\sigma}}_{\textstyle\color{#b7791f}{\text{standard deviation}}}
+\right)
+$$
+
+- $y_t$ — the observed value at time $t$ (e.g., NDVI in a given month)
+- $c$ — a constant: the mean of the series, estimated from the data
+- $e_t$ — the error at time $t$: how far the observation is from the mean due to stochastic variation
+- $\sigma$ — the standard deviation of the error, i.e., how much observations vary around the mean
+
+**Key assumption:** each $e_t$ is drawn independently — knowing $e_{t-1}$ tells you nothing about $e_t$.
+The model is just "mean plus noise"
+
+## AR(1) model
+
+Add influence of the last observed value.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#c05621}{b_1 y_{t-1}}}_{\textstyle\color{#c05621}{\text{lag-1 effect}}}
+  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+$$
+e_t \sim \underbrace{\color{#6b46c1}{N}}_{\textstyle\color{#6b46c1}{\text{normal distribution}}}\!\left(
+  \underbrace{\color{#2c7a7b}{0}}_{\textstyle\color{#2c7a7b}{\text{mean = 0}}},\; \quad
+  \underbrace{\color{#b7791f}{\sigma}}_{\textstyle\color{#b7791f}{\text{standard deviation}}}
+\right)
+$$
+
+- $y_t$ — the observed value at time $t$
+- $c$ — a constant, analogous to the intercept in a regression
+- $b_1 y_{t-1}$ — the lag-1 effect: $b_1$ is the AR1 coefficient, determining how strongly (and in which direction) the previous value, $y_{t-1}$, influences $y_t$
+- $e_t$ — random error at time $t$, independent of past errors
+
+**Reading the coefficient:** if $b_1$ is large and positive, a high value last time step predicts a high value this time step (values persist). If $b_1$ were negative, high values would tend to be followed by low values.
+
+**Ecological connection:** if $y$ is $\log(N)$, this is essentially a Gompertz population model — the current population size depends on the previous one.
+
+## AR(2) model
+
+Extends the AR(1) model with a second lag, letting the model capture dependence on both the previous time step *and* the one before that.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#c05621}{b_1 y_{t-1}}}_{\textstyle\color{#c05621}{\text{lag-1 effect}}}
+  \;+\; \underbrace{\color{#2f855a}{b_2 y_{t-2}}}_{\textstyle\color{#2f855a}{\text{lag-2 effect}}}
+  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+$$
+e_t \sim \underbrace{\color{#6b46c1}{N}}_{\textstyle\color{#6b46c1}{\text{normal distribution}}}\!\left(
+  \underbrace{\color{#2c7a7b}{0}}_{\textstyle\color{#2c7a7b}{\text{mean = 0}}},\; \quad
+  \underbrace{\color{#b7791f}{\sigma}}_{\textstyle\color{#b7791f}{\text{standard deviation}}}
+\right)
+$$
+
+- $y_t$ — the observed value at time $t$
+- $c$ — a constant, analogous to the intercept in a regression
+- $b_1$ — the AR1 coefficient: the effect of the value one time step back ($y_{t-1}$)
+- $b_2$ — the AR2 coefficient: the effect of the value two time steps back ($y_{t-2}$)
+- $e_t$ — random error at time $t$, independent of past errors
+
+**Reading the coefficients together:** $b_1$ and $b_2$ don't have to point the same direction. For example, a large positive $b_1$ combined with a smaller negative $b_2$ means a high value last time step predicts a high value now, while a high value two time steps back predicts a slightly *lower* value now — the two lags can partially offset each other.
