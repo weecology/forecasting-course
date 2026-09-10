@@ -5,6 +5,7 @@ order: 1
 
 Before starting lesson:
 
-* Make sure the Portal time series data is available on your computer
-* Download the [Desert Pocket Mouse data](/data/pp_abundance_timeseries.csv)
-* No new packages need to be installed for this lesson
+```r
+install.packages(c('tsibble', 'fable', 'feasts', 'ggtime'))
+download.file("https://course.naturecast.org/data/pp_abundance_by_month.csv", "pp_abundance_by_month.csv")
+```
