@@ -6,6 +6,7 @@ listing:
   contents:
   - material.qmd
   - r_tutorial.qmd
+  - equation_review.qmd
   type: table
   fields:
   - title

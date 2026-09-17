@@ -1,0 +1,104 @@
+---
+title: Annotated Equations
+order: 4
+---
+
+A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd).
+
+## Time-series linear model (TSLM)
+
+A TSLM is similar to a standard regression.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_t}}_{\textstyle\color{#319795}{\text{covariate}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+- $y_t$ — the observed value at time $t$
+- $c$ — a constant, the intercept
+- $\beta_1 x_t$ — the covariate effect: how strongly the predictor $x_t$ is related to $y_t$
+- $\epsilon_t$ — random error at time $t$
+
+**Limitation:** Regression assumes independent observations, so autocorrelation in the residuals limits the model's statistical inferences.
+
+## Adding trends
+
+We can explicitly model trends that are not captured by the covariates by fitting them directly.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate 1}}}
+  \;+\; \underbrace{\color{#059669}{\beta_3 t}}_{\textstyle\color{#059669}{\text{trend}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+- $y_t$ — the observed value at time $t$
+- $c$ — a constant, the intercept
+- $\beta_1 x_{1,t}$ — the covariate's effect
+- $\beta_3 t$ — the trend term: $t$ is time and serves as a predictor for long-term increases or decreases the other covariates don't capture
+- $\epsilon_t$ — random error at time $t$
+
+**Reading it:** adding `trend()` doesn't explain *why* there's a long-term change — it just accounts for the fact that a long-term change exists
+
+## ARIMAX: ARIMA with external predictors
+
+`ARIMA()` can include exogenous covariates directly, combining regression with AR and MA structure in one model.
+
+$$
+y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+  \;+\; \underbrace{\color{#7c3aed}{\theta_1 \epsilon_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+- $y_t$ — the observed value at time $t$
+- $c$ — a constant
+- $\beta_1 x_{1,t}$ — the covariate effect
+- $\beta_2 y_{t-1}$ — AR: the effect of the previous value
+- $\theta_1 \epsilon_{t-1}$ — MA: the effect of the previous error
+- $\epsilon_t$ — random error at time $t$
+
+**Why this helps:** AR and MA terms capture autocorrelation that a plain TSLM leaves behind, while the covariates allow inclusion of external drivers.
+
+## The differenced ARIMAX model
+
+Once `ARIMA()` decides differencing is needed, every term in the model — including the covariate — gets differenced too, and the constant drops out (as in the [differencing section](../R-time-series-modeling-2/equation_review.qmd#differencing) of the previous lesson).
+
+$$
+y_t' = \underbrace{\color{#319795}{\beta_1 x_{1,t}'}}_{\textstyle\color{#319795}{\text{covariate (differenced)}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}'}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+  \;+\; \underbrace{\color{#7c3aed}{\theta_1 \epsilon_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+- $y_t'$ — the differenced response
+- $\beta_1 x_{1,t}'$ — the differenced covariate effect
+- $\beta_2 y_{t-1}'$ — AR: the effect of the previous differenced value
+- $\theta_1 \epsilon_{t-1}$ — MA: the effect of the previous error
+- $\epsilon_t$ — random error at time $t$
+
+## Regression with ARIMA errors
+
+`fable` doesn't literally fit the equations above — it fits a plain regression on the covariate, then models the *leftover* structure in that regression's error with an ARIMA model.
+
+$$
+y_t = \underbrace{\color{#319795}{\beta_1 x_{1,t}}}_{\textstyle\color{#319795}{\text{covariate effect}}}
+  \;+\; \underbrace{\color{#d53f8c}{\eta_t}}_{\textstyle\color{#d53f8c}{\text{ARIMA-structured error}}}
+$$
+
+$$
+\eta_t = \underbrace{\color{#c05621}{\beta_2 \eta_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1 on the error}}}
+  \;+\; \underbrace{\color{#7c3aed}{\theta_1 \epsilon_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
+$$
+
+- $y_t$ — the response
+- $\beta_1 x_{1,t}$ — the covariate's effect modeled as a linear regression term
+- $\eta_t$ — the time-series structured regression error
+- $\beta_2 \eta_{t-1}$ — the AR part of that structured error
+- $\theta_1 \epsilon_{t-1}$ — the MA part of that structured error
+- $\epsilon_t$ — the remaining Normally distributed error left after the time-series components
+
+**Why split it this way:** it keeps the covariate's coefficient directly interpretable (a plain regression slope), while letting the ARIMA machinery handle whatever autocorrelation the regression alone couldn't.

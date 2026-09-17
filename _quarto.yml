@@ -133,16 +133,19 @@ website:
         contents:
         - lessons/R-time-series-modeling/material.qmd
         - lessons/R-time-series-modeling/r_tutorial.qmd
+        - lessons/R-time-series-modeling/equation_review.qmd
       - section: 'R: Time series modeling 2'
         href: lessons/R-time-series-modeling-2/index.qmd
         contents:
         - lessons/R-time-series-modeling-2/material.qmd
         - lessons/R-time-series-modeling-2/r_tutorial.qmd
+        - lessons/R-time-series-modeling-2/equation_review.qmd
       - section: 'R: Time series modeling 3'
         href: lessons/R-time-series-modeling-3/index.qmd
         contents:
         - lessons/R-time-series-modeling-3/material.qmd
         - lessons/R-time-series-modeling-3/r_tutorial.qmd
+        - lessons/R-time-series-modeling-3/equation_review.qmd
       - section: Intro to Ecological Forecasting
         href: lessons/intro-to-forecasting/index.qmd
         contents:
@@ -229,11 +232,13 @@ website:
         contents:
         - lessons/R-complex-time-series-models-1/material.qmd
         - lessons/R-complex-time-series-models-1/r_tutorial.qmd
+        - lessons/R-complex-time-series-models-1/equation_review.qmd
       - section: 'R: Complex Time-Series Models 2'
         href: lessons/R-complex-time-series-models-2/index.qmd
         contents:
         - lessons/R-complex-time-series-models-2/material.qmd
         - lessons/R-complex-time-series-models-2/r_tutorial.qmd
+        - lessons/R-complex-time-series-models-2/equation_review.qmd
       - section: 'R: State Space Models 1'
         href: lessons/R-state-space-models-1/index.qmd
         contents:
