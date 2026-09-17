@@ -3,7 +3,7 @@ title: Annotated Equations
 order: 4
 ---
 
-A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd). Each equation is broken down term by term so you can check your understanding of what every symbol is doing.
+A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd).
 
 ## Moving average (MA) model
 
@@ -11,14 +11,14 @@ Instead of using past *values* like an AR model, an MA model uses past *errors* 
 
 $$
 y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
-  \;+\; \underbrace{\color{#7c3aed}{\theta_1 e_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
-  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+  \;+\; \underbrace{\color{#7c3aed}{\theta_1 \epsilon_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
 $$
 
 - $y_t$ — the observed value at time $t$
 - $c$ — a constant, analogous to the intercept in a regression
-- $\theta_1 e_{t-1}$ — the lag-1 MA effect: $\theta_1$ scales how much last time step's *error* (not value) carries over
-- $e_t$ — random error at time $t$
+- $\theta_1 \epsilon_{t-1}$ — the lag-1 MA effect: $\theta_1$ scales how much last time step's *error* (not value) carries over
+- $\epsilon_t$ — random error at time $t$
 
 **Reading the coefficient:** if $\theta_1 > 0$, an observation that came in above the mean last time step nudges this time step above the mean too. Positive MA components say an outlier tends to be followed by another outlier in the same direction — unlike an AR model, it's the *surprise*, not the *value*, that carries forward.
 
@@ -29,15 +29,15 @@ AR and MA structure can both be present in the same time series — an ARMA mode
 $$
 y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
   \;+\; \underbrace{\color{#c05621}{b_1 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
-  \;+\; \underbrace{\color{#7c3aed}{\theta_1 e_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
-  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+  \;+\; \underbrace{\color{#7c3aed}{\theta_1 \epsilon_{t-1}}}_{\textstyle\color{#7c3aed}{\text{MA: lag-1}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
 $$
 
 - $y_t$ — the observed value at time $t$
 - $c$ — a constant
 - $b_1 y_{t-1}$ — the AR part: the effect of the previous *value*
-- $\theta_1 e_{t-1}$ — the MA part: the effect of the previous *error*
-- $e_t$ — random error at time $t$
+- $\theta_1 \epsilon_{t-1}$ — the MA part: the effect of the previous *error*
+- $\epsilon_t$ — random error at time $t$
 
 ## Differencing
 
@@ -61,19 +61,19 @@ Fitting `ARIMA()` with no structure specified can return a model like this one �
 $$
 y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
   \;+\; \underbrace{
-    \color{#7c3aed}{\theta_1 e_{t-1}}
+    \color{#7c3aed}{\theta_1 \epsilon_{t-1}}
     \color{black}{\,+\,}
-    \color{#9333ea}{\theta_2 e_{t-2}}
+    \color{#9333ea}{\theta_2 \epsilon_{t-2}}
     \color{black}{\,+\,}
-    \color{#c026d3}{\theta_3 e_{t-3}}
+    \color{#c026d3}{\theta_3 \epsilon_{t-3}}
   }_{\textstyle\color{#9333ea}{\text{MA terms: lags 1-3}}}
-  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
 $$
 
 - $y_t$ — the observed value at time $t$
 - $c$ — a constant
-- $\theta_1 e_{t-1}$, $\theta_2 e_{t-2}$, $\theta_3 e_{t-3}$ — the MA(3) terms: this model uses the last three months' errors, shown in the `Coefficients` table as `ma1`, `ma2`, `ma3`
-- $e_t$ — random error at time $t$
+- $\theta_1 \epsilon_{t-1}$, $\theta_2 \epsilon_{t-2}$, $\theta_3 \epsilon_{t-3}$ — the MA(3) terms: this model uses the last three months' errors, shown in the `Coefficients` table as `ma1`, `ma2`, `ma3`
+- $\epsilon_t$ — random error at time $t$
 
 **Reading it:** if NDVI was above average over the last three months, this model expects it to be above average now too — consistent with the idea that a good year (an MA-style "outlier" in errors) tends to persist for a while.
 
@@ -94,25 +94,25 @@ $$
 
 ## Full seasonal ARIMA model
 
-Putting the MA terms, the seasonal AR term, and the random error together gives the full model.
+Like the MA(3) model above but with a seasonal AR term added.
 
 $$
 y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
   \;+\; \underbrace{
-    \color{#7c3aed}{\theta_1 e_{t-1}}
+    \color{#7c3aed}{\theta_1 \epsilon_{t-1}}
     \color{black}{\,+\,}
-    \color{#9333ea}{\theta_2 e_{t-2}}
+    \color{#9333ea}{\theta_2 \epsilon_{t-2}}
     \color{black}{\,+\,}
-    \color{#c026d3}{\theta_3 e_{t-3}}
+    \color{#c026d3}{\theta_3 \epsilon_{t-3}}
   }_{\textstyle\color{#9333ea}{\text{MA terms: lags 1-3}}}
   \;+\; \underbrace{\color{#dd6b20}{b_{12} y_{t-12}}}_{\textstyle\color{#dd6b20}{\text{seasonal effect}}}
-  \;+\; \underbrace{\color{#718096}{e_t}}_{\textstyle\color{#718096}{\text{random error}}}
+  \;+\; \underbrace{\color{#718096}{\epsilon_t}}_{\textstyle\color{#718096}{\text{random error}}}
 $$
 
 - $y_t$ — the observed value at time $t$
 - $c$ — a constant
-- $\theta_1 e_{t-1}$, $\theta_2 e_{t-2}$, $\theta_3 e_{t-3}$ — the MA(3) terms from the last three months' errors
+- $\theta_1 \epsilon_{t-1}$, $\theta_2 \epsilon_{t-2}$, $\theta_3 \epsilon_{t-3}$ — the MA(3) terms from the last three months' errors
 - $b_{12} y_{t-12}$ — the seasonal AR term from one year back
-- $e_t$ — random error at time $t$
+- $\epsilon_t$ — random error at time $t$
 
 **Putting it together:** this model explains the current value using recent surprises (MA), last year's value (seasonal AR), and nothing else — no direct AR terms on the immediately preceding months were needed once the seasonal and MA structure were included.
