@@ -13,7 +13,7 @@ order: 4
 
 ## Adding sources of uncertainty
 
-* So far we've talked about uncertainty as a single thing: epilson ~ N(0, sigma)
+* So far we've talked about uncertainty as a single thing: $\epsilon \sim N(0, \sigma)$
 * What are the different sources of uncertainty? ***list on board and discuss what each is as students name them***
   * observation error
   * parameter uncertainty

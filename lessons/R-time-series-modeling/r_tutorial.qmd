@@ -85,7 +85,7 @@ gg_tsdisplay(data_ts, NDVI)
 * The data is normally distributed with a fixed mean and variance
 * It takes the form
 
-  > `y_t = c + e_t, where e_t ~ N(0, sigma)`
+  > $y_t = c + \epsilon_t$, where $\epsilon_t \sim N(0, \sigma)$
 
 * So each time step in our model is a random draw from a normal distribution with a mean of `c`
 * We fit time-series models using the `fable` package
@@ -155,9 +155,9 @@ gg_tsdisplay(data_ts, NDVI)
 * Current value depends on past values
 * The simplest version of this type of model is an AR1 model
 
-> *leave room to add y_t-2*
+> *leave room to add $y_{t-2}$*
 
-> `y_t = c + b_1 * y_t-1 + e_t, where e_t ~ N(0, sigma)`
+> $y_t = c + b_1 y_{t-1} + \epsilon_t$, where $\epsilon_t \sim N(0, \sigma)$
 
 * c is a constant, like the intercept in regression
 * b_1 is a coefficient determining how y_t is related to y at a 1 time-step lag, i.e., the previous time step
@@ -170,9 +170,9 @@ gg_tsdisplay(data_ts, NDVI)
 
 * Since we have also have lag 2 autocorrelation we add a term for two time steps back
 
-> `y_t = c + b1 * y_t-1 + b2 * y_t-2 + e_t, where e_t ~ N(0, sigma)`
+> $y_t = c + b_1 y_{t-1} + b_2 y_{t-2} + \epsilon_t$, where $\epsilon_t \sim N(0, \sigma)$
 
-> Instructors note: Actually `y_t = (1 - b1 - b2) * c + b1 * y_t-1 + b2 * y_t-2 + e_t` due to non-zero mean
+> Instructors note: Actually $y_t = (1 - b_1 - b_2) c + b_1 y_{t-1} + b_2 y_{t-2} + \epsilon_t$ due to non-zero mean
 
 * This type of model structure is available in `fable`'s `AR()` model
 * If we want to specify how many autoregressive terms to include we specify the model as an R formula
