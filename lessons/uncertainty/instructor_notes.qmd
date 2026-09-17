@@ -5,7 +5,7 @@ order: 4
 
 ## Sources of uncertainty
 
-- So far we've talked about uncertainty as a single thing: epilson ~ N(0, sigma)
+- So far we've talked about uncertainty as a single thing: $\epsilon \sim N(0, \sigma)$
 - Different sources of uncertainty
   - process uncertainty
   - parameter uncertainty
