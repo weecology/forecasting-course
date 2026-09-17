@@ -36,11 +36,11 @@ data_ts
 *  Note that this is not using a moving average like you did when decomposing time-series
 *  MA models are like AR models in that they use past observations to predict the next step
 *  But instead of using the values themselves they use the past errors
-*  So a 1st order MA model looks like this 
+*  So a 1st order MA model looks like this
 
-> `y_t = c + theta_1 * e_t-1 + error_t`
+> $y_t = c + \theta_1 e_{t-1} + \epsilon_t$
 
-* So if `theta_1` > 0 then if the observation has greater than the mean at the previous time step it is like to be greater than the mean at the current time step
+* So if $\theta_1$ > 0 then if the observation has greater than the mean at the previous time step it is like to be greater than the mean at the current time step
 * Positive MA components say that if the previous observation was an outlier then the next observation is expected to be an outlier in the same direction
 * This makes sense for NDVI
 * Greenness isn't really driven by greenness in the same way a populations abundance is
@@ -49,7 +49,7 @@ data_ts
 * Both AR and MA structures can be present in time-series
 * We can combine them in an ARMA model
 
-> `y_t = c + b_1 * y_t-1 + theta_1 * error_t-1 + error_t`
+> $y_t = c + b_1 y_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$
 
 ### Accounting for trends
 
@@ -59,7 +59,7 @@ data_ts
 * To take out the trend before model fitting the data is differenced
 * Typically by subtracting the previous value
 
-> `y_t' = y_t - y_t-1`
+> $y_t' = y_t - y_{t-1}$
 
 * So, if we difference the data we are now modeling the change from time-step to time-step, not the actual values
 
@@ -87,7 +87,7 @@ report(arima_model)
 * `p` is the AR order, `d` is the degree of differencing, and `q` is the MA order
 * So this model is a 3rd order MA model, with no differencing, and no autoregressive terms
 
-> `y_t = c + theta_1 * e_t-1 + theta_2 * e_t-2 + theta_3 * e_t-3 + e_t`
+> $y_t = c + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \theta_3 \epsilon_{t-3} + \epsilon_t$
 
 * This is also shown in the `Coefficients` table by the `ma1`, `ma2`, and `ma3` terms
 * So, if NDVI was above average over the last 3 months we expect it to be above average now
@@ -99,9 +99,9 @@ report(arima_model)
 * The seasonal component is also shown in PDQ notation in the second set of parentheses
 * We model season components with lags of the length of a full seasonal cycle
 * In this case a full cycle is 1 year
-* So the SAR1 part of the model as
+* So the SAR1 part of the model is
 
-> `y_t = c + b_12 * y_t-12`
+> $y_t = c + b_{12} y_{t-12}$
 
 * The value in the current month is related to the value observed 1 year ago
 * This makes a lot of sense for NDVI
@@ -109,7 +109,7 @@ report(arima_model)
 * So a good piece of information is how green the ecosystem was at this time last year
 * Our full model would therefore be
 
-> `y_t = c + theta_1 * e_t-1 + theta_2 * e_t-2 + theta_3 * e_t-3 + b_12 * y_t-12 + e_t`
+> $y_t = c + \theta_1 e_{t-1} + \theta_2 e_{t-2} + \theta_3 e_{t-3} + b_{12} y_{t-12} + \epsilon_t$
 
 * What does this look like?
 
