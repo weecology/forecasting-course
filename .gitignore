@@ -5,3 +5,7 @@ node_modules/
 /.quarto/
 **/*.quarto_ipynb
 .Rproj.user
+
+# Rendered answer key. Built by hand from assignment_solution.qmd; not published
+# with the site and not worth committing as a 3 MB self-contained file.
+lessons/*/assignment_solution.html

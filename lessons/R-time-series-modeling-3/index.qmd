@@ -7,6 +7,7 @@ listing:
   - material.qmd
   - r_tutorial.qmd
   - equation_review.qmd
+  - assignment.qmd
   type: table
   fields:
   - title
