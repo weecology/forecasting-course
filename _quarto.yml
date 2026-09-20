@@ -17,6 +17,8 @@ project:
     # Raw R scratch files with no front matter; kept in the repo, not published.
     - "!lessons/R-state-space-models-1/r_tutorial_new.qmd"
     - "!lessons/R-state-space-models-1/r_tutorial_new_notes.qmd"
+    # Assignment answers don't render
+    - "!lessons/R-time-series-modeling-3/assignment_solution.qmd"
   resources:
     - data/**
     - media/**
@@ -146,6 +148,7 @@ website:
         - lessons/R-time-series-modeling-3/material.qmd
         - lessons/R-time-series-modeling-3/r_tutorial.qmd
         - lessons/R-time-series-modeling-3/equation_review.qmd
+        - lessons/R-time-series-modeling-3/assignment.qmd
       - section: Intro to Ecological Forecasting
         href: lessons/intro-to-forecasting/index.qmd
         contents:

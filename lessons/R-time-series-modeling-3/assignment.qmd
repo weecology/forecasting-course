@@ -1,0 +1,136 @@
+---
+title: Assignment
+order: 5
+---
+
+## Overview
+
+This assignment covers the material from **Time series modeling in R 1, 2, and 3**.
+You will fit the same family of models we fit in the tutorials -- white noise, autoregressive,
+seasonal ARIMA, time-series linear models, and dynamic regression -- to a new ecological
+time series, and evaluate each one the way we did in class.
+
+Work through the parts in order, which will expand the modeling approach
+gradually fixing problems you diagnose as you go.
+
+Turn in a single R script (or Quarto document) on Canvas that contains your code,
+generates your plots,
+and includes written answers as comments (R script) or text block (Quarto document).
+
+::: {.callout-note}
+
+**Learning Objectives:**
+
+* Fit white noise, AR, ARIMA, TSLM, and dynamic regression models to a new dataset
+* Use residual to check if a model has captured the structure in a time series
+* Interpret model coefficients
+
+:::
+
+## Data
+
+We are exploring dissolved oxygen from **Lake Barco**,
+the National Ecological Observatory Network (NEON) aquatic site at the Ordway-Swisher Biological Station in Florida.
+
+Dissolved oxygen is controlled by a combination of temperature and algae and serves as a good indicator of lake condition.
+
+The data is monthly and includes three variables:
+
+* `oxygen` -- dissolved oxygen concentration (mg/L), our response variable
+* `temperature` -- water temperature (°C)
+* `chla` -- chlorophyll-a (µg/L), a measure of how much algae is in the water
+
+### Where the data come from
+
+The data are NEON sensor measurements, obtained through the
+[NEON Ecological Forecasting Challenge](https://projects.ecoforecast.org/neon4cast-docs/),
+which is run by the Ecological Forecasting Initiative Research Coordination Network and
+repackages the raw NEON products into tidy daily "target" files.
+
+Two NEON data products underlie the three columns:
+
+* [Temperature at specific depth in surface water (DP1.20264.001)](https://data.neonscience.org/data-products/DP1.20264.001) -- `temperature`
+* [Water quality (DP1.20288.001)](https://data.neonscience.org/data-products/DP1.20288.001) -- `oxygen` and `chla`
+
+Both are collected at the [Lake Barco (BARC) field site](https://www.neonscience.org/field-sites/barc).
+
+If you want to see how the daily target file was reduced to the monthly series --
+or to rebuild it with more recent data -- the script is
+[`make_barco_timeseries.R`](/data/make_barco_timeseries.R).
+
+> Thomas RQ, Boettiger C, Carey CC, et al. (2023) The NEON Ecological Forecasting Challenge.
+> *Frontiers in Ecology and the Environment* 21(3): 112--113.
+> [doi:10.1002/fee.2616](https://doi.org/10.1002/fee.2616)
+
+## Part 1: Look at the data
+
+
+1. Download the [Lake Barco limnology data](/data/barco_oxygen_timeseries.csv)
+2. Plot the oxygen time series along with its ACF and PACF using `gg_tsdisplay()`.
+3. Briefly describe what you see. E.g., Is there a trend? Is there a seasonal signal? At what lags is the
+   autocorrelation strongest?
+
+## Part 2: White noise
+
+1. Fit a white noise model to `oxygen` using `MEAN()`.
+2. Report the model with `report()`.
+3. Plot the data with the fitted values on top using `augment()` and `autoplot()`.
+4. Plot the residuals with `gg_tsresiduals()`.
+
+**Question:** What structure in the data is this model failing to capture and how do you now?
+
+## Part 3: Autoregressive models
+
+1. Based on the PACF from Part 1, pick the number of autoregressive terms and fit an `AR()`
+   model to `oxygen`.
+2. Report the model.
+3. Plot the fitted values over the data, and plot the residuals.
+
+**Question:**  Describe how you chose the AR order.
+Describe how this month's oxygen relates to last month's.
+Compared to the white noise model, what did the AR model improve.
+What structure is still left in the residuals?
+
+## Part 4: Seasonal ARIMA
+
+1. Fit an `ARIMA()` model to `oxygen`, letting `fable` select the structure.
+2. Report the model.
+3. Plot the fitted values over the data, and plot the residuals.
+
+**Question:** What model structure was selected
+(How many AR terms, how many MA terms, how much differencing, and what seasonal terms).
+How did the the residual ACF change compared to the AR model.
+
+## Part 5: Adding covariates with TSLM
+
+1. Fit a `TSLM()` model predicting `oxygen` from `temperature`.
+2. Report the model.
+3. Add `chla` as a second predictor and refit.
+4. Plot the fitted values compared to the data,
+and plot the residuals of the model with both `temperature and `chla` as drivers.
+
+**Question:** Describe the model coefficients including sign and significance.
+The `TSLM()` model doesn't explicitly model seasonality, butit tracks the seasonal
+ups and downs well. How is it doing that? Are there any issues with the residuals?
+
+## Part 6: Dynamic regression
+
+1. Fit an `ARIMA()` model with `temperature` as an external covariate.
+2. Report the model.
+3. Fit a second version that also includes `chla`.
+4. Compare the two models using the AICc values (lower is better) in their reports and
+   plot the fitted values and residuals for your preferred model.
+
+**Question:** What error structure did `fable` choose for the two models?
+Is the temperature coefficient similar to the one from the `TSLM()` model?
+Compare the residuals of this model to the residuals from the `TSLM()` model in
+Part 5. What did adding the ARIMA error structure change, and why does it matter for
+interpreting the coefficients?
+
+## Part 7: Wrap-up
+
+Include a short paragraph the answers:
+
+* Which model would you choose to describe how dissolved oxygen behaves in Lake Barco, and why?
+* One model suggests that oxygen is seasonal; another suggests why it is seasonal.
+  Which is which, and when might you prefer each one?

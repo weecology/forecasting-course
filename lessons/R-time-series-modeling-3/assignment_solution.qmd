@@ -1,0 +1,166 @@
+---
+title: "Assignment Solution: Time series modeling in R"
+subtitle: Instructor answer key -- not published to the course website
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+    fig-width: 9
+    fig-height: 6
+execute:
+  enabled: true
+  warning: false
+  message: false
+---
+
+::: {.callout-warning}
+
+This file is excluded from the site render in `_quarto.yml` so that it is never
+published alongside the assignment. Render it by hand when you want to refresh it:
+
+```sh
+quarto render lessons/R-time-series-modeling-3/assignment_solution.qmd
+```
+
+Unlike the rest of the site, this document **executes** its R code, so it needs
+`tsibble`, `fable`, `feasts`, `ggtime`, and `dplyr` installed.
+
+:::
+
+```{r}
+#| label: setup
+library(tsibble)
+library(fable)
+library(feasts)
+library(ggtime)
+library(dplyr)
+```
+
+## Part 1: Look at the data
+
+```{r}
+#| label: load
+barco <- read.csv("../../data/barco_oxygen_timeseries.csv") |>
+  mutate(month = yearmonth(date)) |>
+  as_tsibble(index = month)
+```
+
+```{r}
+#| label: tsdisplay
+gg_tsdisplay(barco, oxygen)
+```
+
+## Part 2: White noise
+
+```{r}
+#| label: mean-model
+avg_model <- model(barco, MEAN(oxygen))
+report(avg_model)
+```
+
+```{r}
+#| label: mean-fit
+avg_aug <- augment(avg_model)
+autoplot(avg_aug, oxygen) +
+  autolayer(avg_aug, .fitted, color = "red")
+```
+
+```{r}
+#| label: mean-resid
+gg_tsresiduals(avg_model)
+```
+
+## Part 3: Autoregressive models
+
+```{r}
+#| label: ar-model
+ar_model <- model(barco, AR(oxygen ~ order(2)))
+report(ar_model)
+```
+
+```{r}
+#| label: ar-fit
+ar_aug <- augment(ar_model)
+autoplot(ar_aug, oxygen) +
+  autolayer(ar_aug, .fitted, color = "orange")
+```
+
+```{r}
+#| label: ar-resid
+gg_tsresiduals(ar_model)
+```
+
+## Part 4: Seasonal ARIMA
+
+```{r}
+#| label: arima-model
+arima_model <- model(barco, ARIMA(oxygen))
+report(arima_model)
+```
+
+```{r}
+#| label: arima-fit
+arima_aug <- augment(arima_model)
+autoplot(arima_aug, oxygen) +
+  autolayer(arima_aug, .fitted, color = "orange")
+```
+
+```{r}
+#| label: arima-resid
+gg_tsresiduals(arima_model)
+```
+
+## Part 5: Adding covariates with TSLM
+
+```{r}
+#| label: tslm-temp
+tslm_temp <- model(barco, TSLM(oxygen ~ temperature))
+report(tslm_temp)
+```
+
+```{r}
+#| label: tslm-both
+tslm_model <- model(barco, TSLM(oxygen ~ temperature + chla))
+report(tslm_model)
+```
+
+```{r}
+#| label: tslm-fit
+tslm_aug <- augment(tslm_model)
+autoplot(tslm_aug, oxygen) +
+  autolayer(tslm_aug, .fitted, color = "orange")
+```
+
+```{r}
+#| label: tslm-resid
+gg_tsresiduals(tslm_model)
+```
+
+## Part 6: Dynamic regression
+
+```{r}
+#| label: arimax-temp
+arimax_temp <- model(barco, ARIMA(oxygen ~ temperature))
+report(arimax_temp)
+```
+
+```{r}
+#| label: arimax-both
+arimax_model <- model(barco, ARIMA(oxygen ~ temperature + chla))
+report(arimax_model)
+```
+
+```{r}
+#| label: arimax-fit
+arimax_aug <- augment(arimax_model)
+autoplot(arimax_aug, oxygen) +
+  autolayer(arimax_aug, .fitted, color = "orange")
+```
+
+```{r}
+#| label: arimax-resid
+gg_tsresiduals(arimax_model)
+```
+
+## Part 7: Wrap-up
