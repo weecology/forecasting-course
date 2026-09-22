@@ -16,6 +16,7 @@ library(tsibble)
 library(fable)
 library(feasts)
 library(ggtime)
+library(dplyr)
 ```
 
 * Load the data
