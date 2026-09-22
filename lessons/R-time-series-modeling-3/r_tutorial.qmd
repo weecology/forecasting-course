@@ -139,7 +139,7 @@ gg_tsresiduals(tslm_model)
 
 ### Dynamic regression models
 
-* We can solve the autocorrelation issue in our time-seris linear model by combining it with ARIMA
+* We can solve the autocorrelation issue in our time-series linear model by combining it with ARIMA
 * In an ARIMA model we can specify external covariates like in a linear model
 
 ```r
