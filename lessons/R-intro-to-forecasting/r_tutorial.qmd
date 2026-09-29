@@ -68,6 +68,14 @@ ar1_model = model(pp_data, ARIMA(abundance ~ pdq(1,0,0) + PDQ(0,0,0)))
 report(ar1_model)
 ```
 
+* *Copy parameters over to whiteboard equation*
+
+```r
+ar1_model_aug = augment(ar1_model)
+autoplot(ar1_model_aug, abundance) +
+  autolayer(ar1_model_aug, .fitted, color = "blue")
+```
+
 ### Make forecasts
 
 * To make forecasts from a model we ask what the model would predict at the time-step
