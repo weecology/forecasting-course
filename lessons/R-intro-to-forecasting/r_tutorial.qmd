@@ -95,7 +95,7 @@ ar1_forecast
 * Change the number of time-steps in the forecast using h (default to 2 seasonal cycles)
 
 ```r
-ar1_forecast = forecast(ar1_model, h = 20)
+ar1_forecast = forecast(ar1_model, h = 36)
 ```
 
 #### Visualize
