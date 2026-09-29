@@ -171,28 +171,21 @@ autoplot(ar1_forecast, pp_data, level = c(50, 80))
 * How do we tell?
 * We'll come back to this when we learn how to evaluate forecasts
 
-> Pick a different time-series model and make and visualize a forecast for abundance
-
 #### Incorporating external co-variates
 
 * We know from last time that `mintemp` w/ARIMA errors is a good model
 
 ```r
-arima_exog_model = model(pp_data, ARIMA(abundance ~ mintemp))
-report(arima_exog_model)
+tslm_precip_model = model(pp_data, TSLM(abundance ~ warm_precip))
+report(tslm_precip_model)
 ```
 
 * We can think of our model as
 
-$$y_t = c + \beta_1 x_{1,t} + \beta_2 y_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
-
-> Instructors note - the actual model is 
-$$y_t = c + \beta_1 x_{1,t} + \eta_t$$
-$$\eta_t = \beta_2 \eta_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$$
+$$y_t = c + \beta_1 x_{1,t} + \epsilon_t$$
 
 * So we need values of $x_{1,t}$ to make predictions for time step $t$
 * To forecast with covariates we need forecasts for those covariates
-
 * Since our time-series ended in 2020 we'll use the observed values for the next two years
 
 ```r
@@ -208,14 +201,10 @@ climate_forecasts
 * Use optional `new_data` argument to include drivers
 
 ```r
-arima_exog_forecast = forecast(arima_exog_model, new_data = climate_forecasts)
-autoplot(arima_exog_forecast, pp_data)
+tslm_precip_forecast = forecast(tslm_precip_model, new_data = climate_forecasts)
+autoplot(tslm_precip_forecast, pp_data)
 ```
 
-* Our point estimates now go below 0
-* Possible because of the exogenous driver, but not desireable
-* Otherwise looks reasonable
+> Find a model that performs better than this one by making and visualize forecasts for abundance using different models
 
 * Next time: how do we know if they are good or not?
-
-> Pick a different set of covariates and make and visualize a forecast for abundance
