@@ -120,7 +120,7 @@ autoplot(ar1_forecast, pp_data)
 * 1st step influenced by the low value at the previous time-step
 * Abundance is zero, so predicted value is $c + 0$, or about 6
 * Second step value of $y_{t-1}$ is the value we just forecast, 6
-* So our new predict value is roughly 6 + 0.8 * 6, so about 11
+* So our new predicted value is roughly 6 + 0.8 * 6, so about 11
 * Gradually reverts to the mean
 * $6 + 0.8 \times 30 \approx 30$
 
@@ -138,9 +138,8 @@ autoplot(ar1_forecast, pp_data)
 
 > Instructors note - Only variation in $\epsilon_t$ is included, not uncertainty in parameters
 
-* This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at teach time step
+* This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at each time step
 * Let's run it a few times
-
 * Quantify variability of forecast outcomes
 * If we set `times` to `1000`
 
@@ -153,13 +152,12 @@ autoplot(ar1_forecast, pp_data)
 * Shaded areas provides uncertainty
 * These are the "prediction intervals"
 * The region within which some percentage of our 1000 forecast values occurred
-
 * For many models the values can be calculated without making separate forecasts
 * This is the default behavior that we first saw
 
 ```r
 ar1_forecast = forecast(ar1_model)
-autoplot(ar1_forecast, pp_data, level = c(50, 80))
+autoplot(ar1_forecast, pp_data)
 ```
 
 * Default prediction intervals are 80% and 95%
