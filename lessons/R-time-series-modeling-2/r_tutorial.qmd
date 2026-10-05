@@ -46,6 +46,8 @@ data_ts
 * Greenness isn't really driven by greenness in the same way a populations abundance is
 * But if it's greener than normal this month it's probably a good year so it's likely to be greener than normal next month
 
+<!-- -->
+
 * Both AR and MA structures can be present in time-series
 * We can combine them in an ARMA model
 
@@ -62,6 +64,8 @@ data_ts
 > `y_t' = y_t - y_t-1`
 
 * So, if we difference the data we are now modeling the change from time-step to time-step, not the actual values
+
+<!-- -->
 
 * Adding AR, MA, and differencing together gives us an ARIMA model
   * AR: Autoregressive - Uses past values to predict future values
@@ -92,6 +96,8 @@ report(arima_model)
 * This is also shown in the `Coefficients` table by the `ma1`, `ma2`, and `ma3` terms
 * So, if NDVI was above average over the last 3 months we expect it to be above average now
 * This lines up with our idea that MA might be better for NDVI since it indicates a good year
+
+<!-- -->
 
 * But what is the `sar1` coefficient?
 * That's our season signal

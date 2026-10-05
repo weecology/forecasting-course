@@ -41,6 +41,8 @@ library(terra)
 * Fore forecasts of environmental data we'll use CMIP5 50 year forecasts (CMIP = coupled model intercomparison project)
 * Download data from [https://course.naturecast.org/data/sdm_data.zip](https://course.naturecast.org/data/sdm_data.zip) and unzip it into your working directory
 
+<!-- -->
+
 * The hooded warbler data is in a csv file
 * Load it using `read.csv()`
 
@@ -50,6 +52,8 @@ head(hooded_warb_data)
 ```
 
 * We can see that this file has information on locations as latitude & longitude plus whether or not the species is present at that location
+
+<!-- -->
 
 * The environmental data is stored in raster stacks in `.grd` files
 * Load those using the `rast()`, which is part of the `terra` package
@@ -152,6 +156,8 @@ points(present_loc, pch='+', cex = 0.5)
 * Then do the same thing for 20%, 30%, 40%, and so on which gives us a curve
 * The 1:1 line on this graph is what we would get if we randomly assigned each point to be present or absent
 * So we definitely want a model that is above that line
+
+<!-- -->
 
 * Let's make our own ROC curve
 * Split the data in into presences and absences

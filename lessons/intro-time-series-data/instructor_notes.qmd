@@ -19,9 +19,13 @@ order: 4
         * Resurvey -> Idiosyncratic -> Continuous w/Gaps -> Continuous
         * Place purely spatial data off on one end the side with a "spatial only" label.
   
+<!-- -->
+
 * Ask what types of data are easier/harder to collect
 * Ask what types are more common for going further back in time vs. more recent
 * (optionally) Draw these gradients on board
+
+<!-- -->
 
 * How long do you think most ecological studies/time-series are?
 * Show: Recent study by Estes et al. 2018

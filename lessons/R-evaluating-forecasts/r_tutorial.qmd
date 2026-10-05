@@ -68,6 +68,8 @@ glance(portal_models)
 * We know we don't have this for TSLM, so it's likelihood and IC values are invalid
 * These comparisons also typically tell us about 1 step ahead forecasts and we may care about more steps
 
+<!-- -->
+
 * So it's best to evaluate forecasts themselves
 * Ideally we make a forecast for the future, collect new data, and then see how well the forecast performed
 * This is the gold standard, but it requires waiting for time to pass
@@ -170,6 +172,8 @@ $$mean[(y_{t+h} - \hat{y}_{t+h})^2]$$
 $$RMSE = \sqrt{mean[(y_{t+h} - \hat{y}_{t+h})^2]}$$
 
 * Which gives us a measure of the average error in the units of the response variable
+
+<!-- -->
 
 * `accuracy` function shows a number of common measures of forecast accuracy
   * 1st argument: forecast object from model on training data

@@ -310,6 +310,8 @@ plot(time, predictions, type = "l")
 
 * And this looks very similar to the observed dynamics of y
 
+<!-- -->
+
 * Add prediction intervals as range containing 95% of MCMC samples
 
 ```

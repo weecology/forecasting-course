@@ -142,6 +142,8 @@ mcmc_plot(baseline_model, type = "trace", variable = c("mintemp", "ar1[1]", "sig
 * But part of what's going on here is that we're using a poorly specified model given the data because we've assumed Gaussian errors
 * So let's look at the model & forecast and then keep going
 
+<!-- -->
+
 * We can look at the model structure using `summary()`
 
 ```r
@@ -196,9 +198,13 @@ hist(rpois(n = 1000, lambda = 4.5))
 
 * If the mean is 4.5 sometimes you'll draw a 4, sometimes a 5, sometimes a 0 or a 10
 
+<!-- -->
+
 * $\lambda_t$ can be a decimal
 * We could expect an average of 4.5 rodents based on the environment even though we can only observe an integer number
 * But $\lambda_t$ it does have to be positive because we can't reasonably expect to see negative rodents
+
+<!-- -->
 
 * To handle this we use a log link function to give us only positive values of $\lambda_t$
 * The log link means that instead of modeling $\lambda_t$ directly we model $log(\lambda_t)$
@@ -225,6 +231,8 @@ plot(poisson_model)
 ```
 
 * Model structure looks OK, be we still have some residual seasonal lag we haven't captured
+
+<!-- -->
 
 * Now let's look at the forecast
 
@@ -295,6 +303,8 @@ plot_predictions(poisson_gam_model, condition = "mintemp")
 * Even if gets a little less cold
 * Abundance then increases with temperature
 * But starts to asymptote at higher temperatures
+
+<!-- -->
 
 * How does this influence the forecasts
 

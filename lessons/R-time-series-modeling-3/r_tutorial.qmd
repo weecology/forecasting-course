@@ -91,6 +91,8 @@ gg_tsresiduals(tslm_model)
 * This ramp suggests that there might be a trend
 * It's possible we have a decrease over time
 
+<!-- -->
+
 * We can try to model the trend explicitly to remove the autocorrelation
 * We can do this by adding a fitted trend to our model using `trend()`
 
@@ -185,6 +187,8 @@ gg_tsresiduals(arima_exog_model)
 
 * Look at the report, is this model better than the model with just mintemp?
 * What does that tell us?
+
+<!-- -->
 
 * But did you notice anything else weird?
 * Negative abundances don't make sense
