@@ -163,10 +163,14 @@ gg_tsdisplay(data_ts, NDVI)
 * b_1 is a coefficient determining how y_t is related to y at a 1 time-step lag, i.e., the previous time step
 * e_t is normally distributed error
 
+<!-- -->
+
 * Does this model remind you of a biological model?
 * This model is basically a Gompertz population model if y is log(N)
 * The idea is that the current value influences the future values
 * Makes a lot of sense for things like population dynamics
+
+<!-- -->
 
 * Since we have also have lag 2 autocorrelation we add a term for two time steps back
 

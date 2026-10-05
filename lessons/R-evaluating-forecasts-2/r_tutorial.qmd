@@ -112,6 +112,8 @@ length(in_interval[in_interval == TRUE]) / length(in_interval)
 * Instead of evaluating the mean prediction (point forecast) evaluate the prediction interval
 * _Add two sets of intervals on the axes_
 
+<!-- -->
+
 * Winkler Score
 * Width of the prediction interval + a penalty for points outside the interval
 
@@ -141,6 +143,8 @@ accuracy(forecasts, test, list(winkler = winkler_score), level = 80)
 * Instead of evaluting the mean check how likely an observation is given the full predicted distribution
 * _Add a distribution to the axes with the mode matching $\hat{y}$_
 * The best models most closely match the empirical distribution
+
+<!-- -->
 
 * Doing this is technically complicated
 * Continuous Rank Probability Score

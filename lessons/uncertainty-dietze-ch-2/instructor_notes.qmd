@@ -46,6 +46,8 @@ order: 4
 * How does disturbance make forecasting difficult?
   * What could be done to ameliorate the influence of disturbance on forecasts?
 
+<!-- -->
+
 * Which components of uncertainty (e.g., in eq. 2.1) have the potential to grow
   through time?
   * What implications does this have for our ability to forecast?
@@ -56,6 +58,8 @@ order: 4
 * What is the difference between parameter uncertainty and parameter variability?
 * What are the implications for forecasting?
 * How can we tell them apart?
+
+<!-- -->
 
 * What kinds of uncertainty/variability do you think are most important in
   ecological systems?

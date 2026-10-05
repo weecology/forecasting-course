@@ -92,6 +92,8 @@ ar1_forecast
   * The expected value, or point forecast, is in `$.mean`
   * And information about the error term in `abundance <dist>`
 
+<!-- -->
+
 * Change the number of time-steps in the forecast using h (default to 2 seasonal cycles)
 
 ```r
@@ -140,6 +142,9 @@ autoplot(ar1_forecast, pp_data)
 
 * This lets us run a single forecast including a randomly chosen value for $epsilon_t$ at each time step
 * Let's run it a few times
+
+<!-- -->
+
 * Quantify variability of forecast outcomes
 * If we set `times` to `1000`
 
@@ -152,6 +157,9 @@ autoplot(ar1_forecast, pp_data)
 * Shaded areas provides uncertainty
 * These are the "prediction intervals"
 * The region within which some percentage of our 1000 forecast values occurred
+
+<!-- -->
+
 * For many models the values can be calculated without making separate forecasts
 * This is the default behavior that we first saw
 
@@ -186,6 +194,9 @@ $$y_t = c + \beta_1 x_{1,t} + \epsilon_t$$
 
 * So we need values of $x_{1,t}$ to make predictions for time step $t$
 * To forecast with covariates we need forecasts for those covariates
+
+<!-- -->
+
 * Since our time-series ended in 2020 we'll use the observed values for the next two years
 
 ```r

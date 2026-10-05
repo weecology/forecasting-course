@@ -27,6 +27,8 @@ excellent
 * This means that this type of modeling approach also works naturally with missing data
 * This is different from many types of time-series models that require continuously sampled time-series
 
+<!-- -->
+
 * To illustrate this we'll add `NA`'s to a portion of our time series as an example of missing data
 * Go back to the line where we replaced the end of the time-series with `NA`'s and add some `NA`'s inside the training portion of the data
 * We'll use two examples of missing data
