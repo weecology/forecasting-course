@@ -3,11 +3,11 @@ title: Annotated Equations
 order: 4
 ---
 
-A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd). Each equation is broken down term by term so you can check your understanding of what every symbol is doing.
+A quick reference for the models introduced in the [R Tutorial](r_tutorial.qmd).
 
 ## Baseline model: AR + covariate + Gaussian error
 
-The starting point in `mvgam` looks like the ARIMAX models from previous lessons — a covariate, an autoregressive term, and Gaussian error — just written and fit a different way (via `mvgam()`'s Bayesian MCMC fitting, instead of `fable`'s `ARIMA()`).
+The same structure as the ARIMAX models from previous lessons: a covariate, an AR term, and Gaussian error.
 
 $$
 y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
@@ -16,17 +16,17 @@ y_t = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}
   \;+\; \underbrace{\color{#718096}{\mathcal{N}(0,\sigma^2)}}_{\textstyle\color{#718096}{\text{Gaussian noise}}}
 $$
 
-- $y_t$ — the observed value at time $t$ (e.g., desert pocket mouse abundance)
+- $y_t$ — the observed value at time $t$
 - $c$ — a constant
-- $\beta_1 x_{1,t}$ — the covariate effect (e.g., minimum temperature)
-- $\beta_2 y_{t-1}$ — the AR part: the effect of the previous value
+- $\beta_1 x_{1,t}$ — the covariate effect
+- $\beta_2 y_{t-1}$ — AR: the effect of the previous value
 - $\mathcal{N}(0,\sigma^2)$ — Gaussian noise with mean 0 and variance $\sigma^2$
 
-**How it's fit:** `mvgam` uses Bayesian methods (MCMC via STAN) rather than the exact-likelihood approach `fable` uses, but for this baseline model the equation itself is the same idea — the AR term is specified separately, via `trend_model = AR(p = 1)`, rather than inside the model formula.
+**In `mvgam`:** the AR term is specified with `trend_model = AR(p = 1)` rather than in the model formula.
 
 ## The same model, decomposed
 
-The additive form above can equivalently be written as an explicit observation distribution around a modeled mean — a small notational shift that matters once we start changing the error distribution.
+The same model written as an observation distribution around a modeled mean.
 
 $$
 y_t = \mathcal{N}(
@@ -41,15 +41,15 @@ $$
 $$
 
 - $y_t$ — the observed value at time $t$, drawn from a normal distribution
-- $\mu_t$ — the process mean at time $t$: everything the model can explain
-- $\sigma^2$ — the variance of the observation noise around that mean
-- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — exactly the same constant, covariate, and AR terms as the baseline model, just relocated into $\mu_t$
+- $\mu_t$ — the process mean at time $t$
+- $\sigma^2$ — the variance of the noise around that mean
+- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — the same terms as the baseline model, now determining $\mu_t$
 
-**Why bother rewriting it:** splitting "what generates $y_t$" ($\mathcal{N}(\mu_t, \sigma^2)$) from "what determines $\mu_t$" makes it straightforward to swap in a different observation distribution without changing how $\mu_t$ is modeled — which is exactly what happens next.
+**Why rewrite it:** separating the observation distribution from the model of $\mu_t$ makes it easy to swap in a different distribution.
 
 ## Modeling count data: Poisson error
 
-Abundance counts are non-negative integers, which a Gaussian error model doesn't respect. Swapping in a Poisson distribution fixes that.
+Counts are non-negative integers, so we replace the normal distribution with a Poisson distribution.
 
 $$
 y_t = \mathrm{Pois}(
@@ -63,9 +63,32 @@ $$
   \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
 $$
 
-- $y_t$ — the observed value at time $t$, now constrained to non-negative integers
-- $\lambda_t$ — the Poisson rate parameter: both the mean and the variance of the distribution, so it must be positive
-- $\log(\lambda_t)$ — the log link: instead of modeling $\lambda_t$ directly, the model predicts $\log(\lambda_t)$, which can be any real number, then exponentiates it back — guaranteeing $\lambda_t$ stays positive
-- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — the same constant, covariate, and AR terms as before, now predicting $\log(\lambda_t)$ instead of $y_t$ directly
+- $y_t$ — the observed count at time $t$
+- $\lambda_t$ — the Poisson rate parameter: both the mean and the variance, so it must be positive
+- $\log(\lambda_t)$ — the log link: modeling $\log(\lambda_t)$ instead of $\lambda_t$ keeps $\lambda_t$ positive
+- $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — the same terms as before, now predicting $\log(\lambda_t)$
 
-**A side effect of the log link:** because the model is linear on the log scale, the relationship between the covariate and the untransformed abundance becomes exponential — worth checking with `plot_predictions()` rather than assuming it looks like the linear relationship on the link scale.
+**Note:** the model is linear on the log scale, so the covariate's effect on untransformed abundance is exponential.
+
+## Non-linear responses: GAM
+
+A Generalized Additive Model (GAM) replaces the linear covariate effect with a smooth function, allowing a non-linear response.
+
+$$
+y_t = \mathrm{Pois}(
+  \underbrace{\color{#d53f8c}{\lambda_t}}_{\textstyle\color{#d53f8c}{\text{rate parameter}}}
+)
+$$
+
+$$
+\underbrace{\color{#d69e2e}{\log(\lambda_t)}}_{\textstyle\color{#d69e2e}{\text{log link}}} = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
+  \;+\; \underbrace{\color{#2f855a}{f(x_{1,t})}}_{\textstyle\color{#2f855a}{\text{smooth covariate effect}}}
+  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
+$$
+
+- $y_t$ — the observed count at time $t$
+- $\lambda_t$ — the Poisson rate parameter
+- $f(x_{1,t})$ — a smooth function of the covariate, estimated from the data rather than constrained to a straight line; `s(mintemp)` in the model formula
+- $c$, $\beta_2 y_{t-1}$ — the same constant and AR terms as before
+
+**Note:** $f$ is estimated on the log scale, so view the response on the scale of abundance with `plot_predictions()`.
