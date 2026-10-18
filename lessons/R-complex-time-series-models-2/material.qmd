@@ -12,17 +12,13 @@ Download the [Desert Pocket Mouse data](/data/pp_abundance_by_month.csv)
 
 ### Software Installation
 
-**Windows users: If you don't already have RTools installed then you'll need to install it from https://cran.r-project.org/bin/windows/Rtools/**
+These models are fit using [Stan](https://mc-stan.org/), which compiles each model to C++, so you need a working C++ toolchain in addition to the R packages.
 
-**Mac users: If you don't already have Xcode installed then you'll need to install it from the mac app store.**
+1\. Install a C++ toolchain if you don't already have one:
 
-1\. Install dependencies:
-
-```r
-install.packages(c("brms", "dplyr", "gratia", "ggplot2",
-                   "marginaleffects", "tidybayes", "zoo",
-                   "viridis", "remotes"))
-```
+* **Windows:** Install the version of [Rtools](https://cran.r-project.org/bin/windows/Rtools/) that matches your version of R (e.g., Rtools45 for R 4.5.x). Check your R version by running `R.version.string`.
+* **macOS:** Install Xcode's command line tools by running `xcode-select --install` in the Terminal. You don't need the full Xcode app from the App Store.
+* **Linux:** Install `g++` and `make` using your distribution's package manager (e.g., `sudo apt install build-essential` on Ubuntu/Debian).
 
 2\. Install cmdstanr:
 
@@ -33,27 +29,18 @@ install.packages(
 )
 ```
 
-3\.Install mvgam:
-
-```r
-remotes::install_github('nicholasjclark/mvgam', force = TRUE)
-```
-
-4\. Install cmdstan:
-
-On Windows:
-
-```r
-library(cmdstanr)
-check_cmdstan_toolchain(fix = TRUE)
-install_cmdstan()
-```
-
-On macOS & Linux:
+3\. Install CmdStan (this can take several minutes):
 
 ```r
 library(cmdstanr)
 check_cmdstan_toolchain()
+install_cmdstan()
+```
+
+If this fails try:
+
+```r
+check_cmdstan_toolchain(fix = TRUE)
 install_cmdstan()
 ```
 
@@ -63,4 +50,18 @@ install_cmdstan()
 cmdstan_version()
 ```
 
-If this returns a version number like "2.33.1" then you're all set.
+If this returns a version number (e.g., "2.37.0") then the test passed.
+
+```r
+data(portal_data); mvgam(captures ~ 1, data = portal_data)
+```
+
+If this prints a bunch of output and no errors your all set!
+
+If either fails try:
+
+```r
+check_cmdstan_toolchain(fix = TRUE)
+install_cmdstan()
+cmdstan_version()
+```
