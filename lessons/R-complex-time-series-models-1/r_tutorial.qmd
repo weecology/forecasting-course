@@ -17,7 +17,7 @@ library(cmdstanr)
 cmdstan_version()
 ```
 
-If this returns a version number like `"2.32.2"` then things are working properly.
+If this returns a version number (e.g., `"2.37.0"`) then things are working properly.
 
 ## Introduction
 
@@ -44,6 +44,7 @@ If this returns a version number like `"2.32.2"` then things are working properl
 ```r
 library(mvgam)
 library(dplyr)
+library(tsibble)
 ```
 
 ## Data
