@@ -235,6 +235,8 @@ poisson_model = mvgam(abundance ~ mintemp,
 summary(poisson_model)
 ```
 
+* *Discuss summary: sometimes rhat will still flag and increasing `burnin` may fix it
+
 ```r
 plot(poisson_model)
 ```
