@@ -53,7 +53,7 @@ cmdstan_version()
 If this returns a version number (e.g., "2.37.0") then the test passed.
 
 ```r
-data(portal_data); mvgam(captures ~ 1, data = portal_data)
+library(mvgam); data(portal_data); mvgam(captures ~ 1, data = portal_data)
 ```
 
 If this prints a bunch of output and no errors your all set!
