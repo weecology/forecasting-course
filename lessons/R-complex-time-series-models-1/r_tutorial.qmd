@@ -213,6 +213,14 @@ hist(rpois(n = 1000, lambda = 4.5))
 $$y_t = \mathrm{Pois}(\lambda_t)$$
 $$\mathrm{log(\lambda_t)} = c + \beta_1 x_{1,t} + \beta_2 y_{t-1}$$
 
+* $\lambda_t = e^{log(\lambda_t)}$ so even if the linear fit yields a negative value $\lambda_t$ will always be positive
+
+```r
+exp(-10)
+```
+
+* Change the error model and the link function in `family`
+
 ```r
 poisson_model = mvgam(abundance ~ mintemp,
                       trend_model = AR(p = 1),
