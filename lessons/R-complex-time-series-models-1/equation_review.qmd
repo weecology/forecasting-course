@@ -69,26 +69,3 @@ $$
 - $c$, $\beta_1 x_{1,t}$, $\beta_2 y_{t-1}$ — the same terms as before, now predicting $\log(\lambda_t)$
 
 **Note:** the model is linear on the log scale, so the covariate's effect on untransformed abundance is exponential.
-
-## Non-linear responses: GAM
-
-A Generalized Additive Model (GAM) replaces the linear covariate effect with a smooth function, allowing a non-linear response.
-
-$$
-y_t = \mathrm{Pois}(
-  \underbrace{\color{#d53f8c}{\lambda_t}}_{\textstyle\color{#d53f8c}{\text{rate parameter}}}
-)
-$$
-
-$$
-\underbrace{\color{#d69e2e}{\log(\lambda_t)}}_{\textstyle\color{#d69e2e}{\text{log link}}} = \underbrace{\color{#2b6cb0}{c}}_{\textstyle\color{#2b6cb0}{\text{constant}}}
-  \;+\; \underbrace{\color{#2f855a}{f(x_{1,t})}}_{\textstyle\color{#2f855a}{\text{smooth covariate effect}}}
-  \;+\; \underbrace{\color{#c05621}{\beta_2 y_{t-1}}}_{\textstyle\color{#c05621}{\text{AR: lag-1}}}
-$$
-
-- $y_t$ — the observed count at time $t$
-- $\lambda_t$ — the Poisson rate parameter
-- $f(x_{1,t})$ — a smooth function of the covariate, estimated from the data rather than constrained to a straight line; `s(mintemp)` in the model formula
-- $c$, $\beta_2 y_{t-1}$ — the same constant and AR terms as before
-
-**Note:** $f$ is estimated on the log scale, so view the response on the scale of abundance with `plot_predictions()`.
