@@ -65,3 +65,9 @@ check_cmdstan_toolchain(fix = TRUE)
 install_cmdstan()
 cmdstan_version()
 ```
+
+6\. Install mvgam
+
+```r
+install.packages("mvgam")
+```
