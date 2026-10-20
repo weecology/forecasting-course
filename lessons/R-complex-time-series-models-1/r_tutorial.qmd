@@ -203,7 +203,7 @@ hist(rpois(n = 1000, lambda = 4.5))
 
 * $\lambda_t$ can be a decimal
 * We could expect an average of 4.5 rodents based on the environment even though we can only observe an integer number
-* But $\lambda_t$ it does have to be positive because we can't reasonably expect to see negative rodents
+* But $\lambda_t$ does have to be positive because we can't reasonably expect to see negative rodents
 
 <!-- -->
 
